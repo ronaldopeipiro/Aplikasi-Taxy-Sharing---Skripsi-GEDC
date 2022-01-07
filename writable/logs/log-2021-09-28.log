@@ -1,0 +1,34 @@
+CRITICAL - 2021-09-28 09:41:31 --> auth_driver filter must have a matching alias defined.
+#0 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Filters\Filters.php(338): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('auth_driver')
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(366): CodeIgniter\Filters\Filters->enableFilter('auth_driver', 'before')
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2021-09-28 21:46:11 --> auth_driver filter must have a matching alias defined.
+#0 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Filters\Filters.php(338): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('auth_driver')
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(366): CodeIgniter\Filters\Filters->enableFilter('auth_driver', 'before')
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2021-09-28 21:52:46 --> Invalid file: dosen/login.php
+#0 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dosen/login.php')
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('dosen/login', Array, true)
+#2 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Login.php(79): view('dosen/login', Array)
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Login->index()
+#4 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Login))
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+CRITICAL - 2021-09-28 21:58:59 --> Invalid file: driver/login/views.php
+#0 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('driver/login/vi...')
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('driver/login/vi...', Array, true)
+#2 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Login.php(80): view('driver/login/vi...', Array)
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Login->index()
+#4 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Login))
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#8 {main}

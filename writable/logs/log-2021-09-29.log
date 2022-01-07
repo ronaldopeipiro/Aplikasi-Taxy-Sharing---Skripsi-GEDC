@@ -1,0 +1,48 @@
+CRITICAL - 2021-09-29 00:54:38 --> Cannot declare class App\Controllers\Driver\Auth, because the name is already in use
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2021-09-29 02:32:48 --> Invalid file: driver/auth/sign_up.php
+#0 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('driver/auth/sig...')
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('driver/auth/sig...', Array, true)
+#2 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Auth.php(91): view('driver/auth/sig...', Array)
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Auth->sign_up()
+#4 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Auth))
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+CRITICAL - 2021-09-29 03:53:49 --> Undefined property: App\Controllers\Driver\Auth::$form_validation
+#0 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Auth.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp\\htdocs...', 170)
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Auth->tambah_driver()
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Auth))
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2021-09-29 03:53:49 --> Undefined property: App\Controllers\Driver\Auth::$form_validation
+#0 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Auth.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp\\htdocs...', 170)
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Auth->tambah_driver()
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Auth))
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2021-09-29 03:58:07 --> Undefined property: App\Controllers\Driver\Auth::$form_validation
+#0 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Driver\Auth.php(170): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp\\htdocs...', 170)
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Auth->tambah_driver()
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Auth))
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2021-09-29 06:52:26 --> Cannot declare class App\Controllers\Driver\Dashboard, because the name is already in use
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2021-09-29 06:56:13 --> Call to undefined method App\Models\CustomerModel::getCustomer
+#0 C:\xampp\htdocs\taxi-sharing-2000\app\Controllers\Customer\Dashboard.php(19): CodeIgniter\Model->__call('getCustomer', Array)
+#1 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(779): App\Controllers\Customer\Dashboard->__construct()
+#2 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\taxi-sharing-2000\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\taxi-sharing-2000\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#6 {main}
