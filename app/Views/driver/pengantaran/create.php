@@ -24,7 +24,7 @@
 				<h4>
 					Mau antar penumpang kemana ?
 				</h4>
-				<form action="<?= base_url(); ?>/Driver/Pengantaran/tambah_data" method="POST" enctype="multipart/form-data">
+				<form action="<?= base_url(); ?>/Driver/Pengantaran/tambah_data_pengantaran" method="POST" enctype="multipart/form-data">
 					<?= csrf_field(); ?>
 					<div class="row">
 						<div class="col-lg-8">
@@ -32,26 +32,16 @@
 							<div id="map" style="width: 100%; height: 440px;"></div>
 						</div>
 						<div class="col-lg-4">
-							<div class="form-group row">
-								<label for="latitude" class="col-12 col-form-label">
-									Latitude
-								</label>
-								<div class="col-12">
-									<input class="form-control <?= ($validation->hasError('latitude')) ? 'is-invalid' : ''; ?>" id="latitude" name="latitude" value="<?= old('latitude') ?>" required>
-									<div class="invalid-feedback">
-										<?= $validation->getError('latitude'); ?>
-									</div>
-								</div>
-							</div>
 
 							<div class="form-group row">
-								<label for="longitude" class="col-12 col-form-label">
-									Longitude
+								<label for="latlonginput" class="col-12 col-form-label">
+									Koordinat <br>
+									<span id="mapSearchInput"></span>
 								</label>
 								<div class="col-12">
-									<input class="form-control <?= ($validation->hasError('longitude')) ? 'is-invalid' : ''; ?>" id="longitude" name="longitude" value="<?= old('longitude') ?>" required>
+									<input class="form-control <?= ($validation->hasError('latlonginput')) ? 'is-invalid' : ''; ?>" id="latlonginput" name="latlonginput" value="<?= old('latlonginput') ?>" readonly required>
 									<div class="invalid-feedback">
-										<?= $validation->getError('longitude'); ?>
+										<?= $validation->getError('latlonginput'); ?>
 									</div>
 								</div>
 							</div>
@@ -61,8 +51,8 @@
 									Radius Jemput
 								</label>
 								<div class="col-12">
-									<div id="radius_pilihan">1000</div>
-									<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="customRange1" id="radius_jemput" name="radius_jemput" value="<?= old('radius_jemput') ?>" min="1000" max="10000" step="100" onchange="updateTextInput(this.value);">
+									<div id="radius_pilihan">100</div>
+									<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="radius_jemput" id="radius_jemput" name="radius_jemput" value="<?= (old('radius_jemput')) ? old('radius_jemput') : '100'; ?>" min="100" max="5000" step="10" onchange="updateTextInput(this.value);">
 									<div class="invalid-feedback">
 										<?= $validation->getError('radius_jemput'); ?>
 									</div>
@@ -92,7 +82,8 @@
 	let lineMarkers = [];
 	let lingkar = [];
 	let circle_user;
-	let rad = 1000;
+	let rad = 100;
+	let slider_rad = 100;
 
 	function initMap() {
 
@@ -153,24 +144,21 @@
 						}
 
 						let dataLatLng = place.geometry.location;
-						let latlong = dataLatLng.split(',');
-						let latitude = latlong[0];
-						let longitude = latlong[1];
-
-						document.getElementById("latitude").value = latitude;
-						document.getElementById("longitude").value = longitude;
+						document.getElementById("latlonginput").value = dataLatLng;
 
 						const icon = {
 							url: "<?= base_url() ?>/assets/img/marker-tujuan.png",
-							size: new google.maps.Size(71, 71),
+							size: new google.maps.Size(51, 51),
 							origin: new google.maps.Point(0, 0),
 							anchor: new google.maps.Point(17, 34),
 							scaledSize: new google.maps.Size(70, 70),
 						};
 
 						// Create a marker for each place.
+						var marker_tujuan;
+
 						markers.push(
-							new google.maps.Marker({
+							marker_tujuan = new google.maps.Marker({
 								map,
 								icon,
 								title: place.name,
@@ -178,6 +166,49 @@
 								draggable: true
 							})
 						);
+
+						google.maps.event.addListener(marker_tujuan, 'dragend', function() {
+							var test = geocodePosition(marker_tujuan.getPosition());
+							console.log(test);
+						});
+
+						function geocodePosition(pos) {
+							geocoder = new google.maps.Geocoder();
+							geocoder.geocode({
+									latLng: pos
+								},
+								function(results, status) {
+									if (status == google.maps.GeocoderStatus.OK) {
+										$("#mapSearchInput").val(results[0].formatted_address);
+										$("#mapErrorMsg").hide(100);
+									} else {
+										$("#mapErrorMsg").html('Cannot determine address at this location.' + status).show(100);
+									}
+								}
+							);
+						}
+
+						var circle_tujuan = new google.maps.Circle({
+							strokeColor: '#000AAA',
+							strokeOpacity: 0.5,
+							strokeWeight: 1,
+							fillColor: '#00AEFF',
+							fillOpacity: 0.1,
+							map: map,
+							radius: slider_rad
+						});
+
+						circle_tujuan.bindTo('center', marker_tujuan, 'position');
+						circle_tujuan.setRadius(parseFloat(slider_rad));
+
+						$(document).on('input', '#radius_jemput', function() {
+							$('#radius_pilihan').html($(this).val());
+							slider_rad = $(this).val();
+							circle_tujuan.bindTo('center', marker_tujuan, 'position');
+							circle_tujuan.setRadius(parseFloat(slider_rad));
+						});
+
+
 						if (place.geometry.viewport) {
 							// Only geocodes have viewport.
 							bounds.union(place.geometry.viewport);
@@ -221,18 +252,18 @@
 					animation: google.maps.Animation.DROP
 				});
 
-				var circle_user = new google.maps.Circle({
-					strokeColor: '#000AAA',
-					strokeOpacity: 0.5,
-					strokeWeight: 1,
-					fillColor: '#00AEFF',
-					fillOpacity: 0.1,
-					map: map,
-					radius: rad
-				});
+				// var circle_user = new google.maps.Circle({
+				// 	strokeColor: '#000AAA',
+				// 	strokeOpacity: 0.5,
+				// 	strokeWeight: 1,
+				// 	fillColor: '#00AEFF',
+				// 	fillOpacity: 0.1,
+				// 	map: map,
+				// 	radius: rad
+				// });
 
-				circle_user.bindTo('center', centerLoc, 'position');
-				circle_user.setRadius(parseFloat(rad));
+				// circle_user.bindTo('center', centerLoc, 'position');
+				// circle_user.setRadius(parseFloat(rad));
 
 			}, function() {
 				handleLocationError(true, centerLoc, map.getCenter());

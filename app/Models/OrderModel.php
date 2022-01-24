@@ -10,8 +10,8 @@ class OrderModel extends Model
 	protected $table = 'tb_order';
 	protected $allowedFields = [
 		'id_order',
+		'id_customer',
 		'id_pengantaran',
-		'id_user',
 		'latitude',
 		'longitude',
 		'jarak_jemput',

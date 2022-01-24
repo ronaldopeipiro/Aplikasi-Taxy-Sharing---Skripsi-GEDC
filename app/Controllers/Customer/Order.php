@@ -1,46 +1,41 @@
 <?php
 
-namespace App\Controllers\Driver;
+namespace App\Controllers\Customer;
 
 use CodeIgniter\Controller;
 use App\Models\CustomerModel;
 use App\Models\DriverModel;
+use App\Models\OrderModel;
+use App\Models\PengantaranModel;
+use App\Models\TarifModel;
+use App\Models\TujuanModel;
 
-class Dashboard extends Controller
+class Order extends Controller
 {
 	public function __construct()
 	{
 		$this->request = \Config\Services::request();
 		$this->db = \Config\Database::connect();
 		$this->validation = \Config\Services::validation();
+
 		$this->CustomerModel = new CustomerModel();
 		$this->DriverModel = new DriverModel();
+		$this->OrderModel = new OrderModel();
+		$this->PengantaranModel = new PengantaranModel();
+		$this->TarifModel = new TarifModel();
+		$this->TujuanModel = new TujuanModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
-		$data_user = $this->DriverModel->getDriver($this->id_user);
+		$data_user = $this->CustomerModel->getCustomer($this->id_user);
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
 		$this->user_jenis_kelamin = $data_user['jenis_kelamin'];
 		$this->user_no_hp = $data_user['no_hp'];
 		$this->user_email = $data_user['email'];
-		$this->user_no_anggota = $data_user['no_anggota'];
-		$this->user_nopol = $data_user['nopol'];
-		$this->user_level = "driver";
+		$this->user_level = "customer";
 		$this->user_foto =	$data_user['foto'];
-		$this->user_status = $data_user['status_akun'];
-	}
-
-	public function getAddress($latitude, $longitude)
-	{
-		//google map api url
-		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI";
-
-		// send http request
-		$geocode = file_get_contents($url);
-		$json = json_decode($geocode);
-		$address = $json->results[0]->formatted_address;
-		return $address;
+		$this->user_status = $data_user['status'];
 	}
 
 	public function get_client_ip()
@@ -69,7 +64,7 @@ class Dashboard extends Controller
 			'request' => $this->request,
 			'db' => $this->db,
 			'validation' => $this->validation,
-			'title' => 'Dashboard',
+			'title' => 'Order',
 			'user_id' => $this->id_user,
 			'user_nama_lengkap' => $this->user_nama_lengkap,
 			'user_username' => $this->user_username,
@@ -79,10 +74,12 @@ class Dashboard extends Controller
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,
-			'user_no_anggota' => $this->user_no_anggota,
-			'user_nopol' => $this->user_nopol,
-			'driver_aktif' => $this->DriverModel->getDriverAktif()
+			'driver_aktif' => $this->PengantaranModel->getPengantaranProses()
 		];
-		return view('driver/dashboard/views', $data);
+		return view('customer/dashboard/views', $data);
+	}
+
+	public function order()
+	{
 	}
 }

@@ -71,7 +71,8 @@ class Pengantaran extends Controller
 			'user_status' => $this->user_status,
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
-			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user)
+			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user),
+			'jml_pengantaran_diproses' => $this->PengantaranModel->getJumlahPengantaranProses()
 		];
 
 		return view('driver/pengantaran/views', $data);
@@ -79,6 +80,7 @@ class Pengantaran extends Controller
 
 	public function create()
 	{
+		$jml_pengantaran_diproses = $this->PengantaranModel->getJumlahPengantaranProses();
 		$data = [
 			'request' => $this->request,
 			'db' => $this->db,
@@ -95,9 +97,53 @@ class Pengantaran extends Controller
 			'user_status' => $this->user_status,
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
-			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user)
+			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user),
+			'jml_pengantaran_diproses' => $jml_pengantaran_diproses
 		];
 
-		return view('driver/pengantaran/create', $data);
+		if ($jml_pengantaran_diproses > 0) {
+			header('Location:' . base_url() . '/driver/pengantaran');
+			exit();
+		} else {
+			return view('driver/pengantaran/create', $data);
+		}
+	}
+
+	public function tambah_data_pengantaran()
+	{
+		if (!$this->validate([
+			'latlonginput' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Kolom harus diisi !',
+				]
+			],
+			'radius_jemput' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Kolom harus diisi !',
+				]
+			]
+		])) {
+			return redirect()->to(base_url() . '/driver/pengantaran/create')->withInput();
+		}
+
+		// $waktu_data = date("Y-m-d H:i:s");
+
+		$latlonginput = explode(", ", $this->request->getVar('latlonginput'));
+
+		$latitude = str_replace("(", "", $latlonginput[0]);
+		$longitude = str_replace(")", "", $latlonginput[1]);
+
+		$this->PengantaranModel->save([
+			'id_driver' => $this->id_user,
+			'latitude' => $latitude,
+			'longitude' => $longitude,
+			'radius_jemput' => $this->request->getVar('radius_jemput'),
+			'status_pengantaran' => '0'
+		]);
+
+		session()->setFlashdata('pesan_berhasil', 'Data berhasil disimpan !');
+		return redirect()->to(base_url() . '/driver/pengantaran');
 	}
 }

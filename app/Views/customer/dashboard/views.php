@@ -21,8 +21,10 @@
 				<p style="color: darkslateblue; margin-top: -15px;">
 					<?= $user_no_hp; ?>
 				</p>
-				Ingin menuju bandara ? <br>
-				<a href="" class="btn btn-success mt-2">
+				<br>
+				Ingin menuju bandara ?
+				<br>
+				<a href="<?= base_url(); ?>/customer/order" class="btn btn-success mt-2">
 					<i class="fa fa-arrow-right"></i> Order TAXI
 				</a>
 			</div>
@@ -39,9 +41,8 @@
 					Lokasi Driver
 				</h3>
 				<p>
-					( Lokasi driver aktif dalam redius sekitar anda )
+					( Lokasi driver aktif di sekitar : <span id="alamat_saya"></span> )
 				</p>
-				<div id="alamat_saya"></div>
 				<hr>
 			</div>
 			<div class="col-12 p-0">
@@ -60,9 +61,9 @@
 			},
 			function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK)
-					document.getElementById("alamat_saya").value = results[0].formatted_address;
+					document.getElementById("alamat_saya").innerHTML = results[0].formatted_address;
 				else
-					document.getElementById("alamat_saya").innerHTML += "Unable to retrieve your address" + "<br />";
+					document.getElementById("alamat_saya").innerHTML = "Unable to retrieve your address" + "<br />";
 			});
 	}
 
@@ -70,13 +71,13 @@
 		var map;
 		var userLoc;
 		var gmarkers = [];
-		var marker, i, marker_semua, marker_dokter, marker_tempat_praktik, marker_optik;
+		var marker, i;
 		var lineMarkers = [];
 		var lingkar = [];
 		var circle_user;
 		var id_kategori;
 
-		var rad = 1000;
+		var rad = 10000;
 
 		var infoWindow = new google.maps.InfoWindow;
 		var bounds = new google.maps.LatLngBounds();
@@ -153,10 +154,10 @@
 				trafficLayer.setMap(map);
 
 				var icon_user = {
-					url: "<?= base_url() ?>/assets/img/marker-red.png", // url
-					scaledSize: new google.maps.Size(28, 36), // scaled size
+					url: "<?= base_url() ?>/assets/img/marker-tujuan.png", // url
+					scaledSize: new google.maps.Size(44, 50), // scaled size
 					origin: new google.maps.Point(0, 0), // origin
-					anchor: new google.maps.Point(14, 18), // anchor
+					anchor: new google.maps.Point(22, 34), // anchor
 					animation: google.maps.Animation.DROP
 				};
 
@@ -180,12 +181,13 @@
 
 				circle_user.bindTo('center', centerLoc, 'position');
 				circle_user.setRadius(parseFloat(rad));
-				tampilTitik(rad, 'semua');
+
+				tampilTitik(rad);
 			}, function() {
 				handleLocationError(true, centerLoc, map.getCenter());
 			}, positionOptions);
 
-			function tampilTitik(radius, id_kategori) {
+			function tampilTitik(radius) {
 				if (marker) {
 					marker.setMap(null);
 					marker = "";
@@ -198,17 +200,15 @@
 				// Akhir hapus marker
 
 				// directionsDisplay.setDirections(response);
-				var arrayDriver = [
+				var arrayTitikPengantaran = [
 					<?php
 					foreach ($driver_aktif as $data) {
-						$id_driver = $data["id_driver"];
-						$nama_lengkap = $data["nama_lengkap"];
+						$id_pengantaran = $data["id_pengantaran"];
 						$latitude = $data["latitude"];
 						$longitude = $data["longitude"];
 						echo "
 						{
-                            id_driver: '" . $id_driver . "',
-                            nama_lengkap: '" . $nama_lengkap . "',
+                            id_pengantaran: '" . $id_pengantaran . "',
                             latitude: '" . $latitude . "',
                             longitude: '" . $longitude . "'
                         },
@@ -217,37 +217,36 @@
 					?>
 				];
 
-				for (i = 0; i < arrayDriver.length; i++) {
-					let latitude = arrayDriver[i].lat;
-					let longitude = arrayDriver[i].lng;
+				for (i = 0; i < arrayTitikPengantaran.length; i++) {
+					let latitude = arrayTitikPengantaran[i].lat;
+					let longitude = arrayTitikPengantaran[i].lng;
 					let posisiMarker = new google.maps.LatLng(latitude, longitude);
-					let id_driver = arrayDriver[i].id_driver;
-					let nama_lengkap = arrayDriver[i].nama_lengkap;
+					let id_pengantaran = arrayTitikPengantaran[i].id_pengantaran;
 					stuDistances = calculateDistances(userLoc, posisiMarker);
 
 					// if (stuDistances.metres <= radius) {
 					var icon_tempat_praktik = {
-						url: "<?= base_url() ?>/assets/img/taxi-marker.png", // url
+						url: "<?= base_url() ?>/assets/img/taxi-top-right.png", // url
 						scaledSize: new google.maps.Size(28, 36), // scaled size
 						origin: new google.maps.Point(0, 0), // origin
 						anchor: new google.maps.Point(14, 18) // anchor
 					};
-					var marker_tempat_praktik = new google.maps.Marker({
+					var marker_pengantaran = new google.maps.Marker({
 						position: posisiMarker,
 						map: map,
 						icon: icon_tempat_praktik
 					});
-					google.maps.event.addListener(marker_tempat_praktik, 'click', (function(marker_tempat_praktik, i) {
+					google.maps.event.addListener(marker_pengantaran, 'click', (function(marker_pengantaran, i) {
 						return function() {
 							var distinationOrigin = userLoc;
 							var destinationMarker = posisiMarker;
 							infoWindow.setContent(`
                                     <div style="width: 100%; text-align: center;">
-                                        <h4>${nama_lengkap}</h4>
+                                        <h4>Test</h4>
                                     </div>
                                     <br>
                                     <div class="row justify-content-center">
-                                        <a href="${id_driver}" class="badge badge-success p-2">
+                                        <a href="${id_pengantaran}" class="badge badge-success p-2">
                                             <i class="fa fa-eye"></i> Lihat Dokter
                                         </a>
                                     </div>
@@ -264,16 +263,16 @@
                                         </tr>
 									</table>
 									`);
-							calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_driver);
-							infoWindow.open(map, marker_tempat_praktik);
+							calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_pengantaran);
+							infoWindow.open(map, marker_pengantaran);
 						}
-					})(marker_tempat_praktik, i));
+					})(marker_pengantaran, i));
 					// }
-					gmarkers.push(marker_tempat_praktik);
+					gmarkers.push(marker_pengantaran);
 				}
 			}
 
-			function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_driver) {
+			function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_pengantaran) {
 				directionsService.route({
 					origin: distinationOrigin,
 					destination: destinationMarker,
@@ -281,14 +280,14 @@
 				}, function(response, status) {
 					if (status === google.maps.DirectionsStatus.OK) {
 						directionsDisplay.setDirections(response);
-						computeTotals(response, infoWindow, id_driver);
+						computeTotals(response, infoWindow, id_pengantaran);
 					} else {
 						window.alert('Directions request failed due to ' + status);
 					}
 				});
 			}
 
-			function computeTotals(result, infoWindow, id_driver) {
+			function computeTotals(result, infoWindow, id_pengantaran) {
 				var totalDist = 0;
 				var totalTime = 0;
 				var myroute = result.routes[0];

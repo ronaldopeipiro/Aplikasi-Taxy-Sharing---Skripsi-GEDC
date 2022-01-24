@@ -57,6 +57,10 @@ $routes->get('/customer/sign-up', 'Customer\Auth::sign_up', ['filter' => 'auth_n
 $routes->get('/customer/lupa-password', 'Customer\Auth::lupa_password', ['filter' => 'auth_not_login_customer']);
 $routes->get('/customer', 'Customer\Dashboard::index', ['filter' => 'auth_customer']);
 
+$routes->get('/customer/order', 'Customer\Order::index', ['filter' => 'auth_customer']);
+$routes->get('/customer/order/add', 'Customer\Order::index', ['filter' => 'auth_customer']);
+$routes->get('/customer/order/edit/(:num)', 'Customer\Order::edit/$1', ['filter' => 'auth_customer']);
+
 $routes->get('/customer/logout', 'Logout::customer', ['filter' => 'auth_customer']);
 
 /*

@@ -3,8 +3,10 @@
 <?= $this->section('content'); ?>
 
 <section class="py-8" id="home">
+
 	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>
+
 	<div class="container">
 		<div class="row align-items-center pt-3 pt-lg-0">
 
@@ -47,7 +49,7 @@
 				<h3 class="font-weight-bold">
 					Lokasi Saya
 				</h3>
-				<div id="alamat_saya"></div>
+				<span id="alamat_saya"></span>
 				<hr>
 			</div>
 			<div class="col-12 p-0">
@@ -59,19 +61,6 @@
 </section>
 
 <script>
-	function writeAddressName(latLng) {
-		var geocoder = new google.maps.Geocoder();
-		geocoder.geocode({
-				"location": latLng
-			},
-			function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK)
-					document.getElementById("alamat_saya").value = results[0].formatted_address;
-				else
-					document.getElementById("alamat_saya").innerHTML += "Unable to retrieve your address" + "<br />";
-			});
-	}
-
 	function initMap() {
 		let map;
 		let userLoc;
@@ -99,6 +88,23 @@
 				userLat = position.coords.latitude;
 				userLng = position.coords.longitude;
 				userLoc = new google.maps.LatLng(userLat, userLng);
+
+				function writeAddressName(latLng) {
+					var geocoder = new google.maps.Geocoder();
+					geocoder.geocode({
+							"location": latLng
+						},
+						function(results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								document.getElementById("alamat_saya").innerHTML = results[3].formatted_address;
+							} else {
+								document.getElementById("alamat_saya").innerHTML += "Unable to retrieve your address" + "<br />";
+							}
+						});
+				}
+
+				writeAddressName(userLoc);
+
 				var myStyle = [{
 					featureType: "administrative",
 					elementType: "labels",
@@ -135,7 +141,6 @@
 					location_type: google.maps.GeocoderLocationType.ROOFTOP
 				};
 
-				writeAddressName(userLoc);
 
 				map = new google.maps.Map(document.getElementById('peta'), mapOptions);
 				map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {

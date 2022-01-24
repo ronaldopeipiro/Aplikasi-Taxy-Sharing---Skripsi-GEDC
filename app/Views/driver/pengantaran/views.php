@@ -9,30 +9,35 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="d-flex align-items-center">
-					<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
-						<i class="fa fa-plus"></i>
-					</a>
-					<h4 class="mt-2 ml-2">
+				<div class="d-flex align-items-center justify-content-between">
+					<h4 class="mt-2">
 						Pengantaran
 					</h4>
+					<?php if ($jml_pengantaran_diproses == 0) : ?>
+						<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
+							<i class="fa fa-plus"></i> Tambah
+						</a>
+					<?php endif; ?>
 				</div>
 				<hr>
 			</div>
 
 			<div class="col-lg-12" style="min-height: 300px;">
-				<table class="table table-sm table-responsive table-responsive" id="data-table-custom" style="width: 100%;">
+				<table class="table table-responsive table-bordered" id="data-table-custom" style="width: 100%;">
 					<thead>
 						<tr>
 							<th>No.</th>
 							<th>Lokasi</th>
+							<th>Koordinat</th>
 							<th>Radius Jemput</th>
 							<th>Status</th>
+							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$no = 1;
+						$class_dashboard = new App\Controllers\Driver\Dashboard;
 						?>
 						<?php foreach ($pengantaran as $row) : ?>
 							<?php
@@ -45,13 +50,34 @@
 							}
 							?>
 							<tr>
-								<td style="width: 50px;"><?= $no++; ?></td>
-								<td style="width: 70%;"><?= $row['latitude']; ?>, <?= $row['longitude']; ?></td>
-								<td class="text-center"><?= $row['radius_jemput']; ?> Meter</td>
-								<td class="text-center">
+								<td style="width: 50px; vertical-align: middle;" class="text-center"><?= $no++; ?>.</td>
+								<td style="width: 30%; vertical-align: middle;">
+									<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
+								</td>
+								<td style="width: 30%; vertical-align: middle;">
+									<a href="https://google.co.id/maps?q=<?= $row['latitude'] . ',' . $row['longitude']; ?>" target="_blank">
+										<?= $row['latitude'] . ', ' . $row['longitude']; ?>
+									</a>
+								</td>
+								<td class="text-left" style="vertical-align: middle;"><?= $row['radius_jemput']; ?> Meter</td>
+								<td class="text-left" style="vertical-align: middle;">
 									<span class="<?= $class_status; ?>">
 										<?= $status_pengantaran; ?>
 									</span>
+								</td>
+								<td style="vertical-align: middle;">
+									<div class="list-unstyled d-flex justify-content-center align-items-center">
+										<li class="mr-2">
+											<a href="#" class="btn btn-warning">
+												<i class="fa fa-edit"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="btn btn-danger">
+												<i class="fa fa-trash"></i>
+											</a>
+										</li>
+									</div>
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -63,6 +89,8 @@
 
 	</div>
 </section>
+
+
 
 <script>
 	$(document).ready(function() {

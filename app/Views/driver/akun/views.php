@@ -58,6 +58,8 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi atque non quibusdam! Architecto odit voluptatum et, voluptatem error nihil pariatur ullam possimus similique, eos, quis laborum quibusdam ea minima. Sapiente!
+
 		</div>
 	</div>
 
