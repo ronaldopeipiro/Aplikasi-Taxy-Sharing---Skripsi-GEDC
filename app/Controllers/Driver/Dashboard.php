@@ -5,6 +5,9 @@ namespace App\Controllers\Driver;
 use CodeIgniter\Controller;
 use App\Models\CustomerModel;
 use App\Models\DriverModel;
+use App\Models\PengantaranModel;
+use App\Models\OrderModel;
+use App\Models\BandaraModel;
 
 class Dashboard extends Controller
 {
@@ -15,6 +18,9 @@ class Dashboard extends Controller
 		$this->validation = \Config\Services::validation();
 		$this->CustomerModel = new CustomerModel();
 		$this->DriverModel = new DriverModel();
+		$this->PengantaranModel = new PengantaranModel();
+		$this->OrderModel = new OrderModel();
+		$this->BandaraModel = new BandaraModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -41,6 +47,29 @@ class Dashboard extends Controller
 		$json = json_decode($geocode);
 		$address = $json->results[0]->formatted_address;
 		return $address;
+	}
+
+	public function update_posisi()
+	{
+		$latitude = $this->request->getPost('latitude');
+		$longitude = $this->request->getPost('longitude');
+
+		$this->DriverModel->updateDriver([
+			'latitude' => $latitude,
+			'longitude' => $longitude
+		], $this->id_user);
+	}
+
+	public function distance_matrix_google($lat1, $lng1, $lat2, $lng2)
+	{
+		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI");
+		$json = json_decode($fetch);
+
+		$data['distance'] = $json->rows[0]->elements[0]->distance->text;;
+		$data['duration'] = $json->rows[0]->elements[0]->duration->text;
+		$data['duration_in_traffic'] = $json->rows[0]->elements[0]->duration_in_traffic->text;
+
+		return $data;
 	}
 
 	public function get_client_ip()

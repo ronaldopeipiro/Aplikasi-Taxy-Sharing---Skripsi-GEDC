@@ -10,6 +10,7 @@ class PengantaranModel extends Model
 	protected $table = 'tb_pengantaran';
 	protected $allowedFields = [
 		'id_pengantaran',
+		'id_bandara',
 		'id_driver',
 		'latitude',
 		'longitude',
@@ -33,7 +34,6 @@ class PengantaranModel extends Model
 			'id_driver' => $id_driver
 		])->orderBy('id_pengantaran', 'desc')->findAll();
 	}
-
 
 	public function getPengantaranProses()
 	{

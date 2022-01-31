@@ -103,6 +103,19 @@
 						});
 				}
 
+				$.ajax({
+					type: "POST",
+					url: "<?= base_url() ?>/Driver/Dashboard/update_posisi",
+					dataType: "JSON",
+					data: {
+						latitude: userLat,
+						longitude: userLng
+					},
+					success: function(data) {
+						console.log('OK');
+					}
+				});
+
 				writeAddressName(userLoc);
 
 				var myStyle = [{

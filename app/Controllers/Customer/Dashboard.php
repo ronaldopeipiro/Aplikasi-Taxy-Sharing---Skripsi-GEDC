@@ -5,6 +5,10 @@ namespace App\Controllers\Customer;
 use CodeIgniter\Controller;
 use App\Models\CustomerModel;
 use App\Models\DriverModel;
+use App\Models\PengantaranModel;
+use App\Models\OrderModel;
+use App\Models\BandaraModel;
+use App\Models\TarifModel;
 
 class Dashboard extends Controller
 {
@@ -15,6 +19,10 @@ class Dashboard extends Controller
 		$this->validation = \Config\Services::validation();
 		$this->CustomerModel = new CustomerModel();
 		$this->DriverModel = new DriverModel();
+		$this->PengantaranModel = new PengantaranModel();
+		$this->OrderModel = new OrderModel();
+		$this->BandaraModel = new BandaraModel();
+		$this->TarifModel = new TarifModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -27,6 +35,8 @@ class Dashboard extends Controller
 		$this->user_level = "customer";
 		$this->user_foto =	$data_user['foto'];
 		$this->user_status = $data_user['status'];
+		$this->user_latitude = $data_user['latitude'];
+		$this->user_longitude = $data_user['longitude'];
 	}
 
 	public function get_client_ip()
@@ -49,6 +59,17 @@ class Dashboard extends Controller
 		return $ipaddress;
 	}
 
+	public function update_posisi()
+	{
+		$latitude = $this->request->getPost('latitude');
+		$longitude = $this->request->getPost('longitude');
+
+		$this->CustomerModel->updateCustomer([
+			'latitude' => $latitude,
+			'longitude' => $longitude
+		], $this->id_user);
+	}
+
 	public function index()
 	{
 		$data = [
@@ -65,7 +86,10 @@ class Dashboard extends Controller
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,
-			'driver_aktif' => $this->DriverModel->getDriverAktif()
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
+			'pengantaran' => $this->PengantaranModel->getPengantaranProses(),
+			'data_tarif' => $this->TarifModel->getTarif(1)
 		];
 		return view('customer/dashboard/views', $data);
 	}

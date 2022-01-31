@@ -1,0 +1,53 @@
+ERROR - 2022-01-25 18:14:34 --> Column 'latitude' cannot be null
+CRITICAL - 2022-01-25 18:14:34 --> Column 'latitude' cannot be null
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(280): mysqli->query('INSERT INTO `tb...')
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\BaseModel.php(658): CodeIgniter\Model->insert(Array, false)
+#8 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Order.php(102): CodeIgniter\BaseModel->save(Array)
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Order->submit_order('1')
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Order))
+#11 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2022-01-25 18:52:52 --> Undefined variable: row
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(300): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 300, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(74): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-25 18:52:52 --> Undefined variable: row
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(300): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 300, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(74): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-25 18:52:53 --> Undefined variable: row
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(300): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 300, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(74): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}

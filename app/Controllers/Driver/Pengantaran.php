@@ -74,7 +74,6 @@ class Pengantaran extends Controller
 			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user),
 			'jml_pengantaran_diproses' => $this->PengantaranModel->getJumlahPengantaranProses()
 		];
-
 		return view('driver/pengantaran/views', $data);
 	}
 
@@ -101,11 +100,11 @@ class Pengantaran extends Controller
 			'jml_pengantaran_diproses' => $jml_pengantaran_diproses
 		];
 
-		if ($jml_pengantaran_diproses > 0) {
+		if (($jml_pengantaran_diproses == 0) or (isset($jml_pengantaran_diproses))) {
+			return view('driver/pengantaran/create', $data);
+		} else {
 			header('Location:' . base_url() . '/driver/pengantaran');
 			exit();
-		} else {
-			return view('driver/pengantaran/create', $data);
 		}
 	}
 

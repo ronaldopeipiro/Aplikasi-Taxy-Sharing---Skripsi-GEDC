@@ -45,10 +45,24 @@ $routes->get('/driver/pengantaran', 'Driver\Pengantaran::index', ['filter' => 'a
 $routes->get('/driver/pengantaran/create', 'Driver\Pengantaran::create', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/orderan', 'Driver\Orderan::index', ['filter' => 'auth_driver']);
+
 $routes->get('/driver/history', 'Driver\Orderan::history', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/akun', 'Driver\Akun::index', ['filter' => 'auth_driver']);
+
 $routes->get('/driver/logout', 'Logout::driver', ['filter' => 'auth_driver']);
+
+
+// Admin
+$routes->get('/admin/login', 'Admin\Auth::login', ['filter' => 'auth_not_login_admin']);
+$routes->get('/admin', 'Admin\Dashboard::index', ['filter' => 'auth_admin']);
+
+$routes->get('/admin/orderan', 'Admin\Orderan::index', ['filter' => 'auth_admin']);
+$routes->get('/admin/driver', 'Admin\Driver::index', ['filter' => 'auth_admin']);
+$routes->get('/admin/customer', 'Admin\Customer::index', ['filter' => 'auth_admin']);
+
+$routes->get('/admin/logout', 'Logout::admin', ['filter' => 'auth_admin']);
+
 
 
 // Customer
@@ -58,7 +72,7 @@ $routes->get('/customer/lupa-password', 'Customer\Auth::lupa_password', ['filter
 $routes->get('/customer', 'Customer\Dashboard::index', ['filter' => 'auth_customer']);
 
 $routes->get('/customer/order', 'Customer\Order::index', ['filter' => 'auth_customer']);
-$routes->get('/customer/order/add', 'Customer\Order::index', ['filter' => 'auth_customer']);
+$routes->post('/customer/order/submit-order', 'Customer\Order::submit_order', ['filter' => 'auth_customer']);
 $routes->get('/customer/order/edit/(:num)', 'Customer\Order::edit/$1', ['filter' => 'auth_customer']);
 
 $routes->get('/customer/logout', 'Logout::customer', ['filter' => 'auth_customer']);

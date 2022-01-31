@@ -19,6 +19,8 @@ class Filters extends BaseConfig
 		'csrf' => \CodeIgniter\Filters\CSRF::class,
 		'toolbar' => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'auth_admin' => \App\Filters\AuthAdmin::class,
+		'auth_not_login_admin' => \App\Filters\AuthNotLoginAdmin::class,
 		'auth_driver' => \App\Filters\AuthDriver::class,
 		'auth_not_login_driver' => \App\Filters\AuthNotLoginDriver::class,
 		'auth_customer' => \App\Filters\AuthCustomer::class,

@@ -1,0 +1,102 @@
+CRITICAL - 2022-01-31 06:17:00 --> Cannot declare class App\Controllers\Driver\Pengantaran, because the name is already in use
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-01-31 06:17:09 --> Cannot declare class App\Controllers\Driver\Pengantaran, because the name is already in use
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-01-31 06:22:17 --> Undefined variable: driver_aktif
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\driver\orderan\views.php(227): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 227, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('driver/orderan/...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Driver\Orderan.php(55): view('driver/orderan/...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Driver\Orderan->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Orderan))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:15 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:33 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:34 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:35 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:36 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 06:48:37 --> Object of class stdClass could not be converted to int
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Object of class...', 'C:\\laragon\\www\\...', 62, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(94): view('customer/dashbo...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Dashboard->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-01-31 07:05:59 --> Undefined variable: orderan_belum_selesai
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\order\views.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 53, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('customer/order/...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Order.php(67): view('customer/order/...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Customer\Order->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Order))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}

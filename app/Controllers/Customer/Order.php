@@ -8,7 +8,7 @@ use App\Models\DriverModel;
 use App\Models\OrderModel;
 use App\Models\PengantaranModel;
 use App\Models\TarifModel;
-use App\Models\TujuanModel;
+use App\Models\BandaraModel;
 
 class Order extends Controller
 {
@@ -23,7 +23,7 @@ class Order extends Controller
 		$this->OrderModel = new OrderModel();
 		$this->PengantaranModel = new PengantaranModel();
 		$this->TarifModel = new TarifModel();
-		$this->TujuanModel = new TujuanModel();
+		$this->BandaraModel = new BandaraModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -36,30 +36,14 @@ class Order extends Controller
 		$this->user_level = "customer";
 		$this->user_foto =	$data_user['foto'];
 		$this->user_status = $data_user['status'];
-	}
-
-	public function get_client_ip()
-	{
-		$ipaddress = '';
-		if (getenv('HTTP_CLIENT_IP'))
-			$ipaddress = getenv('HTTP_CLIENT_IP');
-		else if (getenv('HTTP_X_FORWARDED_FOR'))
-			$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-		else if (getenv('HTTP_X_FORWARDED'))
-			$ipaddress = getenv('HTTP_X_FORWARDED');
-		else if (getenv('HTTP_FORWARDED_FOR'))
-			$ipaddress = getenv('HTTP_FORWARDED_FOR');
-		else if (getenv('HTTP_FORWARDED'))
-			$ipaddress = getenv('HTTP_FORWARDED');
-		else if (getenv('REMOTE_ADDR'))
-			$ipaddress = getenv('REMOTE_ADDR');
-		else
-			$ipaddress = 'UNKNOWN';
-		return $ipaddress;
+		$this->user_latitude = $data_user['latitude'];
+		$this->user_longitude = $data_user['longitude'];
 	}
 
 	public function index()
 	{
+		$jml_pengantaran_diproses = $this->PengantaranModel->getJumlahPengantaranProses();
+
 		$data = [
 			'request' => $this->request,
 			'db' => $this->db,
@@ -74,12 +58,57 @@ class Order extends Controller
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,
-			'driver_aktif' => $this->PengantaranModel->getPengantaranProses()
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
+			'data_tarif' => $this->TarifModel->getTarif(1),
+			'pengantaran' => $this->PengantaranModel->getPengantaranProses(),
+			'jml_pengantaran_diproses' => $jml_pengantaran_diproses
 		];
-		return view('customer/dashboard/views', $data);
+		return view('customer/order/views', $data);
 	}
 
-	public function order()
+	public function submit_order()
 	{
+		$id_pengantaran = $this->request->getPost('id_pengantaran');
+		$id_customer = $this->request->getPost('id_customer');
+		$latitude = $this->request->getPost('latitude');
+		$longitude = $this->request->getPost('longitude');
+		$jarak_customer_to_bandara = $this->request->getPost('jarak_customer_to_bandara');
+		$tarif_perkm = $this->request->getPost('tarif_perkm');
+		$biaya = $this->request->getPost('biaya');
+
+		$cek_orderan_proses = ($this->db->query("SELECT * FROM tb_order WHERE id_customer='$id_customer' AND status='0' LIMIT 1 "))->getNumRows();
+
+		if ($cek_orderan_proses > 0) {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Orderan gagal ditambahkan, anda masih memiliki orderan yang belum selesai !'
+			));
+		} else {
+			$this->OrderModel->save([
+				'id_pengantaran' => $id_pengantaran,
+				'id_customer' => $id_customer,
+				'latitude' => $latitude,
+				'longitude' => $longitude,
+				'jarak_customer_to_bandara' => $jarak_customer_to_bandara,
+				'tarif_perkm' => $tarif_perkm,
+				'biaya' => $biaya
+			]);
+
+			echo json_encode(array(
+				'success' => '1',
+				'pesan' => 'Orderan masuk, menunggu driver menerima orderan anda !'
+			));
+		}
+	}
+
+	public function cancel_order()
+	{
+		$id_order = $this->request->getPost('id_order');
+
+		$this->OrderModel->deleteOrder($id_order);
+
+		session()->setFlashdata('pesan_berhasil', 'Orderan dibatalkan !');
+		return redirect()->to(base_url() . '/customer/order');
 	}
 }
