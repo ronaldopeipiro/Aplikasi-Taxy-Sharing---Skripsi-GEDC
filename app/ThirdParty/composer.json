@@ -1,0 +1,12 @@
+{
+    "name": "asus/third-party",
+    "authors": [
+        {
+            "name": "Ronaldo Pei Piro",
+            "email": "ronaldopeipiro11@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.0"
+    }
+}

@@ -78,14 +78,14 @@ class Auth extends Controller
 		$google_client = new \Google_Client();
 
 		// Localhost
-		$google_client->setClientId('851560113698-5gocvm900lb6n4358055mbj0hcodm347.apps.googleusercontent.com');
-		$google_client->setClientSecret('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');
+		$google_client->setClientId('470512694911-b0qms2mklitu9btvi9fvr21j65vlkmcs.apps.googleusercontent.com');
+		$google_client->setClientSecret('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');
 
-		// Hosting
-		// $google_client->setClientId('851560113698-opv5e5dee74tc3un8nrqq61um6unni3j.apps.googleusercontent.com');
-		// $google_client->setClientSecret('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');
+		// Hosting jo.yokcaridok.id
+		// $google_client->setClientId('470512694911-6ffkdo551ugthpd935s930p0636o92a2.apps.googleusercontent.com');
+		// $google_client->setClientSecret('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');
 
-		$google_client->setRedirectUri(base_url() . '/pelapor/sign-in');
+		$google_client->setRedirectUri(base_url() . '/customer/login');
 		$google_client->addScope('email');
 		$google_client->addScope('profile');
 		$google_client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'));
@@ -108,10 +108,10 @@ class Auth extends Controller
 				$picture_user = $gdata['picture'];
 				$gender_user = $gdata['gender'];
 
-				$cek_data = $this->PelaporModel->getPelaporByGoogleId($google_id_user);
+				$cek_data = $this->CustomerModel->getPelaporByGoogleId($google_id_user);
 
 				if (!$cek_data) {
-					$this->PelaporModel->save([
+					$this->CustomerModel->save([
 						'google_id' => $google_id_user,
 						'nama_lengkap' => $nama_user,
 						'email' => $email_user,

@@ -42,6 +42,13 @@ class CustomerModel extends Model
 		])->orderBy('id_customer', 'DESC')->findAll();
 	}
 
+	public function getCustomerByGoogleId($google_id)
+	{
+		return $this->where([
+			'google_id' => $google_id
+		])->first();
+	}
+
 	public function updateCustomer($data, $id)
 	{
 		$query = $this->db->table($this->table)->update($data, array('id_customer' => $id));

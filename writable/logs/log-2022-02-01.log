@@ -620,3 +620,12 @@ CRITICAL - 2022-02-01 09:50:46 --> Trying to access array offset on value of typ
 CRITICAL - 2022-02-01 05:24:36 --> App\Controllers\customer\Auth::login(): Failed opening required 'C:\laragon\www\taxi-sharing-2020\app\Libraries/vendor/autoload.php' (include_path='.;C:/laragon/etc/php/pear')
 #0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
 #1 {main}
+CRITICAL - 2022-02-01 05:28:02 --> App\Controllers\customer\Auth::login(): Failed opening required 'C:\laragon\www\taxi-sharing-2020\app\Libraries/vendor/autoload.php' (include_path='.;C:/laragon/etc/php/pear')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-02-01 18:38:17 --> App\Controllers\customer\Auth::login(): Failed opening required 'C:\laragon\www\taxi-sharing-2020\app\Libraries/vendor/autoload.php' (include_path='.;C:/laragon/etc/php/pear')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-02-01 18:42:45 --> App\Controllers\customer\Auth::login(): Failed opening required 'C:\laragon\www\taxi-sharing-2020\app\Libraries/vendor/autoload.php' (include_path='.;C:/laragon/etc/php/pear')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
