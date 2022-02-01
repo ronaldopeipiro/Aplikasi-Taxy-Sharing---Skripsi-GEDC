@@ -60,6 +60,7 @@ $routes->get('/admin', 'Admin\Dashboard::index', ['filter' => 'auth_admin']);
 $routes->get('/admin/orderan', 'Admin\Orderan::index', ['filter' => 'auth_admin']);
 $routes->get('/admin/driver', 'Admin\Driver::index', ['filter' => 'auth_admin']);
 $routes->get('/admin/customer', 'Admin\Customer::index', ['filter' => 'auth_admin']);
+$routes->get('/admin/bandara', 'Admin\Bandara::index', ['filter' => 'auth_admin']);
 
 $routes->get('/admin/logout', 'Logout::admin', ['filter' => 'auth_admin']);
 

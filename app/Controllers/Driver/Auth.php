@@ -102,9 +102,9 @@ class Auth extends Controller
 
 		if ($data) {
 			$pass = $data['password'];
-			$status = $data['status_akun'];
+			$status = $data['aktif'];
 
-			if ($status != "2") {
+			if ($status == "Y") {
 				$verify_pass = password_verify($password, $pass);
 				if ($verify_pass) {
 					$ses_data = [

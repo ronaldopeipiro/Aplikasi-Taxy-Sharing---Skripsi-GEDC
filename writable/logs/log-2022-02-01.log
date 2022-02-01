@@ -1,0 +1,12 @@
+CRITICAL - 2022-02-01 05:53:39 --> Undefined index: nama_lengkap
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\admin\orderan\views.php(82): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\laragon\\www\\...', 82, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(214): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1092): CodeIgniter\View\View->render('admin/orderan/v...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Admin\Orderan.php(47): view('admin/orderan/v...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(802): App\Controllers\Admin\Orderan->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Orderan))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}

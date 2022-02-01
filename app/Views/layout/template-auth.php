@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?= $title; ?> | TAXI SHARING APP</title>
+	<title><?= $title; ?> | AIRPORT TAXI SHARING APP</title>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/favicons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>/assets/img/favicons/favicon-32x32.png">

@@ -29,7 +29,6 @@ class Dashboard extends Controller
 		$data_user = $this->CustomerModel->getCustomer($this->id_user);
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
-		$this->user_jenis_kelamin = $data_user['jenis_kelamin'];
 		$this->user_no_hp = $data_user['no_hp'];
 		$this->user_email = $data_user['email'];
 		$this->user_level = "customer";
@@ -82,7 +81,6 @@ class Dashboard extends Controller
 			'user_username' => $this->user_username,
 			'user_email' => $this->user_email,
 			'user_no_hp' => $this->user_no_hp,
-			'user_jenis_kelamin' => $this->user_jenis_kelamin,
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,

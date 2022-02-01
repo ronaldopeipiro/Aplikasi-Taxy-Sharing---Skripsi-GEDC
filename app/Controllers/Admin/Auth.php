@@ -98,7 +98,7 @@ class Auth extends Controller
 				if ($verify_pass) {
 					$ses_data = [
 						'id_user' => $data['id_admin'],
-						'login_driver_taxy_sharing'  => TRUE
+						'login_admin_taxy_sharing'  => TRUE
 					];
 
 					$session->setFlashdata('pesan_berhasil', 'Selamat Datang ' . $data['nama_lengkap']);

@@ -10,7 +10,7 @@
 
 			<div class="row mb-5">
 				<div class="col-12">
-					<h3 class="text-center font-weight-bold">TAXI SHARING APP</h3>
+					<h3 class="text-center font-weight-bold">AIRPORT TAXI SHARING APP</h3>
 					<hr>
 					<h5 class="text-center">
 						Daftar sebagai Driver

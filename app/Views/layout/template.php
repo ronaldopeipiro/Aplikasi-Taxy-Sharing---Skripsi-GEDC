@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title><?= $title; ?> | TAXI SHARING APP</title>
+	<title><?= $title; ?> | AIRPORT TAXI SHARING APP</title>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/logo.jpg">
 	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>/assets/img/logo.jpg">
@@ -237,7 +237,46 @@
 				</button>
 				<div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
 					<ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-						<?php if ($user_level == "customer") : ?>
+
+						<?php if ($user_level == "admin") : ?>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium active" aria-current="page" href="<?= base_url(); ?>/admin">
+									Beranda
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium" href="<?= base_url(); ?>/admin/orderan">
+									Orderan
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium" href="<?= base_url(); ?>/admin/customer">
+									Customer
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium" href="<?= base_url(); ?>/admin/driver">
+									Driver
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium" href="<?= base_url(); ?>/admin/bandara">
+									Bandara
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium" href="<?= base_url(); ?>/admin/pengaturan">
+									Pengaturan
+								</a>
+							</li>
+							<li class="nav-item px-2">
+								<a class="nav-link fw-medium btn-logout" href="<?= base_url(); ?>/admin/logout">
+									<i class="fa fa-sign-out"></i>
+								</a>
+							</li>
+
+						<?php elseif ($user_level == "customer") : ?>
+
 							<li class="nav-item px-2">
 								<a class="nav-link fw-medium active" aria-current="page" href="<?= base_url(); ?>/customer">
 									Beranda
@@ -263,7 +302,9 @@
 									<i class="fa fa-sign-out"></i>
 								</a>
 							</li>
+
 						<?php elseif ($user_level == "driver") : ?>
+
 							<li class="nav-item px-2">
 								<a class="nav-link fw-medium active" aria-current="page" href="<?= base_url(); ?>/driver">
 									Beranda
@@ -294,7 +335,9 @@
 									<i class="fa fa-sign-out"></i>
 								</a>
 							</li>
+
 						<?php endif; ?>
+
 					</ul>
 				</div>
 			</div>

@@ -27,7 +27,6 @@ class Dashboard extends Controller
 		$data_user = $this->DriverModel->getDriver($this->id_user);
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
-		$this->user_jenis_kelamin = $data_user['jenis_kelamin'];
 		$this->user_no_hp = $data_user['no_hp'];
 		$this->user_email = $data_user['email'];
 		$this->user_no_anggota = $data_user['no_anggota'];
