@@ -6,7 +6,7 @@ use CodeIgniter\Config\AutoloadConfig;
 
 /**
  * -------------------------------------------------------------------
- * AUTOLOADER CONFIGURATION
+ * AUTO-LOADER
  * -------------------------------------------------------------------
  *
  * This file defines the namespaces and class maps so the Autoloader
@@ -31,57 +31,44 @@ class Autoload extends AutoloadConfig
 	 * else you will need to modify all of those classes for this to work.
 	 *
 	 * Prototype:
-	 *```
+	 *
 	 *   $psr4 = [
 	 *       'CodeIgniter' => SYSTEMPATH,
 	 *       'App'	       => APPPATH
 	 *   ];
-	 *```
+	 *
 	 * @var array<string, string>
 	 */
+	// public $psr4 = [
+	// 	APP_NAMESPACE => APPPATH, // For custom app namespace
+	// 	'Config'      => APPPATH . 'Config',
+	// ];
+
 	public $psr4 = [
 		'App'         => APPPATH,                // To ensure filters, etc still found,
 		APP_NAMESPACE => APPPATH,                // For custom namespace
 		'Config'      => APPPATH . 'Config',
 		'Libraries'   => APPPATH . 'Libraries',   // Your custom Libraries
-		'Myth\Auth'   => APPPATH . 'ThirdParty/myth-auth/src'
+		'Myth\Auth'   => APPPATH . 'ThirdParty/myth/auth/src'
 	];
 
-	/**
-	 * -------------------------------------------------------------------
-	 * Class Map
-	 * -------------------------------------------------------------------
-	 * The class map provides a map of class names and their exact
-	 * location on the drive. Classes loaded in this manner will have
-	 * slightly faster performance because they will not have to be
-	 * searched for within one or more directories as they would if they
-	 * were being autoloaded through a namespace.
-	 *
-	 * Prototype:
-	 *```
-	 *   $classmap = [
-	 *       'MyClass'   => '/path/to/class/file.php'
-	 *   ];
-	 *```
-	 * @var array<string, string>
-	 */
+	/*
+     * -------------------------------------------------------------------
+     * Class Map
+     * -------------------------------------------------------------------
+     * The class map provides a map of class names and their exact
+     * location on the drive. Classes loaded in this manner will have
+     * slightly faster performance because they will not have to be
+     * searched for within one or more directories as they would if they
+     * were being autoloaded through a namespace.
+     *
+     * Prototype:
+     *
+     *   $classmap = [
+     *       'MyClass'   => '/path/to/class/file.php'
+     *   ];
+     *
+     * @var array<string, string>
+     */
 	public $classmap = [];
-
-	/**
-	 * -------------------------------------------------------------------
-	 * Files
-	 * -------------------------------------------------------------------
-	 * The files array provides a list of paths to __non-class__ files
-	 * that will be autoloaded. This can be useful for bootstrap operations
-	 * or for loading functions.
-	 *
-	 * Prototype:
-	 * ```
-	 *	  $files = [
-	 *	 	   '/path/to/my/file.php',
-	 *    ];
-	 * ```
-	 * @var array<int, string>
-	 */
-	public $files = [];
 }

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '9b742de330e8a4f9c1df07d5726c8e0028c31765',
+    'reference' => '8f4a346e60497aa9d030188bde021cf91e598b3e',
     'name' => 'codeigniter4/appstarter',
   ),
   'versions' => 
@@ -18,7 +18,14 @@
       'aliases' => 
       array (
       ),
-      'reference' => '9b742de330e8a4f9c1df07d5726c8e0028c31765',
+      'reference' => '8f4a346e60497aa9d030188bde021cf91e598b3e',
+    ),
+    'codeigniter4/authentication-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
     ),
     'codeigniter4/framework' => 
     array (
@@ -167,6 +174,15 @@
       array (
         0 => '1.10.2',
       ),
+    ),
+    'myth/auth' => 
+    array (
+      'pretty_version' => 'v1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c62802b9e2ce5be931f15270811d831cc2e85457',
     ),
     'nikic/php-parser' => 
     array (
