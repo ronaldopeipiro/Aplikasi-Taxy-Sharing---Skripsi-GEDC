@@ -65,7 +65,6 @@ $routes->get('/admin/bandara', 'Admin\Bandara::index', ['filter' => 'auth_admin'
 $routes->get('/admin/logout', 'Logout::admin', ['filter' => 'auth_admin']);
 
 
-
 // Customer
 $routes->get('/customer/login', 'Customer\Auth::login', ['filter' => 'auth_not_login_customer']);
 $routes->get('/customer/sign-up', 'Customer\Auth::sign_up', ['filter' => 'auth_not_login_customer']);
@@ -76,6 +75,10 @@ $routes->get('/customer/order', 'Customer\Order::index', ['filter' => 'auth_cust
 $routes->post('/customer/order/submit-order', 'Customer\Order::submit_order', ['filter' => 'auth_customer']);
 $routes->get('/customer/order/edit/(:num)', 'Customer\Order::edit/$1', ['filter' => 'auth_customer']);
 
+$routes->get('/customer/history', 'Customer\Order::history', ['filter' => 'auth_customer']);
+$routes->get('/customer/history/detail/(:any)', 'Customer\Order::detail_history/$1', ['filter' => 'auth_customer']);
+
+$routes->get('/customer/akun', 'Customer\Akun::index', ['filter' => 'auth_customer']);
 $routes->get('/customer/logout', 'Logout::customer', ['filter' => 'auth_customer']);
 
 /*

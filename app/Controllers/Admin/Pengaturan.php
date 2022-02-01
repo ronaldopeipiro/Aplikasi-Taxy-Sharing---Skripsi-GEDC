@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\Controller;
 use App\Models\AdminModel;
+use App\Models\TarifModel;
 
 class Pengaturan extends Controller
 {
@@ -13,6 +14,7 @@ class Pengaturan extends Controller
 		$this->db = \Config\Database::connect();
 		$this->validation = \Config\Services::validation();
 		$this->AdminModel = new AdminModel();
+		$this->TarifModel = new TarifModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -40,9 +42,25 @@ class Pengaturan extends Controller
 			'user_no_hp' => $this->user_no_hp,
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
-			'user_status' => $this->user_status
+			'user_status' => $this->user_status,
+			'data_tarif' => $this->TarifModel->getTarif(1)
 		];
 		return view('admin/pengaturan/views', $data);
+	}
+
+	public function ubah_tarif()
+	{
+		$tarif_perkm = $this->request->getPost('tarif_perkm');
+
+		$this->TarifModel->updateTarif([
+			'tarif_perkm' => $tarif_perkm,
+			'id_admin' => $this->id_user
+		], 1);
+
+		echo json_encode(array(
+			'success' => '1',
+			'pesan' => 'Tarif berhasil diubah !'
+		));
 	}
 
 	public function ubah_data_akun()

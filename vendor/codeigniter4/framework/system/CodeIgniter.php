@@ -12,6 +12,7 @@
 namespace CodeIgniter;
 
 use Closure;
+use CodeIgniter\Debug\Kint\RichRenderer;
 use CodeIgniter\Debug\Timer;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
@@ -19,6 +20,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\DownloadResponse;
 use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -32,7 +34,6 @@ use Config\Services;
 use Exception;
 use Kint;
 use Kint\Renderer\CliRenderer;
-use Kint\Renderer\RichRenderer;
 
 /**
  * This class is the core of the framework, and will analyse the
@@ -44,7 +45,7 @@ class CodeIgniter
     /**
      * The current version of CodeIgniter Framework
      */
-    public const CI_VERSION = '4.1.4';
+    public const CI_VERSION = '4.1.8';
 
     private const MIN_PHP_VERSION = '7.3';
 
@@ -172,19 +173,19 @@ class CodeIgniter
         Services::exceptions()->initialize();
 
         // Run this check for manual installations
-        if (!is_file(COMPOSER_PATH)) {
+        if (! is_file(COMPOSER_PATH)) {
             $this->resolvePlatformExtensions(); // @codeCoverageIgnore
         }
 
         // Set default locale on the server
-        // locale_set_default($this->config->defaultLocale ?? 'en');
+        locale_set_default($this->config->defaultLocale ?? 'en');
 
         // Set default timezone on the server
-        // date_default_timezone_set($this->config->appTimezone ?? 'UTC');
+        date_default_timezone_set($this->config->appTimezone ?? 'UTC');
 
         $this->initializeKint();
 
-        if (!CI_DEBUG) {
+        if (! CI_DEBUG) {
             Kint::$enabled_mode = false; // @codeCoverageIgnore
         }
     }
@@ -209,7 +210,7 @@ class CodeIgniter
         $missingExtensions = [];
 
         foreach ($requiredExtensions as $extension) {
-            if (!extension_loaded($extension)) {
+            if (! extension_loaded($extension)) {
                 $missingExtensions[] = $extension;
             }
         }
@@ -225,7 +226,7 @@ class CodeIgniter
     protected function initializeKint()
     {
         // If we have KINT_DIR it means it's already loaded via composer
-        if (!defined('KINT_DIR')) {
+        if (! defined('KINT_DIR')) {
             spl_autoload_register(function ($class) {
                 $class = explode('\\', $class);
 
@@ -248,21 +249,23 @@ class CodeIgniter
          */
         $config = config('Config\Kint');
 
-        Kint::$max_depth           = $config->maxDepth;
+        Kint::$depth_limit         = $config->maxDepth;
         Kint::$display_called_from = $config->displayCalledFrom;
         Kint::$expanded            = $config->expanded;
 
-        if (!empty($config->plugins) && is_array($config->plugins)) {
+        if (! empty($config->plugins) && is_array($config->plugins)) {
             Kint::$plugins = $config->plugins;
         }
+
+        Kint::$renderers[Kint::MODE_RICH] = RichRenderer::class;
 
         RichRenderer::$theme  = $config->richTheme;
         RichRenderer::$folder = $config->richFolder;
         RichRenderer::$sort   = $config->richSort;
-        if (!empty($config->richObjectPlugins) && is_array($config->richObjectPlugins)) {
-            RichRenderer::$object_plugins = $config->richObjectPlugins;
+        if (! empty($config->richObjectPlugins) && is_array($config->richObjectPlugins)) {
+            RichRenderer::$value_plugins = $config->richObjectPlugins;
         }
-        if (!empty($config->richTabPlugins) && is_array($config->richTabPlugins)) {
+        if (! empty($config->richTabPlugins) && is_array($config->richTabPlugins)) {
             RichRenderer::$tab_plugins = $config->richTabPlugins;
         }
 
@@ -357,21 +360,31 @@ class CodeIgniter
     {
         $routeFilter = $this->tryToRouteIt($routes);
 
-        // Run "before" filters
+        $uri = $this->determinePath();
+
+        // Start up the filters
         $filters = Services::filters();
 
         // If any filters were specified within the routes file,
         // we need to ensure it's active for the current request
         if ($routeFilter !== null) {
-            $filters->enableFilter($routeFilter, 'before');
-            $filters->enableFilter($routeFilter, 'after');
+            $multipleFiltersEnabled = config('Feature')->multipleFilters ?? false;
+            if ($multipleFiltersEnabled) {
+                $filters->enableFilters($routeFilter, 'before');
+                $filters->enableFilters($routeFilter, 'after');
+            } else {
+                // for backward compatibility
+                $filters->enableFilter($routeFilter, 'before');
+                $filters->enableFilter($routeFilter, 'after');
+            }
         }
 
-        $uri = $this->determinePath();
-
         // Never run filters when running through Spark cli
-        if (!defined('SPARKED')) {
+        if (! defined('SPARKED')) {
+            // Run "before" filters
+            $this->benchmark->start('before_filters');
             $possibleResponse = $filters->run($uri, 'before');
+            $this->benchmark->stop('before_filters');
 
             // If a ResponseInterface instance is returned then send it back to the client and stop
             if ($possibleResponse instanceof ResponseInterface) {
@@ -386,10 +399,10 @@ class CodeIgniter
         $returned = $this->startController();
 
         // Closure controller has run in startController().
-        if (!is_callable($this->controller)) {
+        if (! is_callable($this->controller)) {
             $controller = $this->createController();
 
-            if (!method_exists($controller, '_remap') && !is_callable([$controller, $this->method], false)) {
+            if (! method_exists($controller, '_remap') && ! is_callable([$controller, $this->method], false)) {
                 throw PageNotFoundException::forMethodNotFound($this->method);
             }
 
@@ -408,10 +421,13 @@ class CodeIgniter
         $this->gatherOutput($cacheConfig, $returned);
 
         // Never run filters when running through Spark cli
-        if (!defined('SPARKED')) {
+        if (! defined('SPARKED')) {
             $filters->setResponse($this->response);
+
             // Run "after" filters
+            $this->benchmark->start('after_filters');
             $response = $filters->run($uri, 'after');
+            $this->benchmark->stop('after_filters');
         } else {
             $response = $this->response;
 
@@ -431,7 +447,7 @@ class CodeIgniter
 
         unset($uri);
 
-        if (!$returnResponse) {
+        if (! $returnResponse) {
             $this->sendResponse();
         }
 
@@ -457,7 +473,7 @@ class CodeIgniter
     protected function detectEnvironment()
     {
         // Make sure ENVIRONMENT isn't already set by other means.
-        if (!defined('ENVIRONMENT')) {
+        if (! defined('ENVIRONMENT')) {
             define('ENVIRONMENT', $_SERVER['CI_ENVIRONMENT'] ?? 'production');
         }
     }
@@ -490,7 +506,9 @@ class CodeIgniter
      */
     protected function startBenchmark()
     {
-        $this->startTime = microtime(true);
+        if ($this->startTime === null) {
+            $this->startTime = microtime(true);
+        }
 
         $this->benchmark = Services::timer();
         $this->benchmark->start('total_execution', $this->startTime);
@@ -521,11 +539,10 @@ class CodeIgniter
             return;
         }
 
-        // @phpstan-ignore-next-line
         if (is_cli() && ENVIRONMENT !== 'testing') {
             // @codeCoverageIgnoreStart
             $this->request = Services::clirequest($this->config);
-            // @codeCoverageIgnoreEnd
+        // @codeCoverageIgnoreEnd
         } else {
             $this->request = Services::request($this->config);
             // guess at protocol if needed
@@ -541,7 +558,7 @@ class CodeIgniter
     {
         $this->response = Services::response($this->config);
 
-        if (!is_cli() || ENVIRONMENT === 'testing') {
+        if (! is_cli() || ENVIRONMENT === 'testing') {
             $this->response->setProtocolVersion($this->request->getProtocolVersion());
         }
 
@@ -579,7 +596,7 @@ class CodeIgniter
     {
         if ($cachedResponse = cache()->get($this->generateCacheName($config))) {
             $cachedResponse = unserialize($cachedResponse);
-            if (!is_array($cachedResponse) || !isset($cachedResponse['output']) || !isset($cachedResponse['headers'])) {
+            if (! is_array($cachedResponse) || ! isset($cachedResponse['output']) || ! isset($cachedResponse['headers'])) {
                 throw new Exception('Error unserializing page cache');
             }
 
@@ -681,7 +698,7 @@ class CodeIgniter
      *
      * @throws RedirectException
      *
-     * @return string|null
+     * @return string|string[]|null
      */
     protected function tryToRouteIt(?RouteCollectionInterface $routes = null)
     {
@@ -705,12 +722,18 @@ class CodeIgniter
         // If a {locale} segment was matched in the final route,
         // then we need to set the correct locale on our Request.
         if ($this->router->hasLocale()) {
-            $this->request->setLocale($this->router->getLocale()); // @phpstan-ignore-line
+            $this->request->setLocale($this->router->getLocale());
         }
 
         $this->benchmark->stop('routing');
 
-        return $this->router->getFilter();
+        // for backward compatibility
+        $multipleFiltersEnabled = config('Feature')->multipleFilters ?? false;
+        if (! $multipleFiltersEnabled) {
+            return $this->router->getFilter();
+        }
+
+        return $this->router->getFilters();
     }
 
     /**
@@ -719,7 +742,7 @@ class CodeIgniter
      */
     protected function determinePath()
     {
-        if (!empty($this->path)) {
+        if (! empty($this->path)) {
             return $this->path;
         }
 
@@ -764,7 +787,7 @@ class CodeIgniter
         }
 
         // Try to autoload the class
-        if (!class_exists($this->controller, true) || $this->method[0] === '_') {
+        if (! class_exists($this->controller, true) || $this->method[0] === '_') {
             throw PageNotFoundException::forControllerNotFound($this->controller, $this->method);
         }
     }
@@ -794,7 +817,7 @@ class CodeIgniter
     protected function runController($class)
     {
         // If this is a console request then use the input segments as parameters
-        $params = defined('SPARKED') ? $this->request->getSegments() : $this->router->params(); // @phpstan-ignore-line
+        $params = defined('SPARKED') ? $this->request->getSegments() : $this->router->params();
 
         if (method_exists($class, '_remap')) {
             $output = $class->_remap($this->method, ...$params);
@@ -913,11 +936,16 @@ class CodeIgniter
     public function storePreviousURL($uri)
     {
         // Ignore CLI requests
-        if (is_cli()) {
-            return;
+        if (is_cli() && ENVIRONMENT !== 'testing') {
+            return; // @codeCoverageIgnore
         }
         // Ignore AJAX requests
         if (method_exists($this->request, 'isAJAX') && $this->request->isAJAX()) {
+            return;
+        }
+
+        // Ignore unroutable responses
+        if ($this->response instanceof DownloadResponse || $this->response instanceof RedirectResponse) {
             return;
         }
 
@@ -942,7 +970,7 @@ class CodeIgniter
             return;
         }
 
-        $method = $this->request->getPost('_method'); // @phpstan-ignore-line
+        $method = $this->request->getPost('_method');
 
         if (empty($method)) {
             return;

@@ -52,7 +52,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 			if ($orderan_belum_selesai->status == "0") {
 				$class_text_status = "badge badge-warning";
-				$text_status = "Proses";
+				$text_status = "Proses (Menunggu driver untuk konfirmasi orderan anda)";
 			} else if ($orderan_belum_selesai->status == "1") {
 				$class_text_status = "badge badge-info";
 				$text_status = "Orderan diterima oleh driver";
@@ -736,7 +736,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											</table>
 
 											<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
-											<input type="text" name="id_pengantaran" value="<?= $id_pengantaran ?>" />
+											<input type="hidden" name="id_pengantaran" value="<?= $id_pengantaran ?>" />
 											<input type="hidden" name="latitude" value="<?= $user_latitude ?>" />
 											<input type="hidden" name="longitude" value="<?= $user_longitude ?>" />
 											<input type="hidden" name="tarif_perkm" value="<?= $data_tarif['tarif_perkm'] ?>" />

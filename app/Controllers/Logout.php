@@ -6,11 +6,11 @@ use CodeIgniter\Controller;
 
 class Logout extends Controller
 {
-	public function administrator()
+	public function admin()
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to(base_url() . '/administrator/login');
+		return redirect()->to(base_url() . '/admin/login');
 	}
 
 	public function driver()

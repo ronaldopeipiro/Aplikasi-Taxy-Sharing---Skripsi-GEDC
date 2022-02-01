@@ -25,7 +25,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 				<hr>
 			</div>
 
-			<div class="col-lg-12" style="min-height: 300px;">
+			<div class="col-lg-12" style="min-height: 60vh;">
 				<div class="row mb-3">
 					<div class="col-lg-3">
 						<div id="statusSelect"></div>
@@ -120,7 +120,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 			"searching": true,
 			"deferRender": true,
 			"initComplete": function() {
-				var status = this.api().column(4);
+				var status = this.api().column(5);
 				var statusSelect = $('<select class="filter form-control-sm"><option value="">Semua Status</option></select>')
 					.appendTo('#statusSelect')
 					.on('change', function() {

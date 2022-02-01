@@ -39,6 +39,37 @@ class Order extends Controller
 		$this->user_longitude = $data_user['longitude'];
 	}
 
+
+	function crypto_rand_secure($min, $max)
+	{
+		$range = $max - $min;
+		if ($range < 1) return $min; // not so random...
+		$log = ceil(log($range, 2));
+		$bytes = (int) ($log / 8) + 1; // length in bytes
+		$bits = (int) $log + 1; // length in bits
+		$filter = (int) (1 << $bits) - 1; // set all lower bits to 1
+		do {
+			$rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+			$rnd = $rnd & $filter; // discard irrelevant bits
+		} while ($rnd > $range);
+		return $min + $rnd;
+	}
+
+	function getToken($length)
+	{
+		$token = "";
+		$codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+		$codeAlphabet .= "0123456789";
+		$max = strlen($codeAlphabet); // edited
+
+		for ($i = 0; $i < $length; $i++) {
+			$token .= $codeAlphabet[$this->crypto_rand_secure(0, $max - 1)];
+		}
+
+		return $token;
+	}
+
 	public function index()
 	{
 		$jml_pengantaran_diproses = $this->PengantaranModel->getJumlahPengantaranProses();
@@ -65,8 +96,31 @@ class Order extends Controller
 		return view('customer/order/views', $data);
 	}
 
+	public function history()
+	{
+		$data = [
+			'request' => $this->request,
+			'db' => $this->db,
+			'validation' => $this->validation,
+			'title' => 'History',
+			'user_id' => $this->id_user,
+			'user_nama_lengkap' => $this->user_nama_lengkap,
+			'user_username' => $this->user_username,
+			'user_email' => $this->user_email,
+			'user_no_hp' => $this->user_no_hp,
+			'user_level' => $this->user_level,
+			'user_foto' => $this->user_foto,
+			'user_status' => $this->user_status,
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
+			'data_tarif' => $this->TarifModel->getTarif(1),
+		];
+		return view('customer/history/views', $data);
+	}
+
 	public function submit_order()
 	{
+		$kode_order = $this->getToken(10);
 		$id_pengantaran = $this->request->getPost('id_pengantaran');
 		$id_customer = $this->request->getPost('id_customer');
 		$latitude = $this->request->getPost('latitude');
@@ -84,6 +138,7 @@ class Order extends Controller
 			));
 		} else {
 			$this->OrderModel->save([
+				'kode_order' => $kode_order,
 				'id_pengantaran' => $id_pengantaran,
 				'id_customer' => $id_customer,
 				'latitude' => $latitude,

@@ -56,13 +56,13 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 											<th>No.</th>
 											<th>Customer</th>
 											<th>Driver</th>
-											<th>Lokasi Pengantaran</th>
-											<th>Lokasi Penjemputan</th>
+											<th>Lokasi Pengantaran Penumpang dari Bandara</th>
+											<th>Lokasi Penjemputan Customer</th>
 											<th>Bandara Tujuan</th>
 											<th>Jarak ke Bandara</th>
-											<th>Tarif/Km</th>
 											<th>Biaya</th>
-											<th>Aktif</th>
+											<th>Status</th>
+											<th>Detail</th>
 										</tr>
 									</thead>
 
@@ -72,28 +72,75 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 										$data_order = $db->query("SELECT * FROM tb_order ORDER BY id_order DESC");
 										?>
 										<?php foreach ($data_order->getResult('array') as $row) : ?>
+											<?php
+											$id_pengantaran = $row["id_pengantaran"];
+											$pengantaran = ($db->query("SELECT * FROM tb_pengantaran WHERE id_pengantaran='$id_pengantaran' "))->getRow();
+
+											$id_driver = $pengantaran->id_driver;
+											$driver = ($db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver' "))->getRow();
+
+											$id_customer = $row['id_customer'];
+											$customer = ($db->query("SELECT * FROM tb_customer WHERE id_customer='$id_customer' "))->getRow();
+
+											$id_bandara = $pengantaran->id_bandara;
+											$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
+
+
+											if ($row['status'] == "0") {
+												$class_text_status = "badge badge-warning";
+												$text_status = "Proses";
+											} else if ($row['status'] == "1") {
+												$class_text_status = "badge badge-info";
+												$text_status = "Orderan diterima oleh driver";
+											} else if ($row['status'] == "2") {
+												$class_text_status = "badge badge-info";
+												$text_status = "Driver menuju lokasi anda";
+											} else if ($row['status'] == "3") {
+												$class_text_status = "badge badge-primary";
+												$text_status = "Dalam perjalanan menuju bandara";
+											} else if ($row['status'] == "4") {
+												$class_text_status = "badge badge-success";
+												$text_status = "Selesai";
+											} else if ($row['status'] == "5") {
+												$class_text_status = "badge badge-danger";
+												$text_status = "Orderan dibatalkan oleh customer";
+											} else if ($row['status'] == "6") {
+												$class_text_status = "badge badge-dark";
+												$text_status = "Orderan ditolak oleh driver";
+											}
+											?>
 											<tr>
 												<td style="vertical-align: middle;" class="text-center">
 													<?= $no++; ?>.
 												</td>
+												<td style="vertical-align: middle;"><?= $customer->nama_lengkap; ?></td>
+												<td style="vertical-align: middle;"><?= $driver->nama_lengkap; ?></td>
 												<td style="vertical-align: middle;">
-													<!-- <img src="<?= (empty($row['foto'])) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/customer/' . $row['foto']; ?>" style="width: 40px; height: 40px; object-fit: cover; object-position: top; border-radius: 50%;"> -->
+													<?= $class_dashboard->getAddress($pengantaran->latitude, $pengantaran->longitude); ?>
+													<br>
+													(<?= $pengantaran->latitude . "," . $pengantaran->longitude ?>)
 												</td>
-												<td style="vertical-align: middle;"><?= $row['nama_lengkap']; ?></td>
-												<td style="vertical-align: middle;"><?= $row['username']; ?></td>
-												<td style="vertical-align: middle;"><?= $row['email'] ?></td>
-												<td style="vertical-align: middle;"><?= $row['no_hp'] ?></td>
 												<td style="vertical-align: middle;">
 													<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
+													<br>
+													(<?= $row['latitude'] . "," . $row['longitude'] ?>)
 												</td>
 												<td style="vertical-align: middle;">
-													<form action="" method="POST">
-														<?= csrf_field(); ?>
-														<select name="aktif" id="aktif" required class="form-control-sm" onchange="this.form.submit()">
-															<option value="Y">Aktif</option>
-															<option value="N">Tidak Aktif</option>
-														</select>
-													</form>
+													<?= $bandara->nama_bandara; ?>
+													<br>
+													(<?= $row['latitude'] . "," . $row['longitude'] ?>)
+												</td>
+												<td style="vertical-align: middle;">
+													<?= $row['jarak_customer_to_bandara']; ?> Km
+												</td>
+												<td style="vertical-align: middle;"><?= rupiah($row['biaya'], "Y") ?></td>
+												<td style="vertical-align: middle;">
+													<?= $text_status; ?>
+												</td>
+												<td style="vertical-align: middle;">
+													<a href="<?= base_url(); ?>/admin/orderan/detail" class="btn btn-outline-info">
+														<i class="fa fa-list"></i> Detail
+													</a>
 												</td>
 											</tr>
 										<?php endforeach; ?>

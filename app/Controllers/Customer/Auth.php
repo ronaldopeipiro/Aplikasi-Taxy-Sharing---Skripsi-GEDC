@@ -71,6 +71,73 @@ class Auth extends Controller
 
 	public function login()
 	{
+		$session = session();
+		$waktu_input = date("Y-m-d H:i:s");
+
+		require_once APPPATH . 'Libraries/vendor/autoload.php';
+		$google_client = new \Google_Client();
+
+		// Localhost
+		$google_client->setClientId('851560113698-5gocvm900lb6n4358055mbj0hcodm347.apps.googleusercontent.com');
+		$google_client->setClientSecret('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');
+
+		// Hosting
+		// $google_client->setClientId('851560113698-opv5e5dee74tc3un8nrqq61um6unni3j.apps.googleusercontent.com');
+		// $google_client->setClientSecret('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');
+
+		$google_client->setRedirectUri(base_url() . '/pelapor/sign-in');
+		$google_client->addScope('email');
+		$google_client->addScope('profile');
+		$google_client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'));
+
+		if ($this->request->getVar('code')) {
+
+			$token = $google_client->fetchAccessTokenWithAuthCode($this->request->getVar('code'));
+
+			if (!isset($token['error'])) {
+
+				$google_client->setAccessToken($token['access_token']);
+				$session->set('access_token', $token['access_token']);
+				$google_service = new \Google_Service_Oauth2($google_client);
+				$gdata = $google_service->userinfo->get();
+
+				// print_r($gdata);
+				$google_id_user = $gdata['id'];
+				$email_user = $gdata['email'];
+				$nama_user = $gdata['given_name'] . " " . $gdata['family_name'];
+				$picture_user = $gdata['picture'];
+				$gender_user = $gdata['gender'];
+
+				$cek_data = $this->PelaporModel->getPelaporByGoogleId($google_id_user);
+
+				if (!$cek_data) {
+					$this->PelaporModel->save([
+						'google_id' => $google_id_user,
+						'nama_lengkap' => $nama_user,
+						'email' => $email_user,
+						'foto' => $picture_user,
+						'status' => '0',
+						'last_login' => $waktu_input,
+						'create_datetime' => $waktu_input,
+						'update_datetime' => $waktu_input,
+					]);
+				}
+
+				$session_data = [
+					'google_id' => $google_id_user,
+					'logged_in_pelapor'  => TRUE
+				];
+				$session->set($session_data);
+			}
+			return redirect()->to(base_url() . '/pelapor/laporan');
+		}
+
+		if (!$session->get('access_token')) {
+			$tombol_login = $google_client->createAuthUrl();
+		} else {
+			$tombol_login = "";
+		}
+
 		helper(['form']);
 		$data = [
 			'title' => 'Masuk sebagai Customer',

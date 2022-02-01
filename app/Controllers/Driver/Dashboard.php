@@ -103,7 +103,6 @@ class Dashboard extends Controller
 			'user_username' => $this->user_username,
 			'user_email' => $this->user_email,
 			'user_no_hp' => $this->user_no_hp,
-			'user_jenis_kelamin' => $this->user_jenis_kelamin,
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,

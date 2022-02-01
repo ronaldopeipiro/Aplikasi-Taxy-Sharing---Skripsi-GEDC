@@ -10,6 +10,51 @@
 
 		<div class="row row-deck row-cards">
 
+			<div class="col-lg-12 mb-3">
+				<div class="card shadow">
+
+					<div class="card-body border-bottom py-2">
+
+						<h5 class="mt-3">
+							<i class="fa fa-edit"></i>
+							Ubah Tarif Per-Km
+						</h5>
+						<hr>
+						<form id="formUpdateTarif">
+							<?= csrf_field(); ?>
+
+							<div class="form-group row mt-3">
+								<label for="tarif_perkm" class="col-sm-3 col-form-label">
+									Tarif Per-Km
+								</label>
+								<div class="col-sm-9 ">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="input_tarif_perkm">Rp</span>
+										</div>
+										<input type="text" class="form-control <?= ($validation->hasError('tarif_perkm')) ? 'is-invalid' : ''; ?>" id="tarif_perkm" name="tarif_perkm" placeholder="0" value="<?= (old('tarif_perkm')) ? old('tarif_perkm') : $data_tarif['tarif_perkm']; ?>" aria-label="tarif_perkm" aria-describedby="input_tarif_perkm" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+									</div>
+									<div class="invalid-feedback">
+										<?= $validation->getError('tarif_perkm'); ?>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row mb-2" style="margin-top: 38px;">
+								<div class="col-12 text-right">
+									<button type="submit" class="btn btn-outline-success shadow" style="width: 180px;">
+										<span class="fa fa-save" style="margin-right: 10px;"></span> SIMPAN
+									</button>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+
 			<div class="col-lg-8 mb-2">
 				<div class="card shadow">
 
@@ -199,6 +244,37 @@
 <script>
 	$(document).ready(function() {
 		$(function() {
+
+			$("#formUpdateTarif").submit(function(e) {
+				e.preventDefault();
+
+				var tarif_perkm = $('#tarif_perkm').val();
+
+				$.ajax({
+					type: "POST",
+					url: "<?= base_url() ?>/Admin/Pengaturan/ubah_tarif",
+					dataType: "JSON",
+					data: {
+						tarif_perkm: tarif_perkm
+					},
+					success: function(data) {
+						if (data.success == "1") {
+							Swal.fire(
+								'Berhasil !',
+								data.pesan,
+								'success'
+							)
+						} else if (data.success == "0") {
+							Swal.fire(
+								'Gagal !',
+								data.pesan,
+								'error'
+							)
+						}
+					}
+				});
+
+			});
 
 			$("#formUpdateDataAkun").submit(function(e) {
 				e.preventDefault();
