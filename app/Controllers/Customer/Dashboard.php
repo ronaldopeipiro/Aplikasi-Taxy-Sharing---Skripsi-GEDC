@@ -25,8 +25,15 @@ class Dashboard extends Controller
 		$this->TarifModel = new TarifModel();
 
 		$this->session = session();
-		$this->id_user = $this->session->get('id_user');
-		$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		if ($this->session->get('id_user') != "") {
+			$this->id_user = $this->session->get('id_user');
+			$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		} elseif ($this->session->get('google_id') != "") {
+			$this->google_id = $this->session->get('google_id');
+			$data_user = $this->CustomerModel->getCustomerByGoogleId($this->google_id);
+			$this->id_user = $data_user['id_customer'];
+		}
+
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
 		$this->user_no_hp = $data_user['no_hp'];
@@ -36,6 +43,41 @@ class Dashboard extends Controller
 		$this->user_status = $data_user['status'];
 		$this->user_latitude = $data_user['latitude'];
 		$this->user_longitude = $data_user['longitude'];
+	}
+
+	public function getAddress($latitude, $longitude)
+	{
+		//google map api url
+		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI";
+
+		// send http request
+		$geocode = file_get_contents($url);
+		$json = json_decode($geocode);
+		$address = $json->results[0]->formatted_address;
+		return $address;
+	}
+
+	public function update_posisi()
+	{
+		$latitude = $this->request->getPost('latitude');
+		$longitude = $this->request->getPost('longitude');
+
+		$this->CustomerModel->updateCustomer([
+			'latitude' => $latitude,
+			'longitude' => $longitude
+		], $this->id_user);
+	}
+
+	public function distance_matrix_google($lat1, $lng1, $lat2, $lng2)
+	{
+		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI");
+		$json = json_decode($fetch);
+
+		$data['distance'] = $json->rows[0]->elements[0]->distance->text;;
+		$data['duration'] = $json->rows[0]->elements[0]->duration->text;
+		$data['duration_in_traffic'] = $json->rows[0]->elements[0]->duration_in_traffic->text;
+
+		return $data;
 	}
 
 	public function get_client_ip()
@@ -56,17 +98,6 @@ class Dashboard extends Controller
 		else
 			$ipaddress = 'UNKNOWN';
 		return $ipaddress;
-	}
-
-	public function update_posisi()
-	{
-		$latitude = $this->request->getPost('latitude');
-		$longitude = $this->request->getPost('longitude');
-
-		$this->CustomerModel->updateCustomer([
-			'latitude' => $latitude,
-			'longitude' => $longitude
-		], $this->id_user);
 	}
 
 	public function index()

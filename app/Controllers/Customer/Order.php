@@ -26,8 +26,15 @@ class Order extends Controller
 		$this->BandaraModel = new BandaraModel();
 
 		$this->session = session();
-		$this->id_user = $this->session->get('id_user');
-		$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		if ($this->session->get('id_user') != "") {
+			$this->id_user = $this->session->get('id_user');
+			$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		} elseif ($this->session->get('google_id') != "") {
+			$this->google_id = $this->session->get('google_id');
+			$data_user = $this->CustomerModel->getCustomerByGoogleId($this->google_id);
+			$this->id_user = $data_user['id_customer'];
+		}
+
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
 		$this->user_no_hp = $data_user['no_hp'];

@@ -38,6 +38,50 @@ class Dashboard extends Controller
 		$this->user_status = $data_user['status'];
 	}
 
+	public function getAddress($latitude, $longitude)
+	{
+		//google map api url
+		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI";
+
+		// send http request
+		$geocode = file_get_contents($url);
+		$json = json_decode($geocode);
+		$address = $json->results[0]->formatted_address;
+		return $address;
+	}
+
+	public function distance_matrix_google($lat1, $lng1, $lat2, $lng2)
+	{
+		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI");
+		$json = json_decode($fetch);
+
+		$data['distance'] = $json->rows[0]->elements[0]->distance->text;;
+		$data['duration'] = $json->rows[0]->elements[0]->duration->text;
+		$data['duration_in_traffic'] = $json->rows[0]->elements[0]->duration_in_traffic->text;
+
+		return $data;
+	}
+
+	public function get_client_ip()
+	{
+		$ipaddress = '';
+		if (getenv('HTTP_CLIENT_IP'))
+			$ipaddress = getenv('HTTP_CLIENT_IP');
+		else if (getenv('HTTP_X_FORWARDED_FOR'))
+			$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+		else if (getenv('HTTP_X_FORWARDED'))
+			$ipaddress = getenv('HTTP_X_FORWARDED');
+		else if (getenv('HTTP_FORWARDED_FOR'))
+			$ipaddress = getenv('HTTP_FORWARDED_FOR');
+		else if (getenv('HTTP_FORWARDED'))
+			$ipaddress = getenv('HTTP_FORWARDED');
+		else if (getenv('REMOTE_ADDR'))
+			$ipaddress = getenv('REMOTE_ADDR');
+		else
+			$ipaddress = 'UNKNOWN';
+		return $ipaddress;
+	}
+
 	public function index()
 	{
 		$data = [

@@ -14,7 +14,7 @@ function rupiah($angka, $string)
 	return $hasil_rupiah;
 }
 
-$class_dashboard = new App\Controllers\Driver\Dashboard;
+$class_dashboard = new App\Controllers\Customer\Dashboard;
 ?>
 
 <section class="py-8" id="home" style="min-height: 94vh;">

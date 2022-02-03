@@ -102,7 +102,18 @@
 
 							<div class="form-group row mt-3">
 								<div class="col-lg-12 text-center">
-									<img id="fotobaru" src="<?= (empty($user_foto)) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/admin/' . $user_foto; ?>" style="width: 180px; height: 180px; border-radius: 10px; object-fit: cover; object-position: center;">
+									<?php
+									if ($user_foto != "") {
+										if (strpos($user_foto, ':') !== false) {
+											$foto_user = $user_foto;
+										} else {
+											$foto_user = base_url() . '/assets/img/customer/' . $user_foto;
+										}
+									} else {
+										$foto_user = base_url() . '/assets/img/noimg.png';
+									}
+									?>
+									<img id="fotobaru" src="<?= $foto_user; ?>" style="width: 180px; height: 180px; border-radius: 10px; object-fit: cover; object-position: center;">
 								</div>
 								<div class="col-sm-12 mt-3">
 									<input type="file" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto" required onchange="readURL(this)" accept="image/png, image/jpeg, image/jpg">
@@ -207,7 +218,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Admin/Pengaturan/ubah_tarif",
+					url: "<?= base_url() ?>/Customer/Akun/ubah_tarif",
 					dataType: "JSON",
 					data: {
 						tarif_perkm: tarif_perkm
@@ -241,7 +252,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Admin/Pengaturan/ubah_data_akun",
+					url: "<?= base_url() ?>/Customer/Akun/ubah_data_akun",
 					dataType: "JSON",
 					data: {
 						nama_lengkap: nama_lengkap,
@@ -277,7 +288,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Admin/Pengaturan/ubah_password",
+					url: "<?= base_url() ?>/Customer/Akun/ubah_password",
 					dataType: "JSON",
 					data: {
 						password_lama: password_lama,
@@ -313,7 +324,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Admin/Pengaturan/ubah_foto_profil",
+					url: "<?= base_url() ?>/Customer/Akun/ubah_foto_profil",
 					dataType: "JSON",
 					data: formData,
 					cache: false,

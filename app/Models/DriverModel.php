@@ -36,13 +36,6 @@ class DriverModel extends Model
 		return $this->where(['id_driver' => $id_driver])->first();
 	}
 
-	public function getDriverByIdKuliah($id_kuliah)
-	{
-		return $this->where([
-			'id_kuliah' => $id_kuliah
-		])->orderBy('id_driver', 'desc')->findAll();
-	}
-
 	public function getDriverAktif()
 	{
 		return $this->where([

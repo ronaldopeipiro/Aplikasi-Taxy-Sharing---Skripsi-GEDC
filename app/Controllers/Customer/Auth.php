@@ -108,28 +108,26 @@ class Auth extends Controller
 				$picture_user = $gdata['picture'];
 				$gender_user = $gdata['gender'];
 
-				$cek_data = $this->CustomerModel->getPelaporByGoogleId($google_id_user);
+				$cek_data = $this->CustomerModel->getCustomerByGoogleId($google_id_user);
 
 				if (!$cek_data) {
 					$this->CustomerModel->save([
 						'google_id' => $google_id_user,
 						'nama_lengkap' => $nama_user,
+						'username' => $email_user,
 						'email' => $email_user,
 						'foto' => $picture_user,
-						'status' => '0',
-						'last_login' => $waktu_input,
-						'create_datetime' => $waktu_input,
-						'update_datetime' => $waktu_input,
+						'last_login' => $waktu_input
 					]);
 				}
 
 				$session_data = [
 					'google_id' => $google_id_user,
-					'logged_in_pelapor'  => TRUE
+					'login_customer_taxy_sharing'  => TRUE
 				];
 				$session->set($session_data);
 			}
-			return redirect()->to(base_url() . '/pelapor/laporan');
+			return redirect()->to(base_url() . '/customer/login');
 		}
 
 		if (!$session->get('access_token')) {
@@ -138,11 +136,12 @@ class Auth extends Controller
 			$tombol_login = "";
 		}
 
-		helper(['form']);
+		// helper(['form']);
 		$data = [
 			'title' => 'Masuk sebagai Customer',
 			'db' => $this->db,
-			'validation' => $this->validation
+			'validation' => $this->validation,
+			'tombol_login' => $tombol_login
 		];
 		return view('customer/auth/login', $data);
 	}

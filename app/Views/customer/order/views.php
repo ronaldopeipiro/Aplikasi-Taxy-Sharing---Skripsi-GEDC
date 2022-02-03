@@ -12,7 +12,7 @@ function rupiah($angka, $string)
 	}
 	return $hasil_rupiah;
 }
-$class_dashboard = new App\Controllers\Driver\Dashboard;
+$class_dashboard = new App\Controllers\Customer\Dashboard;
 
 $orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status='0' LIMIT 1 "))->getRow();
 $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status='0' LIMIT 1 "))->getNumRows();
@@ -135,7 +135,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 												</span>
 												<br>
 												<span class="font-italic">
-													( <?= $bandara->alamat; ?> )
+													<?= $bandara->alamat; ?>
 												</span>
 											</td>
 										</tr>
@@ -162,7 +162,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 												</span>
 												<br>
 												<small class="text-warning font-italic">
-													( Pembayaran dapat dilakukan secara cash kepada driver kami saat anda sampai di bandara tujuan )
+													(Pembayaran dapat dilakukan secara cash kepada driver kami saat anda sampai di bandara tujuan)
 												</small>
 											</td>
 										</tr>

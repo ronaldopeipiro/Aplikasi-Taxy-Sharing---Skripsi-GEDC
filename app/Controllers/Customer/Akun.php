@@ -16,8 +16,15 @@ class Akun extends Controller
 		$this->CustomerModel = new CustomerModel();
 
 		$this->session = session();
-		$this->id_user = $this->session->get('id_user');
-		$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		if ($this->session->get('id_user') != "") {
+			$this->id_user = $this->session->get('id_user');
+			$data_user = $this->CustomerModel->getCustomer($this->id_user);
+		} elseif ($this->session->get('google_id') != "") {
+			$this->google_id = $this->session->get('google_id');
+			$data_user = $this->CustomerModel->getCustomerByGoogleId($this->google_id);
+			$this->id_user = $data_user['id_customer'];
+		}
+
 		$this->user_username = $data_user['username'];
 		$this->user_nama_lengkap = $data_user['nama_lengkap'];
 		$this->user_no_hp = $data_user['no_hp'];
@@ -94,16 +101,14 @@ class Akun extends Controller
 				'success' => '0',
 				'pesan' => 'Username telah digunakan !'
 			));
-
 			return false;
 		} else {
 			$this->CustomerModel->updateCustomer([
 				'nama_lengkap' => $nama_lengkap,
 				'username' => $username,
 				'no_hp' => $no_hp,
-				'email' => $email,
+				'email' => $email
 			], $this->id_user);
-
 			echo json_encode(array(
 				'success' => '1',
 				'pesan' => 'Data akun berhasil diubah !'
@@ -160,8 +165,11 @@ class Akun extends Controller
 		$file_foto->move('assets/img/customer', $nama_foto);
 
 		// Hapus file lama
-		if ($data_lama['foto'] != '') {
-			unlink('assets/img/customer/' . $data_lama['foto']);
+		$explode_foto = explode(':', $data_lama['foto']);
+		if (!$explode_foto) {
+			if ($data_lama['foto'] != '') {
+				unlink('assets/img/customer/' . $data_lama['foto']);
+			}
 		}
 
 		$this->CustomerModel->updateCustomer([

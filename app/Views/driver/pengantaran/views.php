@@ -16,10 +16,10 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					<h4 class="mt-2">
 						Pengantaran
 					</h4>
-					<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
-						<i class="fa fa-plus"></i> Tambah
-					</a>
 					<?php if (($jml_pengantaran_diproses == 1)) : ?>
+						<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
+							<i class="fa fa-plus"></i> Tambah
+						</a>
 					<?php endif; ?>
 				</div>
 				<hr>

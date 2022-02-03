@@ -14,7 +14,6 @@ class CustomerModel extends Model
 		'username',
 		'password',
 		'nama_lengkap',
-		'jenis_kelamin',
 		'email',
 		'no_hp',
 		'foto',

@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="flex-c p-b-30">
-						<a href="#" class="btn btn-block btn-light" style="border-radius: 30px;">
+						<a href="<?= $tombol_login; ?>" class="btn btn-block btn-light" style="border-radius: 30px;">
 							<img src="<?= base_url(); ?>/assets_login/images/icons/icon-google.png" alt="GOOGLE">
 							<span class="font-weight-bold ml-2">
 								Akun Google

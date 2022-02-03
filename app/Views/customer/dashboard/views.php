@@ -13,7 +13,7 @@ function rupiah($angka, $string)
 	return $hasil_rupiah;
 }
 
-$class_dashboard = new App\Controllers\Driver\Dashboard;
+$class_dashboard = new App\Controllers\Customer\Dashboard;
 
 $orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND (status < 4) LIMIT 1 "))->getRow();
 $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND (status < 4) LIMIT 1 "))->getNumRows();
@@ -73,6 +73,8 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						}
 					});
 
+					location.reload();
+
 				}, function() {
 					handleLocationError(true, centerLoc, map.getCenter());
 				}, positionOptions);
@@ -106,7 +108,19 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 						<div class="row align-items-center pt-3 pt-lg-0">
 							<div class="col-lg-3 text-sm-start text-center">
-								<img src="<?= (empty($user_foto)) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/customer/' . $user_foto; ?>" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: solid 2px #fff; padding: 2px; object-position: top;">
+								<?php
+								$foto_user = "";
+								if ($user_foto != "") {
+									if (strpos($user_foto, ':') !== false) {
+										$foto_user = $user_foto;
+									} else {
+										$foto_user = base_url() . '/assets/img/customer/' . $user_foto;
+									}
+								} else {
+									$foto_user = base_url() . '/assets/img/noimg.png';
+								}
+								?>
+								<img src="<?= $foto_user ?>" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: solid 2px #fff; padding: 2px; object-position: top;">
 							</div>
 
 							<div class="col-lg-8 text-sm-start text-center">
@@ -250,8 +264,9 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											</span>
 											<br>
 											<small class="text-warning font-italic">
-												( Pembayaran dapat dilakukan secara cash kepada driver kami saat anda sampai di bandara tujuan )
+												(Pembayaran dapat dilakukan secara cash kepada driver kami saat anda sampai di bandara tujuan)
 											</small>
+											lorem
 										</td>
 									</tr>
 									<tr>
@@ -294,9 +309,9 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						<div class="card">
 							<div class="card-body">
 
-								<p class="text-center">
+								<small class="text-left">
 									( Lokasi pengantaran penumpang dari bandara di sekitar : <span class="font-italic" id="alamat_saya"></span> )
-								</p>
+								</small>
 								<hr>
 
 								<span id="text-no-driver-ready" class="text-danger font-italic"></span>

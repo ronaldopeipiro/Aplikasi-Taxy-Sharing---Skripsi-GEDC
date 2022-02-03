@@ -176,11 +176,50 @@
 				});
 			});
 
-			$('.btn-cancel-order').on('click', function(e) {
-				event.preventDefault(); // prevent form submit
+			$('.btn-terima-order').on('click', function(e) {
+				event.preventDefault();
 				Swal.fire({
 					title: 'Apakah anda yakin ?',
-					text: "Pilih ya, jika anda ingin membatalkan orderan anda !",
+					text: "Pilih ya, jika anda ingin menerima order !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, Terima !',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-tolak-order').on('click', function(e) {
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda ingin menolak orderan !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, Tolak !',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-cancel-order').on('click', function(e) {
+				// prevent form submit
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda ingin membatalkan orderan !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
