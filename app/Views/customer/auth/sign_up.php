@@ -81,21 +81,6 @@
 				</div>
 
 				<div class="col-lg-6 mt-4">
-					<div class="text-center pb-3">
-						<span class="txt1">
-							atau daftar dengan
-						</span>
-					</div>
-
-					<div class="flex-c p-b-10">
-						<a href="#" class="btn btn-block btn-light" style="border-radius: 30px;">
-							<img src="<?= base_url(); ?>/assets_login/images/icons/icon-google.png" alt="GOOGLE">
-							<span class="font-weight-bold ml-2">
-								Akun Google
-							</span>
-						</a>
-					</div>
-
 					<div class="text-center">
 						Sudah punya akun ? silahkan
 						<a href="<?= base_url(); ?>/customer/login" class="btn btn-link pl-0 pt-1 pb-2">

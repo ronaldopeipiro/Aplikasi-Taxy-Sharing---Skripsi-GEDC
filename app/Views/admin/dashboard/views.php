@@ -33,7 +33,7 @@ for ($i = 1; $i <= 12; $i++) {
 	}
 }
 
-$class_dashboard = new App\Controllers\Driver\Dashboard;
+$class_dashboard = new App\Controllers\Admin\Dashboard;
 ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">
@@ -523,7 +523,10 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					$id_driver = $data["id_driver"];
 					$latitude = $data["latitude"];
 					$longitude = $data["longitude"];
-					$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
+					$nama_lokasi = "";
+					if (($data['latitude'] != "" and ($data['longitude'] != ""))) {
+						$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
+					}
 					$no_hp = $data["no_hp"];
 					$email = $data["email"];
 					$foto_profil_driver = $data["foto"];

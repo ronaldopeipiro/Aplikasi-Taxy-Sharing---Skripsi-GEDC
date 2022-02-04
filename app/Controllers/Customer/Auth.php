@@ -126,6 +126,8 @@ class Auth extends Controller
 					'login_customer_taxy_sharing'  => TRUE
 				];
 				$session->set($session_data);
+
+				$this->kirim_email_konfirmasi_login($nama_user, $email_user);
 			}
 			return redirect()->to(base_url() . '/customer/login');
 		}
@@ -180,6 +182,9 @@ class Auth extends Controller
 
 					$session->setFlashdata('pesan_berhasil', 'Selamat Datang ' . $data['nama_lengkap']);
 					$session->set($ses_data);
+
+					$this->kirim_email_konfirmasi_login($data['nama_lengkap'], $data['email']);
+
 					return redirect()->to(base_url() . '/customer');
 				} else {
 					$session->setFlashdata('pesan_gagal', 'Password salah !');
@@ -264,5 +269,52 @@ class Auth extends Controller
 
 		session()->setFlashdata('pesan_berhasil', 'Selamat anda berhasil terdaftar sebagai Customer kami, silahkan login untuk mulai menggunakan aplikasi ini !');
 		return redirect()->to(base_url() . '/customer/login');
+	}
+
+	public function kirim_email_konfirmasi_login($nama_penerima, $email_penerima)
+	{
+		$email_smtp = \Config\Services::email();
+
+		$config["protocol"] = "smtp";
+		$config["mailType"] = 'html';
+		$config["charset"] = 'utf-8';
+		// $config["CRLF"] = 'rn';
+		$config["priority"] = '5';
+		$config["SMTPHost"] = "smtp.gmail.com"; //alamat email SMTP 
+		$config["SMTPUser"] = "airporttaxisharing@gmail.com"; //password email SMTP 
+		$config["SMTPPass"] = "ztyfhshhykzoqloq";
+
+		// $config["SMTPPort"] = 465;
+		$config["SMTPPort"] = 587;
+		// $config["SMTPCrypto"] = "ssl";
+		$config["SMTPCrypto"] = "tls";
+		$config["SMTPAuth"] = true;
+		$email_smtp->initialize($config);
+		$email_smtp->setFrom("airporttaxisharing@gmail.com", "AIRPORT TAXI SHARING");
+
+		$email_smtp->setTo($email_penerima);
+
+		$email_smtp->setSubject("Konfirmasi Login Aplikasi");
+		$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					anda baru saja login akun anda pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					<br>
+					Jika benar anda yang melakukan aktifitas ini, silahkan abaikan pesan ini. 
+					<br>
+					Tetapi jika ini bukan anda, silahkan lakukan reset password akun anda dan hubungi administrator kami.
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+
+		$email_smtp->setMessage($pesan);
+		$email_smtp->send();
 	}
 }

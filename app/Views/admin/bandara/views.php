@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <?php
-$class_dashboard = new App\Controllers\Driver\Dashboard;
+$class_dashboard = new App\Controllers\Admin\Dashboard;
 ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">

@@ -39,6 +39,7 @@ $routes->get('/', 'Home::beranda');
 $routes->get('/driver/login', 'Driver\Auth::login', ['filter' => 'auth_not_login_driver']);
 $routes->get('/driver/sign-up', 'Driver\Auth::sign_up', ['filter' => 'auth_not_login_driver']);
 $routes->get('/driver/lupa-password', 'Driver\Auth::lupa_password', ['filter' => 'auth_not_login_driver']);
+$routes->get('/driver/reset-password/(:any)', 'Driver\Auth::reset_password/$1', ['filter' => 'auth_not_login_driver']);
 $routes->get('/driver', 'Driver\Dashboard::index', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/pengantaran', 'Driver\Pengantaran::index', ['filter' => 'auth_driver']);
