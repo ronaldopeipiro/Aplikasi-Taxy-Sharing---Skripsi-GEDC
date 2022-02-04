@@ -79,8 +79,6 @@ class Order extends Controller
 
 	public function index()
 	{
-		$jml_pengantaran_diproses = $this->PengantaranModel->getJumlahPengantaranProses();
-
 		$data = [
 			'request' => $this->request,
 			'db' => $this->db,
@@ -98,7 +96,6 @@ class Order extends Controller
 			'user_longitude' => $this->user_longitude,
 			'data_tarif' => $this->TarifModel->getTarif(1),
 			'pengantaran' => $this->PengantaranModel->getPengantaranProses(),
-			'jml_pengantaran_diproses' => $jml_pengantaran_diproses
 		];
 		return view('customer/order/views', $data);
 	}
@@ -166,7 +163,10 @@ class Order extends Controller
 	{
 		$id_order = $this->request->getPost('id_order');
 
-		$this->OrderModel->deleteOrder($id_order);
+		// $this->OrderModel->deleteOrder($id_order);
+		$this->OrderModel - updateOrder([
+			'status' => '5'
+		], $id_order);
 
 		session()->setFlashdata('pesan_berhasil', 'Orderan dibatalkan !');
 		return redirect()->to(base_url() . '/customer/order');

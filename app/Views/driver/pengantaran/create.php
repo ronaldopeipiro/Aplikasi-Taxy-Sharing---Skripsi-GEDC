@@ -21,56 +21,84 @@
 			</div>
 
 			<div class="col-lg-12" style="min-height: 300px;">
-				<h4>
-					Mau antar penumpang kemana ?
-				</h4>
-				<form action="<?= base_url(); ?>/Driver/Pengantaran/tambah_data_pengantaran" method="POST" enctype="multipart/form-data">
-					<?= csrf_field(); ?>
-					<div class="row">
-						<div class="col-lg-8">
-							<input id="pac-input" type="text" placeholder="Masukkan nama tempat ..." class="form-control" name="lokasi" value="" required>
-							<div id="map" style="width: 100%; height: 440px;"></div>
-						</div>
-						<div class="col-lg-4">
 
-							<div class="form-group row">
-								<label for="latlonginput" class="col-12 col-form-label">
-									Koordinat <br>
-									<span id="mapSearchInput"></span>
-								</label>
-								<div class="col-12">
-									<input class="form-control <?= ($validation->hasError('latlonginput')) ? 'is-invalid' : ''; ?>" id="latlonginput" name="latlonginput" value="<?= old('latlonginput') ?>" readonly required>
-									<div class="invalid-feedback">
-										<?= $validation->getError('latlonginput'); ?>
+				<div class="card">
+					<div class="card-body">
+
+						<h4>
+							Mau antar penumpang kemana ?
+						</h4>
+						<p class="text-success text-justify">
+							Tentukan titik tujuan pengantaran penumpang anda dan temukan customer baru di sekitar lokasi tujuan anda tersebut untuk anda angkut kembali ke bandara. Anda juga dapat menentukan radius penjemputan penumpang dari sekitar lokasi pengantaran sesuai keinginan anda.
+						</p>
+						<form action="<?= base_url(); ?>/Driver/Pengantaran/tambah_data_pengantaran" method="POST" enctype="multipart/form-data">
+							<?= csrf_field(); ?>
+							<div class="row">
+
+								<div class="col-lg-8">
+									<input id="pac-input" type="text" placeholder="Masukkan nama tempat ..." class="form-control" name="lokasi" value="" required>
+									<div id="map" style="width: 100%; height: 440px; border-radius: 10px;"></div>
+								</div>
+
+								<div class="col-lg-4">
+
+									<div class="form-group row">
+										<label for="id_bandara" class="col-12 col-form-label">
+											Bandara Keberangkatan
+										</label>
+										<div class="col-12">
+											<select name="id_bandara" id="id_bandara" class="form-control">
+												<?php foreach ($data_bandara as $row) : ?>
+													<option value="<?= $row['id_bandara']; ?>" selected><?= $row['nama_bandara']; ?></option>
+												<?php endforeach; ?>
+											</select>
+											<div class="invalid-feedback">
+												<?= $validation->getError('id_bandara'); ?>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
 
-							<div class="form-group row">
-								<label for="radius_jemput" class="col-12 col-form-label">
-									Radius Jemput
-								</label>
-								<div class="col-12">
-									<div id="radius_pilihan">100</div>
-									<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="radius_jemput" id="radius_jemput" name="radius_jemput" value="<?= (old('radius_jemput')) ? old('radius_jemput') : '100'; ?>" min="100" max="5000" step="10" onchange="updateTextInput(this.value);">
-									<div class="invalid-feedback">
-										<?= $validation->getError('radius_jemput'); ?>
+									<div class="form-group row">
+										<label for="latlonginput" class="col-12 col-form-label">
+											Koordinat Lokasi Pengantaran Penumpang dari Bandara <br>
+											<span id="mapSearchInput"></span>
+										</label>
+										<div class="col-12">
+											<input class="form-control <?= ($validation->hasError('latlonginput')) ? 'is-invalid' : ''; ?>" id="latlonginput" name="latlonginput" value="<?= old('latlonginput') ?>" readonly required>
+											<div class="invalid-feedback">
+												<?= $validation->getError('latlonginput'); ?>
+											</div>
+										</div>
 									</div>
+
+									<div class="form-group row">
+										<label for="radius_jemput" class="col-12 col-form-label">
+											Radius Jemput
+										</label>
+										<div class="col-12">
+											<div id="radius_pilihan">100</div>
+											<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="radius_jemput" id="radius_jemput" name="radius_jemput" value="<?= (old('radius_jemput')) ? old('radius_jemput') : '100'; ?>" min="100" max="5000" step="10" onchange="updateTextInput(this.value);">
+											<div class="invalid-feedback">
+												<?= $validation->getError('radius_jemput'); ?>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group row mt-5">
+										<div class="col-12">
+											<button type="submit" class="btn btn-block btn-success">
+												<i class="fa fa-arrow-right"></i> SUBMIT
+											</button>
+										</div>
+									</div>
+
 								</div>
 							</div>
 
-							<div class="form-group row mt-5">
-								<div class="col-12">
-									<button type="submit" class="btn btn-block btn-success">
-										<i class="fa fa-arrow-right"></i> SUBMIT
-									</button>
-								</div>
-							</div>
+						</form>
 
-						</div>
 					</div>
-
-				</form>
+				</div>
 
 			</div>
 		</div>
@@ -146,30 +174,29 @@
 						let dataLatLng = place.geometry.location;
 						document.getElementById("latlonginput").value = dataLatLng;
 
-						const icon = {
-							url: "<?= base_url() ?>/assets/img/marker-tujuan.png",
-							size: new google.maps.Size(51, 51),
-							origin: new google.maps.Point(0, 0),
-							anchor: new google.maps.Point(17, 34),
-							scaledSize: new google.maps.Size(70, 70),
+						var iconTitikPengantaran = {
+							url: "<?= base_url() ?>/assets/img/titik-pengantaran.png", // url
+							scaledSize: new google.maps.Size(40, 40), // scaled size
+							origin: new google.maps.Point(0, 0), // origin
+							anchor: new google.maps.Point(20, 20) // anchor
 						};
 
-						// Create a marker for each place.
 						var marker_tujuan;
 
 						markers.push(
 							marker_tujuan = new google.maps.Marker({
 								map,
-								icon,
+								icon: iconTitikPengantaran,
 								title: place.name,
 								position: place.geometry.location,
 								draggable: true
 							})
 						);
 
-						google.maps.event.addListener(marker_tujuan, 'dragend', function() {
-							var test = geocodePosition(marker_tujuan.getPosition());
-							console.log(test);
+						google.maps.event.addListener(marker_tujuan, 'drag', function() {
+							var positionStartLat = this.position.lat();
+							var positionStartLng = this.position.lng();
+							document.getElementById("latlonginput").value = '(' + positionStartLat + ', ' + positionStartLng + ')';
 						});
 
 						function geocodePosition(pos) {
@@ -208,9 +235,7 @@
 							circle_tujuan.setRadius(parseFloat(slider_rad));
 						});
 
-
 						if (place.geometry.viewport) {
-							// Only geocodes have viewport.
 							bounds.union(place.geometry.viewport);
 						} else {
 							bounds.extend(place.geometry.location);
@@ -237,7 +262,7 @@
 				trafficLayer.setMap(map);
 
 				var icon_user = {
-					url: "<?= base_url() ?>/assets/img/taxi-top-right.png", // url
+					url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
 					scaledSize: new google.maps.Size(40, 40), // scaled size
 					origin: new google.maps.Point(0, 0), // origin
 					anchor: new google.maps.Point(14, 18), // anchor
@@ -251,19 +276,6 @@
 					icon: icon_user,
 					animation: google.maps.Animation.DROP
 				});
-
-				// var circle_user = new google.maps.Circle({
-				// 	strokeColor: '#000AAA',
-				// 	strokeOpacity: 0.5,
-				// 	strokeWeight: 1,
-				// 	fillColor: '#00AEFF',
-				// 	fillOpacity: 0.1,
-				// 	map: map,
-				// 	radius: rad
-				// });
-
-				// circle_user.bindTo('center', centerLoc, 'position');
-				// circle_user.setRadius(parseFloat(rad));
 
 			}, function() {
 				handleLocationError(true, centerLoc, map.getCenter());

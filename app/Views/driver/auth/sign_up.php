@@ -96,22 +96,7 @@
 						</button>
 					</div>
 
-					<div class="text-center p-t-30 p-b-20">
-						<span class="txt1">
-							atau daftar dengan
-						</span>
-					</div>
-
-					<div class="flex-c p-b-30">
-						<a href="#" class="btn btn-block btn-light" style="border-radius: 30px;">
-							<img src="<?= base_url(); ?>/assets_login/images/icons/icon-google.png" alt="GOOGLE">
-							<span class="font-weight-bold ml-2">
-								Akun Google
-							</span>
-						</a>
-					</div>
-
-					<div class="text-center">
+					<div class="text-center mt-5">
 						Sudah punya akun ? silahkan
 						<a href="<?= base_url(); ?>/driver/login" class="btn btn-link pl-0 pt-1 pb-2">
 							Login

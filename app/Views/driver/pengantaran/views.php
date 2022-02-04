@@ -16,7 +16,8 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					<h4 class="mt-2">
 						Pengantaran
 					</h4>
-					<?php if (($jml_pengantaran_diproses == 1)) : ?>
+
+					<?php if (($jml_pengantaran_diproses == '0')) : ?>
 						<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
 							<i class="fa fa-plus"></i> Tambah
 						</a>
@@ -84,18 +85,13 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 								</td>
 								<td style="vertical-align: middle;">
 									<?php if ($row['status_pengantaran'] == "0") : ?>
-										<div class="list-unstyled d-flex justify-content-center align-items-center">
-											<li class="mr-2">
-												<a href="#" class="btn btn-warning">
-													<i class="fa fa-edit"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="btn btn-danger">
-													<i class="fa fa-trash"></i>
-												</a>
-											</li>
-										</div>
+										<form action="<?= base_url(); ?>/Driver/Pengantaran/cancel_pengantaran" method="post" style="width: 100%;">
+											<input type="hidden" name="id_pengantaran" value="<?= $row['id_pengantaran']; ?>">
+											<input type="hidden" name="status" value="2">
+											<button type="submit" class="btn btn-sm btn-block btn-danger btn-cancel-confirm-pengantaran">
+												<i class="fa fa-times"></i> Batalkan
+											</button>
+										</form>
 									<?php endif; ?>
 								</td>
 							</tr>

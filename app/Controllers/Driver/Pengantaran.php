@@ -6,6 +6,7 @@ use CodeIgniter\Controller;
 use App\Models\CustomerModel;
 use App\Models\DriverModel;
 use App\Models\PengantaranModel;
+use App\Models\BandaraModel;
 
 class Pengantaran extends Controller
 {
@@ -17,6 +18,7 @@ class Pengantaran extends Controller
 		$this->CustomerModel = new CustomerModel();
 		$this->DriverModel = new DriverModel();
 		$this->PengantaranModel = new PengantaranModel();
+		$this->BandaraModel = new BandaraModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -30,6 +32,8 @@ class Pengantaran extends Controller
 		$this->user_level = "driver";
 		$this->user_foto =	$data_user['foto'];
 		$this->user_status = $data_user['status_akun'];
+
+		$this->jml_pengantaran_diproses = ($this->db->query("SELECT * FROM tb_pengantaran WHERE id_driver='$this->id_user' AND status_pengantaran = '0' "))->getNumRows();
 	}
 
 	public function index()
@@ -50,14 +54,13 @@ class Pengantaran extends Controller
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
 			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user),
-			'jml_pengantaran_diproses' => $this->PengantaranModel->getJumlahPengantaranProses()
+			'jml_pengantaran_diproses' => $this->jml_pengantaran_diproses
 		];
 		return view('driver/pengantaran/views', $data);
 	}
 
 	public function create()
 	{
-		$jml_pengantaran_diproses = $this->PengantaranModel->getJumlahPengantaranProses();
 		$data = [
 			'request' => $this->request,
 			'db' => $this->db,
@@ -74,10 +77,11 @@ class Pengantaran extends Controller
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
 			'pengantaran' => $this->PengantaranModel->getPengantaranByIdDriver($this->id_user),
-			'jml_pengantaran_diproses' => $jml_pengantaran_diproses
+			'jml_pengantaran_diproses' => $this->jml_pengantaran_diproses,
+			'data_bandara' => $this->BandaraModel->getBandara()
 		];
 
-		if (($jml_pengantaran_diproses == 0) or (isset($jml_pengantaran_diproses))) {
+		if ($this->jml_pengantaran_diproses == '0') {
 			return view('driver/pengantaran/create', $data);
 		} else {
 			header('Location:' . base_url() . '/driver/pengantaran');
@@ -88,6 +92,12 @@ class Pengantaran extends Controller
 	public function tambah_data_pengantaran()
 	{
 		if (!$this->validate([
+			'id_bandara' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Kolom harus diisi !',
+				]
+			],
 			'latlonginput' => [
 				'rules' => 'required',
 				'errors' => [
@@ -112,6 +122,7 @@ class Pengantaran extends Controller
 		$longitude = str_replace(")", "", $latlonginput[1]);
 
 		$this->PengantaranModel->save([
+			'id_bandara' => $this->request->getVar('id_bandara'),
 			'id_driver' => $this->id_user,
 			'latitude' => $latitude,
 			'longitude' => $longitude,
@@ -120,6 +131,19 @@ class Pengantaran extends Controller
 		]);
 
 		session()->setFlashdata('pesan_berhasil', 'Data berhasil disimpan !');
+		return redirect()->to(base_url() . '/driver/pengantaran');
+	}
+
+	public function cancel_pengantaran()
+	{
+		$id_pengantaran = $this->request->getPost('id_pengantaran');
+		$status = $this->request->getPost('status');
+
+		$this->PengantaranModel->updatePengantaran([
+			'status_pengantaran' => $status
+		], $id_pengantaran);
+
+		session()->setFlashdata('pesan_berhasil', 'Berhasil dibatalkan !');
 		return redirect()->to(base_url() . '/driver/pengantaran');
 	}
 }

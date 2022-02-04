@@ -40,9 +40,33 @@
 									Username
 								</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" id="username" name="username" value="<?= (old('username')) ? old('username') : $user_username; ?>" placeholder="Masukkan username . . . ." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" minlength="16" maxlength="16">
+									<input type="text" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" id="username" name="username" value="<?= (old('username')) ? old('username') : $user_username; ?>" placeholder="Masukkan username . . .">
 									<div class="invalid-feedback">
 										<?= $validation->getError('username'); ?>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row mt-3">
+								<label for="no_anggota" class="col-sm-3 col-form-label">
+									No. Anggota
+								</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control <?= ($validation->hasError('no_anggota')) ? 'is-invalid' : ''; ?>" id="no_anggota" name="no_anggota" value="<?= (old('no_anggota')) ? old('no_anggota') : $user_no_anggota; ?>" placeholder="Masukkan No. Anggota . . . ." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" minlength="16" maxlength="16">
+									<div class="invalid-feedback">
+										<?= $validation->getError('no_anggota'); ?>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row mt-3">
+								<label for="nopol" class="col-sm-3 col-form-label">
+									No. Polisi
+								</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control <?= ($validation->hasError('nopol')) ? 'is-invalid' : ''; ?>" id="nopol" name="nopol" value="<?= (old('nopol')) ? old('nopol') : $user_nopol; ?>" placeholder="Masukkan No. Polisi . . . .">
+									<div class="invalid-feedback">
+										<?= $validation->getError('nopol'); ?>
 									</div>
 								</div>
 							</div>
@@ -107,7 +131,7 @@
 										if (strpos($user_foto, ':') !== false) {
 											$foto_user = $user_foto;
 										} else {
-											$foto_user = base_url() . '/assets/img/customer/' . $user_foto;
+											$foto_user = base_url() . '/assets/img/driver/' . $user_foto;
 										}
 									} else {
 										$foto_user = base_url() . '/assets/img/noimg.png';
@@ -211,51 +235,24 @@
 	$(document).ready(function() {
 		$(function() {
 
-			$("#formUpdateTarif").submit(function(e) {
-				e.preventDefault();
-
-				var tarif_perkm = $('#tarif_perkm').val();
-
-				$.ajax({
-					type: "POST",
-					url: "<?= base_url() ?>/Customer/Akun/ubah_tarif",
-					dataType: "JSON",
-					data: {
-						tarif_perkm: tarif_perkm
-					},
-					success: function(data) {
-						if (data.success == "1") {
-							Swal.fire(
-								'Berhasil !',
-								data.pesan,
-								'success'
-							)
-						} else if (data.success == "0") {
-							Swal.fire(
-								'Gagal !',
-								data.pesan,
-								'error'
-							)
-						}
-					}
-				});
-
-			});
-
 			$("#formUpdateDataAkun").submit(function(e) {
 				e.preventDefault();
 
 				var nama_lengkap = $('#nama_lengkap').val();
 				var username = $('#username').val();
+				var no_anggota = $('#no_anggota').val();
+				var nopol = $('#nopol').val();
 				var no_hp = $('#no_hp').val();
 				var email = $('#email').val();
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Customer/Akun/ubah_data_akun",
+					url: "<?= base_url() ?>/Driver/Akun/ubah_data_akun",
 					dataType: "JSON",
 					data: {
 						nama_lengkap: nama_lengkap,
+						no_anggota: no_anggota,
+						nopol: nopol,
 						username: username,
 						no_hp: no_hp,
 						email: email
@@ -288,7 +285,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Customer/Akun/ubah_password",
+					url: "<?= base_url() ?>/Driver/Akun/ubah_password",
 					dataType: "JSON",
 					data: {
 						password_lama: password_lama,
@@ -324,7 +321,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "<?= base_url() ?>/Customer/Akun/ubah_foto_profil",
+					url: "<?= base_url() ?>/Driver/Akun/ubah_foto_profil",
 					dataType: "JSON",
 					data: formData,
 					cache: false,

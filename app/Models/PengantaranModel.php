@@ -42,27 +42,6 @@ class PengantaranModel extends Model
 		])->findAll();
 	}
 
-	public function getJumlahPengantaranProses()
-	{
-		return $this->where([
-			'status_pengantaran' => '0'
-		])->countAllResults();
-	}
-
-	public function getJumlahPengantaranSelesai()
-	{
-		return $this->where([
-			'status_pengantaran' => '1'
-		])->countAllResults();
-	}
-
-	public function getJumlahPengantaranTidakSelesai()
-	{
-		return $this->where([
-			'status_pengantaran' => '2'
-		])->countAllResults();
-	}
-
 	public function getPengantaranByStatus($status)
 	{
 		return $this->where([

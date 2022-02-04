@@ -208,9 +208,11 @@ class Auth extends Controller
 			'email' => $this->request->getVar('email'),
 			'no_hp' => $this->request->getVar('no_hp'),
 			'status_akun' => '0',
-			'aktif' => 'N',
+			'aktif' => 'Y',
 			'create_datetime' => $datetime
 		]);
+
+
 
 		session()->setFlashdata('pesan_berhasil', 'Selamat anda berhasil terdaftar sebagai driver kami, silahkan login untuk mulai menggunakan aplikasi ini !');
 		return redirect()->to(base_url() . '/driver/login');

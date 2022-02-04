@@ -214,6 +214,44 @@
 				});
 			});
 
+			$('.btn-confirm-jemput-customer').on('click', function(e) {
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda benar akan menjemput customer !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-confirm-otw-bandara').on('click', function(e) {
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda benar akan berangkat menuju bandara !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
 			$('.btn-cancel-order').on('click', function(e) {
 				// prevent form submit
 				event.preventDefault();
@@ -225,6 +263,46 @@
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
 					confirmButtonText: 'Ya, Batalkan Orderan !',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-cancel-confirm-pengantaran').on('click', function(e) {
+				// prevent form submit
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda ingin membatalkan pengantaran !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, Batalkan !',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-confirm-selesai-order').on('click', function(e) {
+				// prevent form submit
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika benar anda telah sampai dibandara !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -349,21 +427,24 @@
 									Beranda
 								</a>
 							</li>
-							<li class="nav-item px-2">
-								<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/orderan">
-									Orderan
-								</a>
-							</li>
-							<li class="nav-item px-2">
-								<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/pengantaran">
-									Pengantaran
-								</a>
-							</li>
-							<li class="nav-item px-2">
-								<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/history">
-									History
-								</a>
-							</li>
+
+							<?php if ($user_status == 1) : ?>
+								<li class="nav-item px-2">
+									<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/orderan">
+										Orderan
+									</a>
+								</li>
+								<li class="nav-item px-2">
+									<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/pengantaran">
+										Pengantaran
+									</a>
+								</li>
+								<li class="nav-item px-2">
+									<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/history">
+										History
+									</a>
+								</li>
+							<?php endif; ?>
 							<li class="nav-item px-2">
 								<a class="nav-link fw-medium" href="<?= base_url(); ?>/driver/akun">
 									Akun Saya
