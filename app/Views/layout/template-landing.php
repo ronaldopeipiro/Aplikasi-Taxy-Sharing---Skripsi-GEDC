@@ -32,8 +32,8 @@
 	<script src="<?= base_url(); ?>/assets_login/vendor/bootstrap/js/popper.js"></script>
 	<script src="<?= base_url(); ?>/assets_login/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- <script src="vendors/@popperjs/popper.min.js"></script> -->
-	<!-- <script src="vendors/bootstrap/bootstrap.min.js"></script> -->
+	<script src="vendors/@popperjs/popper.min.js"></script>
+	<script src="vendors/bootstrap/bootstrap.min.js"></script>
 	<script src="<?= base_url(); ?>/vendors/is/is.min.js"></script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 	<script src="<?= base_url(); ?>/assets/js/theme.js"></script>
@@ -50,7 +50,6 @@
 
 	<script src="<?= base_url(); ?>/assets_custom/sweetalert2/sweetalert2.min.js"></script>
 
-
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -59,14 +58,28 @@
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 
+	<style>
+		div#loader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0.5);
+			z-index: 1;
+		}
+	</style>
 </head>
 
 
 <body>
 
-	<!-- ===============================================-->
-	<!--    Main Content-->
-	<!-- ===============================================-->
+	<div id="loader" style="display: none;">
+		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+			<img src="<?= base_url(); ?>/assets/img/loader.gif" style="width: 150px; height: 150px; object-fit: cover; object-position: center;">
+		</div>
+	</div>
+
 	<main class="main" id="top">
 		<?= $this->renderSection('content_landing'); ?>
 

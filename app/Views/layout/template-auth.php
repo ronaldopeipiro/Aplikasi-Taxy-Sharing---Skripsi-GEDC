@@ -54,6 +54,10 @@
 
 	<script src="<?= base_url(); ?>/assets_login/js/main.js"></script>
 
+	<script>
+		const base_url = "<?= base_url() ?>"
+	</script>
+
 	<style>
 		/* Hide the browser's default checkbox */
 		.container-remember input {
@@ -124,69 +128,30 @@
 			-ms-transform: rotate(45deg);
 			transform: rotate(45deg);
 		}
+
+		div#loading-image {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0.5);
+			z-index: 100;
+		}
 	</style>
 </head>
 
 <body>
 
-	<?php if (session()->getFlashdata('pesan_berhasil')) : ?>
-		<script>
-			Swal.fire(
-				'Berhasil !',
-				'<?= session()->getFlashdata('pesan_berhasil'); ?>',
-				'success'
-			)
-		</script>
-	<?php elseif (session()->getFlashdata('pesan_gagal')) : ?>
-		<script>
-			Swal.fire(
-				'Gagal !',
-				'<?= session()->getFlashdata('pesan_gagal'); ?>',
-				'error'
-			)
-		</script>
-	<?php endif; ?>
+	<div id="loading-image" style="display: none;">
+		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+			<img src="<?= base_url(); ?>/assets/img/loader.gif" style="width: 150px; height: 150px; object-fit: cover; object-position: center;">
+		</div>
+	</div>
+
+	<?= $this->renderSection('content_auth'); ?>
 
 	<script>
-		$(document).ready(function() {
-			$('.btn-hapus').on('click', function(e) {
-				event.preventDefault(); // prevent form submit
-				Swal.fire({
-					title: 'Apakah anda yakin ?',
-					text: "Pilih ya, jika anda ingin menghapus data !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, hapus data !',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
-			$('.btn-logout').on('click', function(e) {
-				event.preventDefault(); // prevent form submit
-				Swal.fire({
-					title: 'Konfirmasi ?',
-					text: "Apakah anda yakin ingin keluar dari aplikasi ?",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Tidak'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						window.location.href = $('.btn-logout').attr('href');
-					}
-				});
-			});
-		});
-
 		$(function() {
 			$('.js-select-2').select2();
 			$('#data-table').DataTable({
@@ -196,9 +161,6 @@
 			});
 		})
 	</script>
-
-	<?= $this->renderSection('content_auth'); ?>
-
 </body>
 
 </html>

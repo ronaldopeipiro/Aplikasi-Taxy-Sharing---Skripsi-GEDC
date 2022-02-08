@@ -70,6 +70,7 @@ $routes->get('/admin/logout', 'Logout::admin', ['filter' => 'auth_admin']);
 $routes->get('/customer/login', 'Customer\Auth::login', ['filter' => 'auth_not_login_customer']);
 $routes->get('/customer/sign-up', 'Customer\Auth::sign_up', ['filter' => 'auth_not_login_customer']);
 $routes->get('/customer/lupa-password', 'Customer\Auth::lupa_password', ['filter' => 'auth_not_login_customer']);
+$routes->get('/customer/reset-password/(:any)', 'Customer\Auth::reset_password/$1', ['filter' => 'auth_not_login_customer']);
 $routes->get('/customer', 'Customer\Dashboard::index', ['filter' => 'auth_customer']);
 
 $routes->get('/customer/order', 'Customer\Order::index', ['filter' => 'auth_customer']);

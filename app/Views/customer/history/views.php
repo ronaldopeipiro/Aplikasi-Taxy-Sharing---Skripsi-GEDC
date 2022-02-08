@@ -32,8 +32,8 @@ $class_dashboard = new App\Controllers\Customer\Dashboard;
 				<hr>
 			</div>
 
-			<div class="col-12">
-				<table class="table-sm table-bordered table-hover" style="width: 100%; font-size: 12px;" id="data-table-custom">
+			<div class="col-12 table-responsive">
+				<table class="table table-sm table-bordered table-hover" style="width: 100%; font-size: 12px;" id="data-table-custom">
 					<thead>
 						<tr class="text-center">
 							<th>No.</th>
@@ -51,7 +51,7 @@ $class_dashboard = new App\Controllers\Customer\Dashboard;
 					<tbody>
 						<?php
 						$no = 1;
-						$data_order = $db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' ORDER BY id_order DESC");
+						$data_order = $db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status >= 4 ORDER BY id_order DESC");
 						?>
 						<?php foreach ($data_order->getResult('array') as $row) : ?>
 							<?php
@@ -119,7 +119,7 @@ $class_dashboard = new App\Controllers\Customer\Dashboard;
 									<?= $text_status; ?>
 								</td>
 								<td style="vertical-align: middle;">
-									<a href="<?= base_url(); ?>/admin/orderan/detail" class="btn btn-outline-info">
+									<a href="<?= base_url(); ?>/customer/history/detail/<?= $row['kode_order']; ?>" class="btn btn-outline-info">
 										<i class="fa fa-list"></i> Detail
 									</a>
 								</td>

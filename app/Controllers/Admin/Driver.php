@@ -46,4 +46,30 @@ class Driver extends Controller
 		];
 		return view('admin/driver/views', $data);
 	}
+
+	public function update_aktif()
+	{
+		$id_driver = $this->request->getVar('id_driver');
+		$aktif = $this->request->getVar('aktif');
+
+		$this->db->query("UPDATE tb_driver SET aktif='$aktif' WHERE id_driver= '$id_driver' ");
+
+		echo json_encode(array(
+			'success' => '1',
+			'pesan' => 'Status aktif berhasil diubah !'
+		));
+	}
+
+	public function update_status_akun()
+	{
+		$id_driver = $this->request->getVar('id_driver');
+		$status_akun = $this->request->getVar('status_akun');
+
+		$this->db->query("UPDATE tb_driver SET status_akun='$status_akun' WHERE id_driver= '$id_driver' ");
+
+		echo json_encode(array(
+			'success' => '1',
+			'pesan' => 'Status verifikasi berhasil diubah !'
+		));
+	}
 }

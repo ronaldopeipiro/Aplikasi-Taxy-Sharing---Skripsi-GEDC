@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class BandaraModel extends Model
 {
 	protected $primaryKey = 'id_bandara';
-	protected $table = 'tb_Bandara';
+	protected $table = 'tb_bandara';
 	protected $allowedFields = [
 		'id_bandara',
 		'nama_bandara',

@@ -37,7 +37,7 @@
 				<div class="col-lg-12 mt-5">
 
 					<div class="text-center">
-						<a href="<?= base_url(); ?>/driver/lupa-password" class="btn btn-link pl-0 pr-0 pt-1 pb-2">
+						<a href="<?= base_url(); ?>/driver/login" class="btn btn-link pl-0 pr-0 pt-1 pb-2">
 							<i class="fa fa-sign-in"></i> Login
 						</a>
 					</div>

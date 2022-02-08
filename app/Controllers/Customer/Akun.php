@@ -32,6 +32,7 @@ class Akun extends Controller
 		$this->user_level = "customer";
 		$this->user_foto =	$data_user['foto'];
 		$this->user_status = $data_user['status'];
+		$this->user_password = $data_user['password'];
 		$this->user_latitude = $data_user['latitude'];
 		$this->user_longitude = $data_user['longitude'];
 	}
@@ -82,6 +83,7 @@ class Akun extends Controller
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,
+			'user_password' => $this->user_password,
 			'user_latitude' => $this->user_latitude,
 			'user_longitude' => $this->user_longitude
 		];
@@ -133,6 +135,8 @@ class Akun extends Controller
 					$this->id_user
 				);
 
+				$this->kirim_email_konfirmasi_update_password($cek_password_lama->nama_lengkap, $cek_password_lama->email, $cek_password_lama->username, $password_baru);
+
 				echo json_encode(array(
 					'success' => '1',
 					'pesan' => 'Password berhasil diubah !'
@@ -180,5 +184,85 @@ class Akun extends Controller
 			'success' => '1',
 			'pesan' => 'Foto profil berhasil diubah !!!'
 		));
+	}
+
+	public function kirim_email_konfirmasi_update_password($nama_penerima, $email_penerima, $username, $password_baru)
+	{
+		$email_smtp = \Config\Services::email();
+
+		$config["protocol"] = "smtp";
+		$config["mailType"] = 'html';
+		$config["charset"] = 'utf-8';
+		// $config["CRLF"] = 'rn';
+		$config["priority"] = '5';
+		$config["SMTPHost"] = "smtp.gmail.com"; //alamat email SMTP 
+		$config["SMTPUser"] = "airporttaxisharing@gmail.com"; //password email SMTP 
+		$config["SMTPPass"] = "ztyfhshhykzoqloq";
+
+		// $config["SMTPPort"] = 465;
+		$config["SMTPPort"] = 587;
+		// $config["SMTPCrypto"] = "ssl";
+		$config["SMTPCrypto"] = "tls";
+		$config["SMTPAuth"] = true;
+		$email_smtp->initialize($config);
+		$email_smtp->setFrom("airporttaxisharing@gmail.com", "AIRPORT TAXI SHARING");
+
+		$email_smtp->setTo($email_penerima);
+
+		$email_smtp->setSubject("Berhasil Reset Password");
+		$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					anda baru saja melakukan update password akun anda pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					Berikut detail akun anda :
+					<table>
+						<tr>
+							<td>Nama Lengkap</td>
+							<td>:</td>
+							<td>' . $nama_penerima . '</td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td>:</td>
+							<td>' . $username . '</td>
+						</tr>
+						<tr>
+							<td>Password Akun</td>
+							<td>:</td>
+							<td>' . $password_baru . '</td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td>' . $email_penerima . '</td>
+						</tr>
+						<tr>
+							<td>Status Akun</td>
+							<td>:</td>
+							<td>Aktif</td>
+						</tr>
+					</table>
+					<br>
+					Silahkan login menggunakan akun baru anda melalui tautan 
+					<br>
+					<a href="' . base_url() . '/customer/login">
+						Login Aplikasi
+					</a>
+					<br>
+					<br>
+					Jika ini bukan anda, silahkan abaikan pesan ini.
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+
+		$email_smtp->setMessage($pesan);
+		$email_smtp->send();
 	}
 }

@@ -31,6 +31,8 @@ class Orderan extends Controller
 		$this->user_nopol = $data_user['nopol'];
 		$this->user_level = "driver";
 		$this->user_foto =	$data_user['foto'];
+		$this->user_latitude =	$data_user['latitude'];
+		$this->user_longitude =	$data_user['longitude'];
 		$this->user_status = $data_user['status_akun'];
 	}
 
@@ -48,6 +50,8 @@ class Orderan extends Controller
 			'user_no_hp' => $this->user_no_hp,
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
 			'user_status' => $this->user_status,
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
@@ -73,7 +77,7 @@ class Orderan extends Controller
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
 		];
-		return view('driver/orderan/views', $data);
+		return view('driver/history/views', $data);
 	}
 
 	public function update_status_order()

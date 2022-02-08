@@ -122,6 +122,29 @@ class Order extends Controller
 		return view('customer/history/views', $data);
 	}
 
+	public function detail_history($kode_order)
+	{
+		$data = [
+			'request' => $this->request,
+			'db' => $this->db,
+			'validation' => $this->validation,
+			'title' => 'History',
+			'user_id' => $this->id_user,
+			'user_nama_lengkap' => $this->user_nama_lengkap,
+			'user_username' => $this->user_username,
+			'user_email' => $this->user_email,
+			'user_no_hp' => $this->user_no_hp,
+			'user_level' => $this->user_level,
+			'user_foto' => $this->user_foto,
+			'user_status' => $this->user_status,
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
+			'data_tarif' => $this->TarifModel->getTarif(1),
+			'kode_order' => $kode_order
+		];
+		return view('customer/history/detail', $data);
+	}
+
 	public function submit_order()
 	{
 		$kode_order = $this->getToken(10);

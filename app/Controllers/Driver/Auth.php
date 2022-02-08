@@ -150,23 +150,33 @@ class Auth extends Controller
 						'login_driver_taxy_sharing'  => TRUE
 					];
 
-					$session->setFlashdata('pesan_berhasil', 'Selamat Datang ' . $data['nama_lengkap']);
 					$session->set($ses_data);
-
 					$this->kirim_email_konfirmasi_login($data['nama_lengkap'], $data['email']);
 
-					return redirect()->to(base_url() . '/driver');
+					echo json_encode(array(
+						'success' => '1',
+						'pesan' => 'Selamat Datang ' . $data["nama_lengkap"]
+					));
 				} else {
-					$session->setFlashdata('pesan_gagal', 'Password salah !');
-					return redirect()->to(base_url() . '/driver/login');
+					echo json_encode(array(
+						'success' => '0',
+						'pesan' => 'Password salah !'
+					));
+					return false;
 				}
 			} elseif ($status == "N") {
-				$session->setFlashdata('pesan_gagal', 'Akun anda telah dinonaktifkan !');
-				return redirect()->to(base_url() . '/driver/login');
+				echo json_encode(array(
+					'success' => '0',
+					'pesan' => 'Akun anda telah dinonaktifkan !'
+				));
+				return false;
 			}
 		} else {
-			$session->setFlashdata('pesan_gagal', 'Username tidak ditemukan !');
-			return redirect()->to(base_url() . '/driver/login');
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Username tidak dittemukan !'
+			));
+			return false;
 		}
 	}
 

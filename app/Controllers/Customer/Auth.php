@@ -69,6 +69,21 @@ class Auth extends Controller
 		return $min + $rnd;
 	}
 
+	function getToken($length)
+	{
+		$token = "";
+		$codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+		$codeAlphabet .= "0123456789";
+		$max = strlen($codeAlphabet); // edited
+
+		for ($i = 0; $i < $length; $i++) {
+			$token .= $codeAlphabet[$this->crypto_rand_secure(0, $max - 1)];
+		}
+
+		return $token;
+	}
+
 	public function login()
 	{
 		$session = session();
@@ -156,48 +171,148 @@ class Auth extends Controller
 			'db' => $this->db,
 			'validation' => $this->validation
 		];
-		return view('customer/auth/sign_up', $data);
+		return view('customer/auth/sign-up', $data);
+	}
+
+	public function lupa_password()
+	{
+		helper(['form']);
+		$data = [
+			'title' => 'Lupa Password Akun Customer',
+			'db' => $this->db,
+			'validation' => $this->validation
+		];
+		return view('customer/auth/lupa-password', $data);
+	}
+
+	public function reset_password($token)
+	{
+		helper(['form']);
+		$data = [
+			'title' => 'Lupa Password Akun Customer',
+			'db' => $this->db,
+			'validation' => $this->validation,
+			'token' => $token
+		];
+		return view('customer/auth/reset-password', $data);
 	}
 
 	public function auth_login()
 	{
 		$session = session();
-		$model = new CustomerModel();
 		$username = $this->request->getVar('username');
 		$password = $this->request->getVar('password');
 
-		$data = $model->where('username', $username)->first();
+		$data = ($this->db->query("SELECT * FROM tb_customer WHERE username = '$username' OR email= '$username' ORDER BY id_customer DESC LIMIT 1"))->getRow();
 
-		if ($data) {
-			$pass = $data['password'];
-			$status = $data['status'];
+		if (isset($data)) {
+			$pass = $data->password;
+			$status = $data->status;
 
 			if ($status == "1") {
 				$verify_pass = password_verify($password, $pass);
 				if ($verify_pass) {
 					$ses_data = [
-						'id_user' => $data['id_customer'],
+						'id_user' => $data->id_customer,
 						'login_customer_taxy_sharing'  => TRUE
 					];
 
-					$session->setFlashdata('pesan_berhasil', 'Selamat Datang ' . $data['nama_lengkap']);
 					$session->set($ses_data);
+					$this->kirim_email_konfirmasi_login($data->nama_lengkap, $data->email);
 
-					$this->kirim_email_konfirmasi_login($data['nama_lengkap'], $data['email']);
-
-					return redirect()->to(base_url() . '/customer');
+					echo json_encode(array(
+						'success' => '1',
+						'pesan' => 'Selamat Datang ' . $data->nama_lengkap
+					));
 				} else {
-					$session->setFlashdata('pesan_gagal', 'Password salah !');
-					return redirect()->to(base_url() . '/customer/login');
+					echo json_encode(array(
+						'success' => '0',
+						'pesan' => 'Password salah !'
+					));
+					return false;
 				}
 			} elseif ($status == "0") {
-				$session->setFlashdata('pesan_gagal', 'Akun anda telah dinonaktifkan !');
-				return redirect()->to(base_url() . '/customer/login');
+				echo json_encode(array(
+					'success' => '0',
+					'pesan' => 'Akun anda telah dinonaktifkan !'
+				));
+				return false;
 			}
 		} else {
-			$session->setFlashdata('pesan_gagal', 'Username tidak ditemukan !');
-			return redirect()->to(base_url() . '/customer/login');
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Username tidak ditemukan !'
+			));
+			return false;
 		}
+	}
+
+	public function submit_lupa_password()
+	{
+		$username = $this->request->getVar('username');
+
+		$data = ($this->db->query("SELECT * FROM tb_customer WHERE username = '$username' OR email = '$username' "))->getRow();
+
+		if ($data) {
+			$status = $data->status;
+			if ($status == "1") {
+
+				$token_reset_password = $this->getToken(97);
+
+				$this->CustomerModel->updateCustomer([
+					'token_reset_password' => $token_reset_password
+				], $data->id_customer);
+
+				$this->kirim_email_konfirmasi_lupa_password($data->nama_lengkap, $data->email, $token_reset_password);
+
+				echo json_encode(array(
+					'success' => '1',
+					'pesan' => 'Pesan konfirmasi lupa password telah dikirimkan melalui email ' . $data->email . '. Silahkan periksa email anda !'
+				));
+			} elseif ($status == "0") {
+				echo json_encode(array(
+					'success' => '0',
+					'pesan' => 'Akun dengan username/email ini telah dinonaktifkan !'
+				));
+				return false;
+			}
+		} else {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Username/Email tidak ditemukan !'
+			));
+			return false;
+		}
+	}
+
+	public function submit_reset_password()
+	{
+		$token_reset_password = $this->request->getVar('token_reset_password');
+		$password = $this->request->getVar('password');
+		$konfirmasi_password = $this->request->getVar('konfirmasi_password');
+
+		if ($password != $konfirmasi_password) {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Password baru tidak sesuai dengan konfirmasi !'
+			));
+			return false;
+		}
+		$password_baru_hash = password_hash($password, PASSWORD_DEFAULT);
+
+		$data = ($this->db->query("SELECT * FROM tb_customer WHERE token_reset_password = '$token_reset_password' "))->getRow();
+
+		$this->CustomerModel->updateCustomer([
+			'token_reset_password' => '',
+			'password' => $password_baru_hash
+		], $data->id_customer);
+
+		$this->kirim_email_konfirmasi_reset_password($data->nama_lengkap, $data->email, $data->username, $password);
+
+		echo json_encode(array(
+			'success' => '1',
+			'pesan' => 'Password akun berhasil diubah. Silahkan login kembali menggunakan password baru anda !'
+		));
 	}
 
 	public function tambah_customer()
@@ -263,7 +378,7 @@ class Auth extends Controller
 			'email' => $this->request->getVar('email'),
 			'no_hp' => $this->request->getVar('no_hp'),
 			'status' => '1',
-			'aktif' => 'N',
+			'aktif' => 'Y',
 			'create_datetime' => $datetime
 		]);
 
@@ -304,6 +419,136 @@ class Auth extends Controller
 					Jika benar anda yang melakukan aktifitas ini, silahkan abaikan pesan ini. 
 					<br>
 					Tetapi jika ini bukan anda, silahkan lakukan reset password akun anda dan hubungi administrator kami.
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+
+		$email_smtp->setMessage($pesan);
+		$email_smtp->send();
+	}
+
+	public function kirim_email_konfirmasi_lupa_password($nama_penerima, $email_penerima, $token)
+	{
+		$email_smtp = \Config\Services::email();
+
+		$config["protocol"] = "smtp";
+		$config["mailType"] = 'html';
+		$config["charset"] = 'utf-8';
+		// $config["CRLF"] = 'rn';
+		$config["priority"] = '5';
+		$config["SMTPHost"] = "smtp.gmail.com"; //alamat email SMTP 
+		$config["SMTPUser"] = "airporttaxisharing@gmail.com"; //password email SMTP 
+		$config["SMTPPass"] = "ztyfhshhykzoqloq";
+
+		// $config["SMTPPort"] = 465;
+		$config["SMTPPort"] = 587;
+		// $config["SMTPCrypto"] = "ssl";
+		$config["SMTPCrypto"] = "tls";
+		$config["SMTPAuth"] = true;
+		$email_smtp->initialize($config);
+		$email_smtp->setFrom("airporttaxisharing@gmail.com", "AIRPORT TAXI SHARING");
+
+		$email_smtp->setTo($email_penerima);
+
+		$email_smtp->setSubject("Permohonan Reset Password");
+		$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					anda baru saja meminta untuk melakukan reset password akun anda pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					Silahkan lakukan reset password melalui tautan : 
+					<a href="' . base_url() . '/customer/reset-password/' . $token . '">
+						' . base_url() . '/customer/reset-password/' . $token . '
+					</a>
+					<br>
+					<br>
+					Jika ini bukan anda, silahkan abaikan pesan ini.
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+
+		$email_smtp->setMessage($pesan);
+		$email_smtp->send();
+	}
+
+	public function kirim_email_konfirmasi_reset_password($nama_penerima, $email_penerima, $username, $password_baru)
+	{
+		$email_smtp = \Config\Services::email();
+
+		$config["protocol"] = "smtp";
+		$config["mailType"] = 'html';
+		$config["charset"] = 'utf-8';
+		// $config["CRLF"] = 'rn';
+		$config["priority"] = '5';
+		$config["SMTPHost"] = "smtp.gmail.com"; //alamat email SMTP 
+		$config["SMTPUser"] = "airporttaxisharing@gmail.com"; //password email SMTP 
+		$config["SMTPPass"] = "ztyfhshhykzoqloq";
+
+		// $config["SMTPPort"] = 465;
+		$config["SMTPPort"] = 587;
+		// $config["SMTPCrypto"] = "ssl";
+		$config["SMTPCrypto"] = "tls";
+		$config["SMTPAuth"] = true;
+		$email_smtp->initialize($config);
+		$email_smtp->setFrom("airporttaxisharing@gmail.com", "AIRPORT TAXI SHARING");
+
+		$email_smtp->setTo($email_penerima);
+
+		$email_smtp->setSubject("Berhasil Reset Password");
+		$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					anda baru saja melakukan reset password akun anda pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					Berikut detail akun anda :
+					<table>
+						<tr>
+							<td>Nama Lengkap</td>
+							<td>:</td>
+							<td>' . $nama_penerima . '</td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td>:</td>
+							<td>' . $username . '</td>
+						</tr>
+						<tr>
+							<td>Password Akun</td>
+							<td>:</td>
+							<td>' . $password_baru . '</td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td>' . $email_penerima . '</td>
+						</tr>
+						<tr>
+							<td>Status Akun</td>
+							<td>:</td>
+							<td>Aktif</td>
+						</tr>
+					</table>
+					<br>
+					Silahkan login menggunakan akun baru anda melalui tautan 
+					<br>
+					<a href="' . base_url() . '/customer/login">
+						Login Aplikasi
+					</a>
+					<br>
+					<br>
+					Jika ini bukan anda, silahkan abaikan pesan ini.
 					<br>
 					<br>
 					Terima Kasih 

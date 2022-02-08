@@ -66,9 +66,10 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 												<td style="vertical-align: middle;">
 													<form action="" method="POST">
 														<?= csrf_field(); ?>
-														<select name="aktif" id="aktif" required class="form-control-sm" onchange="this.form.submit()">
-															<option value="Y">Aktif</option>
-															<option value="N">Tidak Aktif</option>
+														<input type="hidden" name="id_customer" class="id_customer" value="<?= $row['id_customer']; ?>">
+														<select name="status" id="status" required class="form-control-sm confirm-submit-status">
+															<option value="1" <?= ($row['status'] == "1") ? "selected" : ""; ?>>Aktif</option>
+															<option value="0" <?= ($row['status'] == "0") ? "selected" : ""; ?>>Tidak Aktif</option>
 														</select>
 													</form>
 												</td>
@@ -91,6 +92,57 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 
 <script>
 	$(document).ready(function() {
+		$('.confirm-submit-status').on('change', function(e) {
+			event.preventDefault(); // prevent form submit
+			Swal.fire({
+				title: 'Apakah anda yakin ?',
+				text: "Pilih ya, jika anda ingin mengubah status customer ini !" + status,
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					var form = $(this).parents('form');
+					var id_customer = form.find(':input.id_customer').val();
+					var status = form.find('.confirm-submit-status').val();
+
+					$.ajax({
+						beforeSend: function() {
+							$("#loading-image").show();
+						},
+						type: "POST",
+						url: "<?= base_url() ?>/Admin/Customer/update_status",
+						dataType: "JSON",
+						data: {
+							id_customer: id_customer,
+							status: status
+						},
+						success: function(data) {
+							if (data.success == "1") {
+								Swal.fire(
+									'Berhasil',
+									data.pesan,
+									'success'
+								)
+							} else if (data.success == "0") {
+								Swal.fire(
+									'Gagal',
+									data.pesan,
+									'error'
+								)
+							}
+						},
+						complete: function(data) {
+							$("#loading-image").hide();
+						}
+					});
+				}
+			});
+		});
+
 		var datetime = new Date();
 		var tanggalHariIni = datetime.getDate() + '-' + datetime.getMonth() + '-' + datetime.getFullYear();
 

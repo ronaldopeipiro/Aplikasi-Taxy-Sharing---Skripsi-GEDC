@@ -8,6 +8,7 @@
 
 	<div class="container">
 
+
 		<div class="row row-deck row-cards">
 
 			<div class="col-lg-8 mb-2">
@@ -137,69 +138,71 @@
 				</div>
 			</div>
 
-			<div class="col-lg-12 mt-3">
-				<div class="card shadow">
-					<div class="card-body border-bottom py-2">
+			<?php if ($user_password != "") : ?>
+				<div class="col-lg-12 mt-3">
+					<div class="card shadow">
+						<div class="card-body border-bottom py-2">
 
-						<h5 class="mt-3">
-							<i class="fa fa-edit"></i>
-							Ubah Password Akun
-						</h5>
-						<hr>
+							<h5 class="mt-3">
+								<i class="fa fa-edit"></i>
+								Ubah Password Akun
+							</h5>
+							<hr>
 
-						<form id="formUpdatePassword">
-							<?= csrf_field(); ?>
+							<form id="formUpdatePassword">
+								<?= csrf_field(); ?>
 
-							<div class="form-group row mt-3">
-								<label for="password_lama" class="col-sm-3 col-form-label">
-									Password lama
-								</label>
-								<div class="col-sm-9">
-									<input type="password" class="form-control <?= ($validation->hasError('password_lama')) ? 'is-invalid' : ''; ?>" id="password_lama" name="password_lama" placeholder="Masukkan password lama ..." value="<?= old('password_lama') ?>">
-									<div class="invalid-feedback">
-										<?= $validation->getError('password_lama'); ?>
+								<div class="form-group row mt-3">
+									<label for="password_lama" class="col-sm-3 col-form-label">
+										Password lama
+									</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control <?= ($validation->hasError('password_lama')) ? 'is-invalid' : ''; ?>" id="password_lama" name="password_lama" placeholder="Masukkan password lama ..." value="<?= old('password_lama') ?>">
+										<div class="invalid-feedback">
+											<?= $validation->getError('password_lama'); ?>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="form-group row mt-3">
-								<label for="password_baru" class="col-sm-3 col-form-label">
-									Password Baru
-								</label>
-								<div class="col-sm-9">
-									<input type="password" class="form-control <?= ($validation->hasError('password_baru')) ? 'is-invalid' : ''; ?>" id="password_baru" name="password_baru" placeholder="Masukkan password baru ..." value="<?= old('password_baru') ?>">
-									<div class="invalid-feedback">
-										<?= $validation->getError('password_baru'); ?>
+								<div class="form-group row mt-3">
+									<label for="password_baru" class="col-sm-3 col-form-label">
+										Password Baru
+									</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control <?= ($validation->hasError('password_baru')) ? 'is-invalid' : ''; ?>" id="password_baru" name="password_baru" placeholder="Masukkan password baru ..." value="<?= old('password_baru') ?>">
+										<div class="invalid-feedback">
+											<?= $validation->getError('password_baru'); ?>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="form-group row mt-3">
-								<label for="konfirmasi_password" class="col-sm-3 col-form-label">
-									Konfirmasi Password Baru
-								</label>
-								<div class="col-sm-9">
-									<input type="password" class="form-control <?= ($validation->hasError('konfirmasi_password')) ? 'is-invalid' : ''; ?>" id="konfirmasi_password" name="konfirmasi_password" placeholder="Masukkan konfirmasi password  ..." value="<?= old('konfirmasi_password') ?>">
-									<div class="invalid-feedback">
-										<?= $validation->getError('konfirmasi_password'); ?>
+								<div class="form-group row mt-3">
+									<label for="konfirmasi_password" class="col-sm-3 col-form-label">
+										Konfirmasi Password Baru
+									</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control <?= ($validation->hasError('konfirmasi_password')) ? 'is-invalid' : ''; ?>" id="konfirmasi_password" name="konfirmasi_password" placeholder="Masukkan konfirmasi password  ..." value="<?= old('konfirmasi_password') ?>">
+										<div class="invalid-feedback">
+											<?= $validation->getError('konfirmasi_password'); ?>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="form-group row mt-4 mb-2">
-								<div class="col-12 text-right">
-									<button type="submit" class="btn btn-outline-success shadow" style="width: 180px;">
-										<span class="fa fa-save" style="margin-right: 10px;"></span> SIMPAN
-									</button>
+								<div class="form-group row mt-4 mb-2">
+									<div class="col-12 text-right">
+										<button type="submit" class="btn btn-outline-success shadow" style="width: 180px;">
+											<span class="fa fa-save" style="margin-right: 10px;"></span> SIMPAN
+										</button>
+									</div>
 								</div>
-							</div>
 
-						</form>
+							</form>
+
+						</div>
 
 					</div>
-
 				</div>
-			</div>
+			<?php endif; ?>
 
 		</div>
 
@@ -260,6 +263,9 @@
 						no_hp: no_hp,
 						email: email
 					},
+					beforeSend: function() {
+						$("#loader").show();
+					},
 					success: function(data) {
 						if (data.success == "1") {
 							Swal.fire(
@@ -274,6 +280,9 @@
 								'error'
 							)
 						}
+					},
+					complete: function(data) {
+						$("#loader").hide();
 					}
 				});
 
@@ -295,6 +304,9 @@
 						password_baru: password_baru,
 						konfirmasi_password: konfirmasi_password,
 					},
+					beforeSend: function() {
+						$("#loader").show();
+					},
 					success: function(data) {
 						if (data.success == "1") {
 							Swal.fire(
@@ -309,6 +321,9 @@
 								'error'
 							)
 						}
+					},
+					complete: function(data) {
+						$("#loader").hide();
 					}
 				});
 
@@ -330,6 +345,9 @@
 					cache: false,
 					processData: false,
 					contentType: false,
+					beforeSend: function() {
+						$("#loader").show();
+					},
 					success: function(data) {
 						if (data.success == "1") {
 							Swal.fire(
@@ -344,6 +362,9 @@
 								'error'
 							)
 						}
+					},
+					complete: function(data) {
+						$("#loader").hide();
 					}
 				});
 

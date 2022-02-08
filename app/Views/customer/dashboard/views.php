@@ -15,8 +15,8 @@ function rupiah($angka, $string)
 
 $class_dashboard = new App\Controllers\Customer\Dashboard;
 
-$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND (status < 4) LIMIT 1 "))->getRow();
-$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND (status < 4) LIMIT 1 "))->getNumRows();
+$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status < 4 LIMIT 1 "))->getRow();
+$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status < 4 LIMIT 1 "))->getNumRows();
 ?>
 
 <?php if ($user_latitude == "" and $user_longitude == "") : ?>
@@ -96,15 +96,25 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 	</script>
 <?php endif; ?>
 
+<script>
+	self.addEventListener('push', function(event) {
+		const promiseChain = self.registration.showNotification('Hello, World.');
+
+		event.waitUntil(promiseChain);
+	});
+</script>
+
 <section class="py-8" id="home">
 	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>
 
 	<div class="container">
+
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card rounded-3">
 					<div class="card-body">
+
 
 						<div class="row align-items-center pt-3 pt-lg-0">
 							<div class="col-lg-3 text-sm-start text-center">
@@ -266,7 +276,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											<small class="text-warning font-italic">
 												(Pembayaran dapat dilakukan secara cash kepada driver kami saat anda sampai di bandara tujuan)
 											</small>
-											lorem
 										</td>
 									</tr>
 									<tr>
@@ -278,22 +287,21 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 									</tr>
 								</table>
 
-								<?php if ($orderan_belum_selesai->status == "0") : ?>
-									<form action="<?= base_url(); ?>/Customer/Order/cancel_order" method="POST">
-										<?= csrf_field(); ?>
-										<input type="hidden" name="id_order" value="<?= $orderan_belum_selesai->id_order; ?>">
-
-										<div class="d-flex justify-content-between align-items-center align-content-center">
-											<a href="<?= base_url(); ?>/customer/order" class="btn btn-info">
-												<i class="fa fa-arrow-right"></i> Detail Order
-											</a>
+								<div class="d-flex justify-content-between align-items-center align-content-center">
+									<a href="<?= base_url(); ?>/customer/order" class="btn btn-info">
+										<i class="fa fa-arrow-right"></i> Detail Order
+									</a>
+									<?php if ($orderan_belum_selesai->status == "0") : ?>
+										<form action="<?= base_url(); ?>/Customer/Order/cancel_order" method="POST">
+											<?= csrf_field(); ?>
+											<input type="hidden" name="id_order" value="<?= $orderan_belum_selesai->id_order; ?>">
 
 											<button type="submit" class="btn btn-danger btn-cancel-order">
 												<i class="fa fa-times"></i> Batalkan
 											</button>
-										</div>
-									</form>
-								<?php endif; ?>
+										</form>
+									<?php endif; ?>
+								</div>
 
 							</div>
 						</div>
@@ -755,7 +763,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 					google.maps.event.addDomListener(window, 'load', initMap);
 				</script>
-
 
 				<script>
 					$(document).ready(function() {

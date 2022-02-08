@@ -72,8 +72,392 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 								<hr>
 							</div>
 
-							<?php if ($r_orderan->status == "3") : ?>
+							<?php if ($r_orderan->status >= "2" and $r_orderan->status <= "4") : ?>
+								<div class="col-lg-12">
+									<div id="maps" style="width: 100%; height: 70vh; border-radius: 20px;"></div>
+									<div id="floating-panel" style="background-color: #444;"></div>
+									<div id="sidebar"></div>
+								</div>
+							<?php endif; ?>
 
+							<?php if ($r_orderan->status == "2") : ?>
+								<script>
+									function initMap() {
+										var map;
+										var driverLocation;
+										var gmarkers = [];
+										var marker, i;
+										var lineMarkers = [];
+										var lingkar = [];
+										var circle_user;
+										var id_kategori;
+
+										var infoWindow = new google.maps.InfoWindow;
+										var bounds = new google.maps.LatLngBounds();
+										var directionsService = new google.maps.DirectionsService();
+										var directionsRenderer = new google.maps.DirectionsRenderer({
+											draggable: true,
+											map
+										});
+										var directionsDisplay;
+
+										if (navigator.geolocation) {
+											var positionOptions = {
+												enableHighAccuracy: true,
+												timeout: 10 * 1000 // 10 seconds
+											};
+
+											navigator.geolocation.getCurrentPosition(function(position) {
+												userLat = position.coords.latitude;
+												userLng = position.coords.longitude;
+												driverLocation = new google.maps.LatLng(userLat, userLng);
+												var myStyle = [{
+													featureType: "administrative",
+													elementType: "labels",
+													stylers: [{
+														visibility: "on"
+													}]
+												}, {
+													featureType: "poi",
+													elementType: "labels",
+													stylers: [{
+														visibility: "off"
+													}]
+												}, {
+													featureType: "water",
+													elementType: "labels",
+													stylers: [{
+														visibility: "on"
+													}]
+												}, {
+													featureType: "road",
+													elementType: "labels",
+													stylers: [{
+														visibility: "on"
+													}]
+												}];
+
+												var mapOptions = {
+													center: driverLocation,
+													zoom: 15,
+													mapTypeControlOptions: {
+														mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
+													},
+													mapTypeId: 'mystyle',
+													location_type: google.maps.GeocoderLocationType.ROOFTOP
+												};
+
+												$.ajax({
+													type: "POST",
+													url: "<?= base_url() ?>/Driver/Dashboard/update_posisi",
+													dataType: "JSON",
+													data: {
+														latitude: userLat,
+														longitude: userLng
+													},
+													success: function(data) {
+														console.log('OK');
+													}
+												});
+
+												map = new google.maps.Map(document.getElementById('maps'), mapOptions);
+												map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
+													name: 'Peta'
+												}));
+												directionsDisplay = new google.maps.DirectionsRenderer({
+													polylineOptions: {
+														strokeColor: "blue"
+													},
+													suppressMarkers: true
+												});
+
+												directionsDisplay.setMap(map);
+												directionsRenderer.setMap(map);
+												google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+													if (directionsDisplay.directions === null) {
+														return;
+													}
+												});
+
+												function showRouteDriverToBandara() {
+													let bandaraLocation = new google.maps.LatLng(<?= $bandara->latitude . ', ' . $bandara->longitude ?>);
+													var start = driverLocation;
+													var end = bandaraLocation;
+													var request = {
+														origin: start,
+														destination: end,
+														travelMode: 'DRIVING'
+													};
+													directionsService.route(request, function(result, status) {
+														if (status == 'OK') {
+															directionsRenderer.setDirections(result);
+														}
+													});
+												}
+
+												function showRouteDriverToCustomer() {
+													let customerLocation = new google.maps.LatLng(<?= $customer->latitude . ', ' . $customer->longitude ?>);
+													var start = driverLocation;
+													var end = customerLocation;
+													var request = {
+														origin: start,
+														destination: end,
+														travelMode: 'DRIVING'
+													};
+													directionsService.route(request, function(result, status) {
+														if (status == 'OK') {
+															directionsRenderer.setDirections(result);
+														}
+													});
+												}
+
+												directionsRenderer.setPanel(document.getElementById("sidebar"));
+
+												const control = document.getElementById("floating-panel");
+
+												map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+												const onChangeHandler = function() {
+													calculateAndDisplayRoute(directionsService, directionsRenderer);
+												};
+
+												showRouteDriverToBandara();
+												showRouteDriverToCustomer();
+
+												var trafficLayer = new google.maps.TrafficLayer();
+												trafficLayer.setMap(map);
+
+												var iconDriver = {
+													url: "<?= base_url() ?>/assets/img/taxi.png", // url
+													scaledSize: new google.maps.Size(44, 50), // scaled size
+													origin: new google.maps.Point(0, 0), // origin
+													anchor: new google.maps.Point(22, 34), // anchor
+													animation: google.maps.Animation.DROP
+												};
+
+												var centerLoc = new google.maps.Marker({
+													position: driverLocation,
+													map: map,
+													title: 'Lokasi Saya !',
+													icon: iconDriver,
+													animation: google.maps.Animation.DROP
+												});
+
+												tampilTitik();
+											}, function() {
+												handleLocationError(true, centerLoc, map.getCenter());
+											}, positionOptions);
+
+											function tampilTitik() {
+												var arrayTitikPengantaran = [
+													<?= "
+									{
+										id_driver: '" . $user_id . "',
+										id_bandara: '" . $id_bandara . "',
+										id_pengantaran: '" . $id_pengantaran . "',
+										nama_bandara: '" . $bandara->nama_bandara . "',
+										latitude: '" . $pengantaran->latitude . "',
+										longitude: '" . $pengantaran->longitude . "',
+										nama_lokasi: '" . $class_dashboard->getAddress($pengantaran->latitude, $pengantaran->longitude) . "',
+										radius_jemput: '" . $pengantaran->radius_jemput . "',
+										foto_profil_driver: '" . $user_foto . "',
+										nopol_driver:'" . $user_nopol . "',
+										nama_driver:'" . $user_nama_lengkap . "',
+									},
+									";
+													?>
+												];
+
+												for (i = 0; i < arrayTitikPengantaran.length; i++) {
+													let id_pengantaran = arrayTitikPengantaran[i].id_pengantaran;
+
+													let id_driver = arrayTitikPengantaran[i].id_driver;
+													let nama_driver = arrayTitikPengantaran[i].nama_driver;
+													let nopol_driver = arrayTitikPengantaran[i].nopol_driver;
+													let foto_profil_driver = arrayTitikPengantaran[i].foto_profil_driver;
+
+													let id_bandara = arrayTitikPengantaran[i].id_bandara;
+													let nama_bandara = arrayTitikPengantaran[i].nama_bandara;
+
+													let latitude = arrayTitikPengantaran[i].latitude;
+													let longitude = arrayTitikPengantaran[i].longitude;
+													let nama_lokasi = arrayTitikPengantaran[i].nama_lokasi;
+
+													let posisiMarker = new google.maps.LatLng(latitude, longitude);
+													let radius_jemput = arrayTitikPengantaran[i].radius_jemput;
+
+													let link_foto_profil_driver = "";
+													if (foto_profil_driver == "") {
+														link_foto_profil_driver = base_url + '/assets/img/noimg.png';
+													} else {
+														link_foto_profil_driver = base_url + '/assets/img/driver/' + foto_profil_driver;
+													}
+
+													var iconTitikPengantaran = {
+														url: "<?= base_url() ?>/assets/img/titik-pengantaran.png", // url
+														scaledSize: new google.maps.Size(40, 40), // scaled size
+														origin: new google.maps.Point(0, 0), // origin
+														anchor: new google.maps.Point(20, 20) // anchor
+													};
+													var marker_pengantaran = new google.maps.Marker({
+														position: posisiMarker,
+														map: map,
+														icon: iconTitikPengantaran
+													});
+
+													var circlePengantaran = new google.maps.Circle({
+														strokeColor: '#00e064',
+														strokeOpacity: 0.5,
+														strokeWeight: 2,
+														fillColor: '#00e064',
+														fillOpacity: 0.1,
+														map: map,
+														radius: radius_jemput
+													});
+
+													circlePengantaran.bindTo('center', marker_pengantaran, 'position');
+													circlePengantaran.setRadius(parseFloat(radius_jemput));
+
+													google.maps.event.addListener(marker_pengantaran, 'click', (function(marker_pengantaran, i) {
+														return function() {
+															var distinationOrigin = driverLocation;
+															var destinationMarker = posisiMarker;
+
+															infoWindow.setContent(`
+                                    <div style="width: 100%; text-align: center;">
+                                        <h4>${nama_driver}</h4>
+                                        <p>${nopol_driver}</p>
+										<img src="${link_foto_profil_driver}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: top;"/>
+									</div>
+									<br>
+                                    <table class="table-sm table-borderless mt-1">
+                                        <tr style="text-align: left;">
+                                            <td>Lokasi</td>
+                                            <td>:</td>
+                                            <td style="width: 70%;">${nama_lokasi}</td>
+                                        </tr>
+										<tr style="text-align: left;">
+                                            <td>Koordinat</td>
+                                            <td>:</td>
+                                            <td style="width: 70%;">${latitude}, ${longitude}</td>
+                                        </tr> 
+										<tr style="text-align: left;">
+                                            <td>Radius Jemput</td>
+                                            <td>:</td>
+                                            <td style="width: 70%;">${radius_jemput} meter</td>
+                                        </tr>
+									`);
+															infoWindow.open(map, marker_pengantaran);
+														}
+													})(marker_pengantaran, i));
+													gmarkers.push(marker_pengantaran);
+												}
+
+												var arrayCustomer = [
+													<?= "
+									{
+										foto_profil_customer: '" . $customer->foto . "',
+										nama_customer:'" . $customer->nama_lengkap . "',
+										email_customer:'" . $customer->email . "',
+										no_hp_customer:'" . $customer->no_hp . "',
+										latitude_customer:'" . $customer->latitude . "',
+										longitude_customer:'" . $customer->longitude . "',
+									},
+									";
+													?>
+												];
+
+												for (i = 0; i < arrayCustomer.length; i++) {
+													let nama_customer = arrayCustomer[i].nama_customer;
+													let email_customer = arrayCustomer[i].email_customer;
+													let no_hp_customer = arrayCustomer[i].no_hp_customer;
+													let latitude_customer = arrayCustomer[i].latitude_customer;
+													let longitude_customer = arrayCustomer[i].longitude_customer;
+													let foto_profil_customer = arrayCustomer[i].foto_profil_customer;
+
+													let posisiCustomer = new google.maps.LatLng(latitude_customer, longitude_customer);
+
+													let link_foto_profil_customer = "";
+													if (foto_profil_customer == "") {
+														link_foto_profil_customer = base_url + '/assets/img/noimg.png';
+													} else {
+														link_foto_profil_customer = base_url + '/assets/img/customer/' + foto_profil_customer;
+													}
+
+													var iconCustomer = {
+														url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
+														scaledSize: new google.maps.Size(40, 40), // scaled size
+														origin: new google.maps.Point(0, 0), // origin
+														anchor: new google.maps.Point(20, 20) // anchor
+													};
+
+													var markerCustomer = new google.maps.Marker({
+														position: posisiCustomer,
+														map: map,
+														icon: iconCustomer
+													});
+
+													google.maps.event.addListener(markerCustomer, 'click', (function(markerCustomer, i) {
+														return function() {
+															infoWindow.setContent(`
+											<div style="width: 100%; text-align: center;">
+												<img src="${link_foto_profil_customer}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: top;"/>
+											</div>
+											<br>
+											<table class="table-sm table-borderless mt-1">
+												<tr style="text-align: left;">
+													<td>Nama Customer</td>
+													<td>:</td>
+													<td style="width: 70%;">${nama_customer}</td>
+												</tr>
+												<tr style="text-align: left;">
+													<td>Email</td>
+													<td>:</td>
+													<td style="width: 70%;">${email_customer}</td>
+												</tr>
+												<tr style="text-align: left;">
+													<td>No. Handphone</td>
+													<td>:</td>
+													<td style="width: 70%;">${no_hp_customer}</td>
+												</tr>
+											`);
+															infoWindow.open(map, markerCustomer);
+														}
+													})(markerCustomer, i));
+													gmarkers.push(markerCustomer);
+												}
+											}
+
+											function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_pengantaran) {
+												directionsService.route({
+													origin: distinationOrigin,
+													destination: destinationMarker,
+													travelMode: google.maps.TravelMode.DRIVING
+												}, function(response, status) {
+													if (status === google.maps.DirectionsStatus.OK) {
+														directionsDisplay.setDirections(response);
+														computeTotals(response, infoWindow, id_pengantaran);
+													} else {
+														window.alert('Directions request failed due to ' + status);
+													}
+												});
+											}
+
+										} else {
+											handleLocationError(false, infoWindow, map.getCenter());
+										}
+									}
+
+									function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+										infoWindow.setPosition(pos);
+										infoWindow.setContent(browserHasGeolocation ?
+											'Error: The Geolocation service failed.' :
+											'Error: Your browser doesn\'t support geolocation.');
+										infoWindow.open(map);
+									}
+
+									google.maps.event.addDomListener(window, 'load', initMap);
+								</script>
 							<?php endif; ?>
 
 							<div class="col-lg-8 mb-3">

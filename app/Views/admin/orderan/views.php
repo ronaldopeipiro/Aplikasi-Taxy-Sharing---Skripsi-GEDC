@@ -32,32 +32,30 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 						<hr>
 
 						<div class="row mb-3">
-							<div class="col-lg-2">
+							<div class="col-lg-4">
 								<label for="driverSelect">Driver</label>
 								<div id="driverSelect"></div>
 							</div>
 
-							<div class="col-lg-2">
+							<div class="col-lg-4">
 								<label for="customerSelect">Customer</label>
 								<div id="customerSelect"></div>
 							</div>
 
-							<div class="col-lg-2">
-								<label for="statusSelect">Status</label>
-								<div id="statusSelect"></div>
+							<div class="col-lg-4">
+								<label for="statusOrderanSelect">Status</label>
+								<div id="statusOrderanSelect"></div>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-12">
-								<table class="table-sm table-bordered table-hover" style="width: 100%; font-size: 12px;" id="data-table-custom">
+							<div class="col-12" style="overflow-x: scroll; min-width: 100%; ">
+								<table class="table table-sm table-responsive table-bordered table-hover" style="font-size: 12px;" id="data-table-custom">
 									<thead>
 										<tr class="text-center">
 											<th>No.</th>
 											<th>Customer</th>
 											<th>Driver</th>
-											<th>Lokasi Pengantaran Penumpang dari Bandara</th>
-											<th>Lokasi Penjemputan Customer</th>
 											<th>Bandara Tujuan</th>
 											<th>Jarak ke Bandara</th>
 											<th>Biaya</th>
@@ -115,7 +113,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 												</td>
 												<td style="vertical-align: middle;"><?= $customer->nama_lengkap; ?></td>
 												<td style="vertical-align: middle;"><?= $driver->nama_lengkap; ?></td>
-												<td style="vertical-align: middle;">
+												<!-- <td style="vertical-align: middle;">
 													<?= $class_dashboard->getAddress($pengantaran->latitude, $pengantaran->longitude); ?>
 													<br>
 													(<?= $pengantaran->latitude . "," . $pengantaran->longitude ?>)
@@ -124,7 +122,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 													<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
 													<br>
 													(<?= $row['latitude'] . "," . $row['longitude'] ?>)
-												</td>
+												</td> -->
 												<td style="vertical-align: middle;">
 													<?= $bandara->nama_bandara; ?>
 													<br>
@@ -170,41 +168,39 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 			"searching": true,
 			"deferRender": true,
 			"initComplete": function() {
-				var statusVerifikasi = this.api().column(8);
-				var statusVerifikasiSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
-					.appendTo('#statusVerifikasiSelect')
+				var statusOrderan = this.api().column(7);
+				var statusOrderanSelect = $('<select class="filter form-control-sm" style="width: 100%;"><option value="">Semua</option></select>')
+					.appendTo('#statusOrderanSelect')
 					.on('change', function() {
 						var val = $(this).val();
-						statusVerifikasi.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+						statusOrderan.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
 					});
-				statusVerifikasiSelect.append(`
-					<option value="Belum diverifikasi">Belum diverifikasi</option>
-					<option value="Terverifikasi">Terverifikasi</option>
-					<option value="Tidak terverifikasi">Tidak terverifikasi</option>
-					`);
-
-				var statusAkun = this.api().column(9);
-				var statusSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
-					.appendTo('#statusSelect')
-					.on('change', function() {
-						var val = $(this).val();
-						statusAkun.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
-					});
-				statusSelect.append(`
+				statusOrderanSelect.append(`
 					<option value="Aktif">Aktif</option>
 					<option value="Tidak Aktif">Tidak Aktif</option>
 					`);
 
-				// var status = this.api().column(4);
-				// var statusSelect = $('<select class="filter form-control js-select-2"><option value="">Semua</option></select>')
-				// 	.appendTo('#statusSelect')
-				// 	.on('change', function() {
-				// 		var val = $(this).val();
-				// 		status.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
-				// 	});
-				// status.data().unique().sort().each(function(d, j) {
-				// 	statusSelect.append('<option value="' + d + '">' + d + '</option>');
-				// });
+				var customer = this.api().column(1);
+				var customerSelect = $('<select class="filter form-control-sm js-select-2" style="width: 100%;"><option value="">Semua</option></select>')
+					.appendTo('#customerSelect')
+					.on('change', function() {
+						var val = $(this).val();
+						customer.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+					});
+				customer.data().unique().sort().each(function(d, j) {
+					customerSelect.append('<option value="' + d + '">' + d + '</option>');
+				});
+
+				var driver = this.api().column(2);
+				var driverSelect = $('<select class="filter form-control-sm js-select-2" style="width: 100%;"><option value="">Semua</option></select>')
+					.appendTo('#driverSelect')
+					.on('change', function() {
+						var val = $(this).val();
+						driver.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+					});
+				driver.data().unique().sort().each(function(d, j) {
+					driverSelect.append('<option value="' + d + '">' + d + '</option>');
+				});
 
 			},
 			"lengthMenu": [

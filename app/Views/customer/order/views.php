@@ -240,6 +240,10 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											</td>
 										</tr>
 									</table>
+
+									<a href="tel:<?= $driver->no_hp; ?>" class="btn btn-block btn-primary">
+										<i class="fa fa-phone mr-2"></i> Hubungi Customer
+									</a>
 								</div>
 							</div>
 

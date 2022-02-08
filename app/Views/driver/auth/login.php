@@ -5,7 +5,7 @@
 <div class="container-login100" style="background-image: url('<?= base_url(); ?>/assets/img/bg-login.jpg');">
 	<div class="wrap-login100 p-l-20 p-r-20 p-t-40 p-b-40">
 
-		<form action="<?= base_url(); ?>/Driver/Auth/auth_login" method="POST" enctype="multipart/form-data">
+		<form id="formSubmitLogin">
 			<?= csrf_field(); ?>
 
 			<div class="row">
@@ -21,7 +21,7 @@
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-6">
 					<div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" name="username" id="username" placeholder="Username">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -39,7 +39,7 @@
 					</div>
 
 					<div class="container-login100-form-btn mt-4">
-						<button type="submit" class="login100-form-btn btn-block">
+						<button type="submit" class="login100-form-btn btn-block" id="submitLogin">
 							<i class="fa fa-arrow-right mr-2"></i> Masuk
 						</button>
 					</div>
@@ -71,14 +71,11 @@
 				</div>
 			</div>
 
-
-
 		</form>
 
 	</div>
 </div>
 
-<div id="dropDownSelect1"></div>
 
 <script>
 	function myFunction() {
@@ -89,6 +86,51 @@
 			x.type = "password";
 		}
 	}
+
+	$(document).ready(function() {
+		$(function() {
+
+			$("#formSubmitLogin").submit(function(e) {
+				e.preventDefault();
+				var username = $('#username').val();
+				var password = $('#password').val();
+
+				$.ajax({
+					beforeSend: function() {
+						$("#loading-image").show();
+					},
+					type: "POST",
+					url: "<?= base_url() ?>/Driver/Auth/auth_login",
+					dataType: "JSON",
+					data: {
+						username: username,
+						password: password
+					},
+					success: function(data) {
+						if (data.success == "1") {
+							Swal.fire(
+								'Berhasil',
+								data.pesan,
+								'success'
+							).then(function() {
+								window.location = base_url + '/driver';
+							});
+						} else if (data.success == "0") {
+							Swal.fire(
+								'Gagal',
+								data.pesan,
+								'error'
+							)
+						}
+					},
+					complete: function(data) {
+						$("#loading-image").hide();
+					}
+				});
+			});
+
+		});
+	});
 </script>
 
 <?= $this->endSection('content_auth'); ?>

@@ -128,14 +128,32 @@
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 
-	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI"></script>
+	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI&language=id-ID"></script>
 
 	<script>
 		const base_url = "<?= base_url() ?>"
 	</script>
+
+	<style>
+		div#loader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0.5);
+			z-index: 1;
+		}
+	</style>
 </head>
 
 <body>
+
+	<div id="loader" style="display: none;">
+		<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+			<img src="<?= base_url(); ?>/assets/img/loader.gif" style="width: 150px; height: 150px; object-fit: cover; object-position: center;">
+		</div>
+	</div>
 
 	<?php if (session()->getFlashdata('pesan_berhasil')) : ?>
 		<script>
