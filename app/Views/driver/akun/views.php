@@ -51,7 +51,7 @@
 								<label for="no_anggota" class="col-sm-3 col-form-label">
 									No. Anggota
 								</label>
-								<div class="col-sm-9">
+								<div class="col-sm-4">
 									<input type="text" class="form-control <?= ($validation->hasError('no_anggota')) ? 'is-invalid' : ''; ?>" id="no_anggota" name="no_anggota" value="<?= (old('no_anggota')) ? old('no_anggota') : $user_no_anggota; ?>" placeholder="Masukkan No. Anggota . . . ." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" minlength="16" maxlength="16">
 									<div class="invalid-feedback">
 										<?= $validation->getError('no_anggota'); ?>
@@ -63,7 +63,7 @@
 								<label for="nopol" class="col-sm-3 col-form-label">
 									No. Polisi
 								</label>
-								<div class="col-sm-9">
+								<div class="col-sm-4">
 									<input type="text" class="form-control <?= ($validation->hasError('nopol')) ? 'is-invalid' : ''; ?>" id="nopol" name="nopol" value="<?= (old('nopol')) ? old('nopol') : $user_nopol; ?>" placeholder="Masukkan No. Polisi . . . .">
 									<div class="invalid-feedback">
 										<?= $validation->getError('nopol'); ?>
@@ -222,6 +222,16 @@
 
 					</div>
 
+				</div>
+			</div>
+
+			<div class="col-lg-12 mt-4">
+				<div class="card">
+					<div class="card-body text-right">
+						<a href="<?= base_url(); ?>/driver/logout" class="btn btn-outline-danger btn-logout">
+							<i class="fa fa-sign-out"></i> Keluar
+						</a>
+					</div>
 				</div>
 			</div>
 

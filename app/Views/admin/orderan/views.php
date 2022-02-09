@@ -152,7 +152,6 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 			</div>
 		</div>
 
-
 	</div>
 
 </section>

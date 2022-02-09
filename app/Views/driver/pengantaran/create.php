@@ -2,6 +2,79 @@
 
 <?= $this->section('content'); ?>
 
+<style>
+	#description {
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+	}
+
+	#infowindow-content .title {
+		font-weight: bold;
+	}
+
+	#infowindow-content {
+		display: none;
+	}
+
+	#map #infowindow-content {
+		display: inline;
+	}
+
+	.pac-card {
+		background-color: #fff;
+		border: 0;
+		border-radius: 2px;
+		box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+		margin: 10px;
+		padding: 0 0.5em;
+		font: 400 18px Roboto, Arial, sans-serif;
+		overflow: hidden;
+		font-family: Roboto;
+		padding: 0;
+	}
+
+	#pac-container {
+		padding-bottom: 12px;
+		margin-right: 12px;
+	}
+
+	.pac-controls {
+		display: inline-block;
+		padding: 10px 11px;
+	}
+
+	.pac-controls label {
+		font-family: Roboto;
+		font-size: 13px;
+		font-weight: 300;
+	}
+
+	#pac-input {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 20px;
+		font-weight: 300;
+		text-overflow: ellipsis;
+	}
+
+	#pac-input:focus {
+		border-color: #4d90fe;
+	}
+
+	#title {
+		color: #fff;
+		background-color: #4d90fe;
+		font-size: 25px;
+		font-weight: 500;
+		padding: 6px 12px;
+	}
+
+	#target {
+		width: 345px;
+	}
+</style>
+
 <section class="py-8" id="home">
 	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>
@@ -24,10 +97,6 @@
 
 				<div class="card">
 					<div class="card-body">
-
-						<h4>
-							Mau antar penumpang kemana ?
-						</h4>
 						<p class="text-success text-justify">
 							Tentukan titik tujuan pengantaran penumpang anda dan temukan customer baru di sekitar lokasi tujuan anda tersebut untuk anda angkut kembali ke bandara. Anda juga dapat menentukan radius penjemputan penumpang dari sekitar lokasi pengantaran sesuai keinginan anda.
 						</p>
@@ -35,8 +104,13 @@
 							<?= csrf_field(); ?>
 							<div class="row">
 
+								<div class="col-lg-12">
+									<div class="form-group">
+										<input id="pac-input" type="text" placeholder="Mau antar penumpang kemana ?" class="form-control" name="lokasi" value="" required>
+									</div>
+								</div>
+
 								<div class="col-lg-8">
-									<input id="pac-input" type="text" placeholder="Masukkan nama tempat ..." class="form-control" name="lokasi" value="" required>
 									<div id="map" style="width: 100%; height: 440px; border-radius: 10px;"></div>
 								</div>
 
@@ -139,7 +213,7 @@
 				const input = document.getElementById("pac-input");
 				const searchBox = new google.maps.places.SearchBox(input);
 
-				map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+				// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 				// Bias the SearchBox results towards current map's viewport.
 				map.addListener("bounds_changed", () => {
 					searchBox.setBounds(map.getBounds());

@@ -24,9 +24,12 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="d-flex align-items-center justify-content-between">
-					<h4 class="mt-2">
-						History Orderan Saya
+				<div class="d-flex align-items-center">
+					<a href="<?= base_url(); ?>/driver" class="btn btn-dark" title="Tambah Data Pengantaran">
+						<i class="fa fa-arrow-left"></i>
+					</a>
+					<h4 class="mt-2 ml-2">
+						History Orderan
 					</h4>
 				</div>
 				<hr>
@@ -37,11 +40,10 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					<thead>
 						<tr class="text-center">
 							<th>No.</th>
-							<th>Lokasi Pengantaran Penumpang dari Bandara</th>
-							<th>Lokasi Penjemputan Customer</th>
+							<th>Waktu Order</th>
+							<th>Customer</th>
 							<th>Bandara Tujuan</th>
 							<th>Jarak ke Bandara</th>
-							<th>Driver</th>
 							<th>Biaya</th>
 							<th>Status</th>
 							<th>Detail</th>
@@ -67,7 +69,6 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							$id_bandara = $pengantaran->id_bandara;
 							$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
 
-
 							if ($row['status'] == "0") {
 								$class_text_status = "badge badge-warning";
 								$text_status = "Proses";
@@ -91,20 +92,15 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 								$text_status = "Orderan ditolak oleh driver";
 							}
 							?>
+
 							<tr>
 								<td style="vertical-align: middle;" class="text-center">
 									<?= $no++; ?>.
 								</td>
-								<td style="vertical-align: middle;">
-									<?= $class_dashboard->getAddress($pengantaran->latitude, $pengantaran->longitude); ?>
-									<br>
-									(<?= $pengantaran->latitude . "," . $pengantaran->longitude ?>)
+								<td style="vertical-align: middle">
+									<?= strftime("%d/%m/%Y <br> %H:%M:%S WIB", strtotime($row['create_datetime'])); ?>
 								</td>
-								<td style="vertical-align: middle;">
-									<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
-									<br>
-									(<?= $row['latitude'] . "," . $row['longitude'] ?>)
-								</td>
+								<td style="vertical-align: middle;"><?= $customer->nama_lengkap; ?></td>
 								<td style="vertical-align: middle;">
 									<?= $bandara->nama_bandara; ?>
 									<br>
@@ -113,7 +109,6 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 								<td style="vertical-align: middle;">
 									<?= $row['jarak_customer_to_bandara']; ?> Km
 								</td>
-								<td style="vertical-align: middle;"><?= $driver->nama_lengkap; ?></td>
 								<td style="vertical-align: middle;"><?= rupiah($row['biaya'], "Y") ?></td>
 								<td style="vertical-align: middle;">
 									<?= $text_status; ?>

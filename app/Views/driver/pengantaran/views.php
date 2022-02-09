@@ -14,9 +14,14 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="d-flex align-items-center justify-content-between">
-					<h4 class="mt-2">
-						Pengantaran
-					</h4>
+					<div class="d-flex align-items-center">
+						<a href="<?= base_url(); ?>/driver" class="btn btn-dark" title="Tambah Data Pengantaran">
+							<i class="fa fa-arrow-left"></i>
+						</a>
+						<h4 class="mt-2 ml-2">
+							Pengantaran
+						</h4>
+					</div>
 
 					<?php if (($jml_pengantaran_diproses == '0')) : ?>
 						<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-success" title="Tambah Data Pengantaran">
@@ -39,6 +44,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 						<thead>
 							<tr>
 								<th>No.</th>
+								<th>Waktu</th>
 								<th>Bandara</th>
 								<th>Lokasi Pengantaran</th>
 								<th>Koordinat Pengantaran</th>
@@ -74,10 +80,13 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 								<tr>
 									<td style="width: 50px; vertical-align: middle;" class="text-center"><?= $no++; ?>.</td>
+									<td style="vertical-align: middle">
+										<?= strftime("%d/%m/%Y <br> %H:%M:%S WIB", strtotime($row['create_datetime'])); ?>
+									</td>
 									<td style="width: 250px; vertical-align: middle;">
 										<?= $bandara->nama_bandara; ?>
 									</td>
-									<td style="width: 300px; vertical-align: middle;">
+									<td style="width: 200px; vertical-align: middle;">
 										<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
 									</td>
 									<td style="width: 20%; vertical-align: middle;">
