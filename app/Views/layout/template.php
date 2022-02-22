@@ -8,13 +8,22 @@
 
 	<title><?= $title; ?> | AIRPORT TAXI SHARING APP</title>
 
-	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/logo.jpg">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Brew">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon" sizes="152x152" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
+	<link rel="apple-touch-icon" sizes="167x167" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
 	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>/assets/img/logo.jpg">
 	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>/assets/img/logo.jpg">
 	<link rel="shortcut icon" type="image/x-icon" href="<?= base_url(); ?>/assets/img/logo.jpg">
-	<link rel="manifest" href="<?= base_url(); ?>/assets/img/favicons/manifest.json">
+
+	<link rel="manifest" href="<?= base_url(); ?>/manifest.json">
+
 	<meta name="msapplication-TileImage" content="<?= base_url(); ?>/assets/img/favicons/logo.jpg">
 	<meta name="theme-color" content="#ffffff">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets_login/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets_login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -24,6 +33,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 	<link href="<?= base_url(); ?>/assets/css/theme.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>/assets/css/maps.css" rel="stylesheet" />
@@ -51,6 +62,9 @@
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI&language=id-ID"></script>
 
@@ -225,6 +239,26 @@
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
 					confirmButtonText: 'Ya, Batalkan !',
+					cancelButtonText: 'Batal'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						var form = $(this).parents('form');
+						form.submit();
+					}
+				});
+			});
+
+			$('.btn-confirm-selesai-pengantaran').on('click', function(e) {
+				// prevent form submit
+				event.preventDefault();
+				Swal.fire({
+					title: 'Apakah anda yakin ?',
+					text: "Pilih ya, jika anda telah selesai melakukan pengantaran penumpang dari bandara !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya !',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -428,7 +462,17 @@
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 	<script src="<?= base_url(); ?>/assets/js/theme.js"></script>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('<?= base_url() ?>/service-worker.js').then(function(registration) {
+					console.log('ServiceWorker Berhasil di Install: ', registration.scope);
+				}, function(err) {
+					console.log('ServiceWorker Gagal Di Install: ', err);
+				});
+			});
+		}
+	</script>
 </body>
 
 </html>

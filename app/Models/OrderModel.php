@@ -45,6 +45,13 @@ class OrderModel extends Model
 		])->orderBy('id_order', 'desc')->findAll();
 	}
 
+	public function getOrderByKodeOrder($kode_order)
+	{
+		return $this->where([
+			'kode_order' => $kode_order
+		])->first();
+	}
+
 	public function getOrderByStatus($status)
 	{
 		return $this->where([

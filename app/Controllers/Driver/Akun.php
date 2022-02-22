@@ -61,6 +61,38 @@ class Akun extends Controller
 		$no_hp = $this->request->getPost('no_hp');
 		$email = $this->request->getPost('email');
 
+		if ($nama_lengkap == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Nama lengkap tidak boleh kosong !'
+			));
+			return false;
+		}
+
+		if ($username == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Username tidak boleh kosong !'
+			));
+			return false;
+		}
+
+		if ($email == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Email tidak boleh kosong !'
+			));
+			return false;
+		}
+
+		if ($no_hp == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'No. Handphone tidak boleh kosong !'
+			));
+			return false;
+		}
+
 		$cek_username = $this->db->query("SELECT * FROM tb_driver WHERE id_driver != '$this->id_user' AND username='$username' ");
 		if ($cek_username->getNumRows() > 0) {
 			echo json_encode(array(
@@ -89,6 +121,30 @@ class Akun extends Controller
 		$password_lama = $this->request->getPost('password_lama');
 		$password_baru = $this->request->getPost('password_baru');
 		$konfirmasi_password = $this->request->getPost('konfirmasi_password');
+
+		if ($password_lama == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Password lama tidak boleh kosong !'
+			));
+			return false;
+		}
+
+		if ($password_baru == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Password baru tidak boleh kosong !'
+			));
+			return false;
+		}
+
+		if ($konfirmasi_password == "") {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Konfirmasi password tidak boleh kosong !'
+			));
+			return false;
+		}
 
 		$cek_password_lama = ($this->db->query("SELECT * FROM tb_driver WHERE id_driver = '$this->id_user' "))->getRow();
 		if (password_verify($password_lama, $cek_password_lama->password)) {

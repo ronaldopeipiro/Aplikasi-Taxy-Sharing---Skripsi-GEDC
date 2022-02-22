@@ -43,8 +43,6 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<th>Waktu Order</th>
 							<th>Customer</th>
 							<th>Bandara Tujuan</th>
-							<th>Jarak ke Bandara</th>
-							<th>Biaya</th>
 							<th>Status</th>
 							<th>Detail</th>
 						</tr>
@@ -69,19 +67,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							$id_bandara = $pengantaran->id_bandara;
 							$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
 
-							if ($row['status'] == "0") {
-								$class_text_status = "badge badge-warning";
-								$text_status = "Proses";
-							} else if ($row['status'] == "1") {
-								$class_text_status = "badge badge-info";
-								$text_status = "Orderan diterima oleh driver";
-							} else if ($row['status'] == "2") {
-								$class_text_status = "badge badge-info";
-								$text_status = "Driver menuju lokasi anda";
-							} else if ($row['status'] == "3") {
-								$class_text_status = "badge badge-primary";
-								$text_status = "Dalam perjalanan menuju bandara";
-							} else if ($row['status'] == "4") {
+							if ($row['status'] == "4") {
 								$class_text_status = "badge badge-success";
 								$text_status = "Selesai";
 							} else if ($row['status'] == "5") {
@@ -107,14 +93,10 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 									(<?= $row['latitude'] . "," . $row['longitude'] ?>)
 								</td>
 								<td style="vertical-align: middle;">
-									<?= $row['jarak_customer_to_bandara']; ?> Km
-								</td>
-								<td style="vertical-align: middle;"><?= rupiah($row['biaya'], "Y") ?></td>
-								<td style="vertical-align: middle;">
 									<?= $text_status; ?>
 								</td>
 								<td style="vertical-align: middle;">
-									<a href="<?= base_url(); ?>/driver/history/detail/<?= $row['kode_order']; ?>" class="btn btn-outline-info">
+									<a href="<?= base_url(); ?>/driver/history/detail/<?= $row['kode_order']; ?>" class="btn btn-sm btn-outline-info">
 										<i class="fa fa-list"></i> Detail
 									</a>
 								</td>

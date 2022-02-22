@@ -8,13 +8,21 @@
 
 	<title><?= $title; ?> | TAXI SHARING APP</title>
 
-	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/favicons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>/assets/img/favicons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>/assets/img/favicons/favicon-16x16.png">
-	<link rel="shortcut icon" type="image/x-icon" href="<?= base_url(); ?>/assets/img/favicons/favicon.ico">
-	<link rel="manifest" href="<?= base_url(); ?>/assets/img/favicons/manifest.json">
-	<meta name="msapplication-TileImage" content="<?= base_url(); ?>/assets/img/favicons/mstile-150x150.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Brew">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon" sizes="152x152" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
+	<link rel="apple-touch-icon" sizes="167x167" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>/assets/img/logo.jpg" type="image/png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url(); ?>/assets/img/logo.jpg">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url(); ?>/assets/img/logo.jpg">
+	<link rel="shortcut icon" type="image/x-icon" href="<?= base_url(); ?>/assets/img/logo.jpg">
+
+	<link rel="manifest" href="<?= base_url(); ?>/manifest.json">
+
+	<meta name="msapplication-TileImage" content="<?= base_url(); ?>/assets/img/favicons/logo.jpg">
 	<meta name="theme-color" content="#ffffff">
+
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets_login/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets_login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -103,6 +111,17 @@
 
 	</main>
 
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('<?= base_url() ?>/service-worker.js').then(function(registration) {
+					console.log('ServiceWorker Berhasil di Install: ', registration.scope);
+				}, function(err) {
+					console.log('ServiceWorker Gagal Di Install: ', err);
+				});
+			});
+		}
+	</script>
 
 </body>
 

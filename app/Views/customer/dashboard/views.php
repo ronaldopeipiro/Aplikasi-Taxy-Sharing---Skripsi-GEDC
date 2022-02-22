@@ -15,8 +15,8 @@ function rupiah($angka, $string)
 
 $class_dashboard = new App\Controllers\Customer\Dashboard;
 
-$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status < 4 LIMIT 1 "))->getRow();
-$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status < 4 LIMIT 1 "))->getNumRows();
+$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status <= 4 LIMIT 1 "))->getRow();
+$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status <= 4 LIMIT 1 "))->getNumRows();
 ?>
 
 <?php if ($user_latitude == "" and $user_longitude == "") : ?>
@@ -99,7 +99,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 <script>
 	self.addEventListener('push', function(event) {
 		const promiseChain = self.registration.showNotification('Hello, World.');
-
 		event.waitUntil(promiseChain);
 	});
 </script>
@@ -316,16 +315,12 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-
 								<small class="text-left">
 									( Lokasi pengantaran penumpang dari bandara di sekitar : <span class="font-italic" id="alamat_saya"></span> )
 								</small>
 								<hr>
-
 								<span id="text-no-driver-ready" class="text-danger font-italic"></span>
-
 								<div id="maps" style="width: 100%; height: 80vh; border-radius: 20px;"></div>
-
 							</div>
 						</div>
 					</div>
@@ -450,9 +445,9 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 								var icon_user = {
 									url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
-									scaledSize: new google.maps.Size(44, 50), // scaled size
+									scaledSize: new google.maps.Size(40, 40), // scaled size
 									origin: new google.maps.Point(0, 0), // origin
-									anchor: new google.maps.Point(22, 34), // anchor
+									anchor: new google.maps.Point(20, 20), // anchor
 									animation: google.maps.Animation.DROP
 								};
 
@@ -612,7 +607,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 												</div>
 												<br>
 												<div class="row justify-content-center mb-4">
-													<form class="formSubmitOrder">
+													<form id="formSubmitOrder` + i + `">
 														<?= csrf_field(); ?>
 														<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
 														<input type="hidden" name="id_pengantaran" value="${id_pengantaran}"/>
@@ -622,7 +617,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 														<input type="hidden" name="jarak_customer_to_bandara" value="${jarak_user_to_bandara}" />
 														<input type="hidden" name="biaya" value="${biaya_perjalanan}" />
 
-														<button type="button" class="btn btn-block btn-outline-success btn-submit-order" title="Order Taxi">
+														<button type="button" class="btn btn-block btn-outline-success btn-submit-order-` + i + `" title="Order Taxi">
 															<i class="fa fa-taxi"></i> ORDER TAXI
 														</button>
 													</form>
@@ -696,6 +691,56 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 									if (driver_ready = 0) {
 										$('#text-no-driver-ready').text('Tidak ada driver yang melakukan pengantaran penumpang di sekitar anda !');
 									}
+
+									$(".btn-submit-order-" + i).click(function(e) {
+										e.preventDefault();
+
+										var id_customer = $('#formSubmitOrder' + i + ' input[name="id_customer"]').val();
+										var id_pengantaran = $('#formSubmitOrder' + i + ' input[name="id_pengantaran"]').val();
+										var latitude = $('#formSubmitOrder' + i + ' input[name="latitude"]').val();
+										var longitude = $('#formSubmitOrder' + i + ' input[name="longitude"]').val();
+										var tarif_perkm = $('#formSubmitOrder' + i + ' input[name="tarif_perkm"]').val();
+										var jarak_customer_to_bandara = $('#formSubmitOrder' + i + ' input[name="jarak_customer_to_bandara"]').val();
+										var biaya = $('#formSubmitOrder' + i + ' input[name="biaya"]').val();
+
+										$.ajax({
+											type: "POST",
+											url: "<?= base_url() ?>/customer/order/submit-order",
+											dataType: "JSON",
+											data: {
+												id_customer: id_customer,
+												id_pengantaran: id_pengantaran,
+												latitude: latitude,
+												longitude: longitude,
+												tarif_perkm: tarif_perkm,
+												jarak_customer_to_bandara: jarak_customer_to_bandara,
+												biaya: biaya
+											},
+											success: function(data) {
+												if (data.success == "1") {
+													Swal.fire(
+														'Berhasil !',
+														data.pesan,
+														'success'
+													);
+													setTimeout(function() { // wait for 5 secs(2)
+														location.reload(); // then reload the page.(3)
+													}, 10);
+												} else if (data.success == "0") {
+													Swal.fire(
+														'Gagal !',
+														data.pesan,
+														'error'
+													);
+													setTimeout(function() { // wait for 5 secs(2)
+														location.reload(); // then reload the page.(3)
+													}, 10);
+												}
+											}
+										});
+
+									});
+
 								}
 							}
 
@@ -762,63 +807,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 					}
 
 					google.maps.event.addDomListener(window, 'load', initMap);
-				</script>
-
-				<script>
-					$(document).ready(function() {
-						$(function() {
-
-							$(".btn-submit-order").click(function(e) {
-								e.preventDefault();
-
-								var id_customer = $('input[name="id_customer"]').val();
-								var id_pengantaran = $('input[name="id_pengantaran"]').val();
-								var latitude = $('input[name="latitude"]').val();
-								var longitude = $('input[name="longitude"]').val();
-								var tarif_perkm = $('input[name="tarif_perkm"]').val();
-								var jarak_customer_to_bandara = $('input[name="jarak_customer_to_bandara"]').val();
-								var biaya = $('input[name="biaya"]').val();
-
-								$.ajax({
-									type: "POST",
-									url: "<?= base_url() ?>/customer/order/submit-order",
-									dataType: "JSON",
-									data: {
-										id_customer: id_customer,
-										id_pengantaran: id_pengantaran,
-										latitude: latitude,
-										longitude: longitude,
-										tarif_perkm: tarif_perkm,
-										jarak_customer_to_bandara: jarak_customer_to_bandara,
-										biaya: biaya
-									},
-									success: function(data) {
-										if (data.success == "1") {
-											Swal.fire(
-												'Berhasil !',
-												data.pesan,
-												'success'
-											);
-											setTimeout(function() {
-												window.location = window.location
-											}, 5000);
-										} else if (data.success == "0") {
-											Swal.fire(
-												'Gagal !',
-												data.pesan,
-												'error'
-											);
-											setTimeout(function() {
-												window.location = window.location
-											}, 5000);
-										}
-									}
-								});
-
-							});
-
-						});
-					});
 				</script>
 
 			<?php endif; ?>

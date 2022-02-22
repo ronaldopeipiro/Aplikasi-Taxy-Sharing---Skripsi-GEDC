@@ -89,6 +89,29 @@ class Pengantaran extends Controller
 		}
 	}
 
+	public function detail($id_pengantaran)
+	{
+		$data = [
+			'request' => $this->request,
+			'db' => $this->db,
+			'validation' => $this->validation,
+			'title' => 'Detail Pengantaran',
+			'user_id' => $this->id_user,
+			'user_nama_lengkap' => $this->user_nama_lengkap,
+			'user_username' => $this->user_username,
+			'user_email' => $this->user_email,
+			'user_no_hp' => $this->user_no_hp,
+			'user_level' => $this->user_level,
+			'user_foto' => $this->user_foto,
+			'user_status' => $this->user_status,
+			'user_no_anggota' => $this->user_no_anggota,
+			'user_nopol' => $this->user_nopol,
+			'pengantaran' => $this->PengantaranModel->getPengantaran($id_pengantaran),
+		];
+
+		return view('driver/pengantaran/detail', $data);
+	}
+
 	public function tambah_data_pengantaran()
 	{
 		if (!$this->validate([
@@ -134,7 +157,7 @@ class Pengantaran extends Controller
 		return redirect()->to(base_url() . '/driver/pengantaran');
 	}
 
-	public function cancel_pengantaran()
+	public function confirm_pengantaran()
 	{
 		$id_pengantaran = $this->request->getPost('id_pengantaran');
 		$status = $this->request->getPost('status');
@@ -143,7 +166,12 @@ class Pengantaran extends Controller
 			'status_pengantaran' => $status
 		], $id_pengantaran);
 
-		session()->setFlashdata('pesan_berhasil', 'Berhasil dibatalkan !');
+		if ($status == "1") {
+			session()->setFlashdata('pesan_berhasil', 'Berhasil ditandai selesai !');
+		} elseif ($status == "2") {
+			session()->setFlashdata('pesan_berhasil', 'Berhasil dibatalkan !');
+		}
+
 		return redirect()->to(base_url() . '/driver/pengantaran');
 	}
 }

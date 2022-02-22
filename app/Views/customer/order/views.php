@@ -14,8 +14,8 @@ function rupiah($angka, $string)
 }
 $class_dashboard = new App\Controllers\Customer\Dashboard;
 
-$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status='0' LIMIT 1 "))->getRow();
-$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status='0' LIMIT 1 "))->getNumRows();
+$orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status <= 4 LIMIT 1 "))->getRow();
+$cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_customer='$user_id' AND status <= 4 LIMIT 1 "))->getNumRows();
 ?>
 
 <section class="py-8" id="home">
@@ -95,13 +95,15 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 					<div class="row">
 
-						<div class="col-lg-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<div id="maps" style="border-radius: 10px; height: 77vh; width: 100%;"></div>
+						<?php if ($orderan_belum_selesai->status < 4) : ?>
+							<div class="col-lg-12 mb-3">
+								<div class="card">
+									<div class="card-body">
+										<div id="maps" style="border-radius: 10px; height: 77vh; width: 100%;"></div>
+									</div>
 								</div>
 							</div>
-						</div>
+						<?php endif; ?>
 
 						<div class="col-lg-8 mb-3 mb-lg-0">
 							<div class="card">
@@ -254,127 +256,127 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 				</div>
 			</div>
 
+			<?php if ($orderan_belum_selesai->status < 4) : ?>
+				<script>
+					function initMap() {
+						var map;
+						var userLoc;
+						var gmarkers = [];
+						var marker, i;
+						var lineMarkers = [];
+						var lingkar = [];
+						var circle_user;
+						var id_kategori;
 
-			<script>
-				function initMap() {
-					var map;
-					var userLoc;
-					var gmarkers = [];
-					var marker, i;
-					var lineMarkers = [];
-					var lingkar = [];
-					var circle_user;
-					var id_kategori;
+						var infoWindow = new google.maps.InfoWindow;
+						var bounds = new google.maps.LatLngBounds();
+						var directionsService = new google.maps.DirectionsService;
+						var directionsDisplay;
 
-					var infoWindow = new google.maps.InfoWindow;
-					var bounds = new google.maps.LatLngBounds();
-					var directionsService = new google.maps.DirectionsService;
-					var directionsDisplay;
-
-					if (navigator.geolocation) {
-						var positionOptions = {
-							enableHighAccuracy: true,
-							timeout: 10 * 1000 // 10 seconds
-						};
-
-						navigator.geolocation.getCurrentPosition(function(position) {
-							userLat = position.coords.latitude;
-							userLng = position.coords.longitude;
-							userLoc = new google.maps.LatLng(userLat, userLng);
-							var myStyle = [{
-								featureType: "administrative",
-								elementType: "labels",
-								stylers: [{
-									visibility: "on"
-								}]
-							}, {
-								featureType: "poi",
-								elementType: "labels",
-								stylers: [{
-									visibility: "off"
-								}]
-							}, {
-								featureType: "water",
-								elementType: "labels",
-								stylers: [{
-									visibility: "on"
-								}]
-							}, {
-								featureType: "road",
-								elementType: "labels",
-								stylers: [{
-									visibility: "on"
-								}]
-							}];
-
-							var mapOptions = {
-								center: userLoc,
-								zoom: 15,
-								mapTypeControlOptions: {
-									mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
-								},
-								mapTypeId: 'mystyle',
-								location_type: google.maps.GeocoderLocationType.ROOFTOP
+						if (navigator.geolocation) {
+							var positionOptions = {
+								enableHighAccuracy: true,
+								timeout: 10 * 1000 // 10 seconds
 							};
 
-							$.ajax({
-								type: "POST",
-								url: "<?= base_url() ?>/Customer/Dashboard/update_posisi",
-								dataType: "JSON",
-								data: {
-									latitude: userLat,
-									longitude: userLng
-								},
-								success: function(data) {
-									console.log('OK');
-								}
-							});
+							navigator.geolocation.getCurrentPosition(function(position) {
+								userLat = position.coords.latitude;
+								userLng = position.coords.longitude;
+								userLoc = new google.maps.LatLng(userLat, userLng);
+								var myStyle = [{
+									featureType: "administrative",
+									elementType: "labels",
+									stylers: [{
+										visibility: "on"
+									}]
+								}, {
+									featureType: "poi",
+									elementType: "labels",
+									stylers: [{
+										visibility: "off"
+									}]
+								}, {
+									featureType: "water",
+									elementType: "labels",
+									stylers: [{
+										visibility: "on"
+									}]
+								}, {
+									featureType: "road",
+									elementType: "labels",
+									stylers: [{
+										visibility: "on"
+									}]
+								}];
 
-							map = new google.maps.Map(document.getElementById('maps'), mapOptions);
-							map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
-								name: 'Peta'
-							}));
-							directionsDisplay = new google.maps.DirectionsRenderer({
-								polylineOptions: {
-									strokeColor: "red"
-								},
-								suppressMarkers: true
-							});
+								var mapOptions = {
+									center: userLoc,
+									zoom: 15,
+									mapTypeControlOptions: {
+										mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
+									},
+									mapTypeId: 'mystyle',
+									location_type: google.maps.GeocoderLocationType.ROOFTOP
+								};
 
-							// directionsDisplay.setMap(map);
-							google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-								if (directionsDisplay.directions === null) {
-									return;
-								}
-							});
+								$.ajax({
+									type: "POST",
+									url: "<?= base_url() ?>/Customer/Dashboard/update_posisi",
+									dataType: "JSON",
+									data: {
+										latitude: userLat,
+										longitude: userLng
+									},
+									success: function(data) {
+										console.log('OK');
+									}
+								});
 
-							var trafficLayer = new google.maps.TrafficLayer();
-							trafficLayer.setMap(map);
+								map = new google.maps.Map(document.getElementById('maps'), mapOptions);
+								map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
+									name: 'Peta'
+								}));
+								directionsDisplay = new google.maps.DirectionsRenderer({
+									polylineOptions: {
+										strokeColor: "red"
+									},
+									suppressMarkers: true
+								});
 
-							var icon_user = {
-								url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
-								scaledSize: new google.maps.Size(44, 50), // scaled size
-								origin: new google.maps.Point(0, 0), // origin
-								anchor: new google.maps.Point(22, 34), // anchor
-								animation: google.maps.Animation.DROP
-							};
+								// directionsDisplay.setMap(map);
+								google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+									if (directionsDisplay.directions === null) {
+										return;
+									}
+								});
 
-							var centerLoc = new google.maps.Marker({
-								position: userLoc,
-								map: map,
-								title: 'Lokasi Saya !',
-								icon: icon_user,
-								animation: google.maps.Animation.DROP
-							});
+								var trafficLayer = new google.maps.TrafficLayer();
+								trafficLayer.setMap(map);
 
-							tampilTitik();
-						}, function() {
-							handleLocationError(true, centerLoc, map.getCenter());
-						}, positionOptions);
+								var icon_user = {
+									url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
+									scaledSize: new google.maps.Size(40, 40), // scaled size
+									origin: new google.maps.Point(0, 0), // origin
+									anchor: new google.maps.Point(20, 20), // anchor
+									animation: google.maps.Animation.DROP
+								};
 
-						function tampilTitik() {
-							var arrayTitikPengantaran = [
-								<?= "
+								var centerLoc = new google.maps.Marker({
+									position: userLoc,
+									map: map,
+									title: 'Lokasi Saya !',
+									icon: icon_user,
+									animation: google.maps.Animation.DROP
+								});
+
+								tampilTitik();
+							}, function() {
+								handleLocationError(true, centerLoc, map.getCenter());
+							}, positionOptions);
+
+							function tampilTitik() {
+								var arrayTitikPengantaran = [
+									<?= "
 									{
 										id_driver: '" . $id_driver . "',
 										id_bandara: '" . $id_bandara . "',
@@ -398,72 +400,72 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 										nama_driver:'" . $driver->nama_lengkap . "',
 									},
 									";
-								?>
-							];
+									?>
+								];
 
-							for (i = 0; i < arrayTitikPengantaran.length; i++) {
-								let id_pengantaran = arrayTitikPengantaran[i].id_pengantaran;
+								for (i = 0; i < arrayTitikPengantaran.length; i++) {
+									let id_pengantaran = arrayTitikPengantaran[i].id_pengantaran;
 
-								let id_driver = arrayTitikPengantaran[i].id_driver;
-								let nama_driver = arrayTitikPengantaran[i].nama_driver;
-								let nopol_driver = arrayTitikPengantaran[i].nopol_driver;
-								let foto_profil_driver = arrayTitikPengantaran[i].foto_profil_driver;
+									let id_driver = arrayTitikPengantaran[i].id_driver;
+									let nama_driver = arrayTitikPengantaran[i].nama_driver;
+									let nopol_driver = arrayTitikPengantaran[i].nopol_driver;
+									let foto_profil_driver = arrayTitikPengantaran[i].foto_profil_driver;
 
-								let id_bandara = arrayTitikPengantaran[i].id_bandara;
-								let nama_bandara = arrayTitikPengantaran[i].nama_bandara;
+									let id_bandara = arrayTitikPengantaran[i].id_bandara;
+									let nama_bandara = arrayTitikPengantaran[i].nama_bandara;
 
-								let latitude = arrayTitikPengantaran[i].latitude;
-								let longitude = arrayTitikPengantaran[i].longitude;
-								let nama_lokasi = arrayTitikPengantaran[i].nama_lokasi;
+									let latitude = arrayTitikPengantaran[i].latitude;
+									let longitude = arrayTitikPengantaran[i].longitude;
+									let nama_lokasi = arrayTitikPengantaran[i].nama_lokasi;
 
-								let posisiMarker = new google.maps.LatLng(latitude, longitude);
-								let radius_jemput = arrayTitikPengantaran[i].radius_jemput;
-								let jarak_user_to_titik = arrayTitikPengantaran[i].jarak_user_to_titik;
-								let jarak_titik_to_bandara = arrayTitikPengantaran[i].jarak_titik_to_bandara;
-								let jarak_user_to_bandara = arrayTitikPengantaran[i].jarak_user_to_bandara;
-								let waktu_tempuh_user_to_bandara = arrayTitikPengantaran[i].waktu_tempuh_user_to_bandara;
-								let estimasi_penjemputan = arrayTitikPengantaran[i].estimasi_penjemputan;
-								let biaya_perjalanan = arrayTitikPengantaran[i].biaya_perjalanan;
-								let biaya_perjalanan_string = arrayTitikPengantaran[i].biaya_perjalanan_string;
+									let posisiMarker = new google.maps.LatLng(latitude, longitude);
+									let radius_jemput = arrayTitikPengantaran[i].radius_jemput;
+									let jarak_user_to_titik = arrayTitikPengantaran[i].jarak_user_to_titik;
+									let jarak_titik_to_bandara = arrayTitikPengantaran[i].jarak_titik_to_bandara;
+									let jarak_user_to_bandara = arrayTitikPengantaran[i].jarak_user_to_bandara;
+									let waktu_tempuh_user_to_bandara = arrayTitikPengantaran[i].waktu_tempuh_user_to_bandara;
+									let estimasi_penjemputan = arrayTitikPengantaran[i].estimasi_penjemputan;
+									let biaya_perjalanan = arrayTitikPengantaran[i].biaya_perjalanan;
+									let biaya_perjalanan_string = arrayTitikPengantaran[i].biaya_perjalanan_string;
 
-								let link_foto_profil_driver = "";
-								if (foto_profil_driver == "") {
-									link_foto_profil_driver = base_url + '/assets/img/noimg.png';
-								} else {
-									link_foto_profil_driver = base_url + '/assets/img/driver/' + foto_profil_driver;
-								}
+									let link_foto_profil_driver = "";
+									if (foto_profil_driver == "") {
+										link_foto_profil_driver = base_url + '/assets/img/noimg.png';
+									} else {
+										link_foto_profil_driver = base_url + '/assets/img/driver/' + foto_profil_driver;
+									}
 
-								var iconTitikPengantaran = {
-									url: "<?= base_url() ?>/assets/img/titik-pengantaran.png", // url
-									scaledSize: new google.maps.Size(40, 40), // scaled size
-									origin: new google.maps.Point(0, 0), // origin
-									anchor: new google.maps.Point(20, 20) // anchor
-								};
-								var marker_pengantaran = new google.maps.Marker({
-									position: posisiMarker,
-									map: map,
-									icon: iconTitikPengantaran
-								});
+									var iconTitikPengantaran = {
+										url: "<?= base_url() ?>/assets/img/titik-pengantaran.png", // url
+										scaledSize: new google.maps.Size(40, 40), // scaled size
+										origin: new google.maps.Point(0, 0), // origin
+										anchor: new google.maps.Point(20, 20) // anchor
+									};
+									var marker_pengantaran = new google.maps.Marker({
+										position: posisiMarker,
+										map: map,
+										icon: iconTitikPengantaran
+									});
 
-								var circlePengantaran = new google.maps.Circle({
-									strokeColor: '#00e064',
-									strokeOpacity: 0.5,
-									strokeWeight: 2,
-									fillColor: '#00e064',
-									fillOpacity: 0.1,
-									map: map,
-									radius: radius_jemput
-								});
+									var circlePengantaran = new google.maps.Circle({
+										strokeColor: '#00e064',
+										strokeOpacity: 0.5,
+										strokeWeight: 2,
+										fillColor: '#00e064',
+										fillOpacity: 0.1,
+										map: map,
+										radius: radius_jemput
+									});
 
-								circlePengantaran.bindTo('center', marker_pengantaran, 'position');
-								circlePengantaran.setRadius(parseFloat(radius_jemput));
+									circlePengantaran.bindTo('center', marker_pengantaran, 'position');
+									circlePengantaran.setRadius(parseFloat(radius_jemput));
 
-								google.maps.event.addListener(marker_pengantaran, 'click', (function(marker_pengantaran, i) {
-									return function() {
-										var distinationOrigin = userLoc;
-										var destinationMarker = posisiMarker;
+									google.maps.event.addListener(marker_pengantaran, 'click', (function(marker_pengantaran, i) {
+										return function() {
+											var distinationOrigin = userLoc;
+											var destinationMarker = posisiMarker;
 
-										infoWindow.setContent(`
+											infoWindow.setContent(`
                                     <div style="width: 100%; text-align: center;">
                                         <h4>${nama_driver}</h4>
                                         <p>${nopol_driver}</p>
@@ -512,15 +514,15 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
                                             <td style="width: 70%;">${radius_jemput} meter</td>
                                         </tr>
 									`);
-										infoWindow.open(map, marker_pengantaran);
-									}
-								})(marker_pengantaran, i));
-								gmarkers.push(marker_pengantaran);
-							}
+											infoWindow.open(map, marker_pengantaran);
+										}
+									})(marker_pengantaran, i));
+									gmarkers.push(marker_pengantaran);
+								}
 
 
-							var arrayDriver = [
-								<?= "
+								var arrayDriver = [
+									<?= "
 									{
 										id_driver: '" . $id_driver . "',
 										foto_profil_driver: '" . $driver->foto . "',
@@ -531,43 +533,43 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 										longitude_driver:'" . $driver->longitude . "',
 									},
 									";
-								?>
-							];
+									?>
+								];
 
-							for (i = 0; i < arrayDriver.length; i++) {
-								let id_driver = arrayDriver[i].id_driver;
-								let nama_driver = arrayDriver[i].nama_driver;
-								let nopol_driver = arrayDriver[i].nopol_driver;
-								let no_anggota_driver = arrayDriver[i].no_anggota_driver;
-								let latitude_driver = arrayDriver[i].latitude_driver;
-								let longitude_driver = arrayDriver[i].longitude_driver;
-								let foto_profil_driver = arrayDriver[i].foto_profil_driver;
+								for (i = 0; i < arrayDriver.length; i++) {
+									let id_driver = arrayDriver[i].id_driver;
+									let nama_driver = arrayDriver[i].nama_driver;
+									let nopol_driver = arrayDriver[i].nopol_driver;
+									let no_anggota_driver = arrayDriver[i].no_anggota_driver;
+									let latitude_driver = arrayDriver[i].latitude_driver;
+									let longitude_driver = arrayDriver[i].longitude_driver;
+									let foto_profil_driver = arrayDriver[i].foto_profil_driver;
 
-								let posisiDriver = new google.maps.LatLng(latitude_driver, longitude_driver);
+									let posisiDriver = new google.maps.LatLng(latitude_driver, longitude_driver);
 
-								let link_foto_profil_driver = "";
-								if (foto_profil_driver == "") {
-									link_foto_profil_driver = base_url + '/assets/img/noimg.png';
-								} else {
-									link_foto_profil_driver = base_url + '/assets/img/driver/' + foto_profil_driver;
-								}
+									let link_foto_profil_driver = "";
+									if (foto_profil_driver == "") {
+										link_foto_profil_driver = base_url + '/assets/img/noimg.png';
+									} else {
+										link_foto_profil_driver = base_url + '/assets/img/driver/' + foto_profil_driver;
+									}
 
-								var iconDriver = {
-									url: "<?= base_url() ?>/assets/img/taxi-top-right.png", // url
-									scaledSize: new google.maps.Size(40, 40), // scaled size
-									origin: new google.maps.Point(0, 0), // origin
-									anchor: new google.maps.Point(20, 20) // anchor
-								};
+									var iconDriver = {
+										url: "<?= base_url() ?>/assets/img/taxi-top-right.png", // url
+										scaledSize: new google.maps.Size(40, 40), // scaled size
+										origin: new google.maps.Point(0, 0), // origin
+										anchor: new google.maps.Point(20, 20) // anchor
+									};
 
-								var markerDriver = new google.maps.Marker({
-									position: posisiDriver,
-									map: map,
-									icon: iconDriver
-								});
+									var markerDriver = new google.maps.Marker({
+										position: posisiDriver,
+										map: map,
+										icon: iconDriver
+									});
 
-								google.maps.event.addListener(markerDriver, 'click', (function(markerDriver, i) {
-									return function() {
-										infoWindow.setContent(`
+									google.maps.event.addListener(markerDriver, 'click', (function(markerDriver, i) {
+										return function() {
+											infoWindow.setContent(`
 											<div style="width: 100%; text-align: center;">
 												<img src="${link_foto_profil_driver}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: top;"/>
 											</div>
@@ -589,43 +591,44 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 													<td style="width: 70%;">${no_anggota_driver}</td>
 												</tr>
 											`);
-										infoWindow.open(map, markerDriver);
-									}
-								})(markerDriver, i));
-								gmarkers.push(markerDriver);
-							}
-						}
-
-						function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_pengantaran) {
-							directionsService.route({
-								origin: distinationOrigin,
-								destination: destinationMarker,
-								travelMode: google.maps.TravelMode.DRIVING
-							}, function(response, status) {
-								if (status === google.maps.DirectionsStatus.OK) {
-									directionsDisplay.setDirections(response);
-									computeTotals(response, infoWindow, id_pengantaran);
-								} else {
-									window.alert('Directions request failed due to ' + status);
+											infoWindow.open(map, markerDriver);
+										}
+									})(markerDriver, i));
+									gmarkers.push(markerDriver);
 								}
-							});
+							}
+
+							function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_pengantaran) {
+								directionsService.route({
+									origin: distinationOrigin,
+									destination: destinationMarker,
+									travelMode: google.maps.TravelMode.DRIVING
+								}, function(response, status) {
+									if (status === google.maps.DirectionsStatus.OK) {
+										directionsDisplay.setDirections(response);
+										computeTotals(response, infoWindow, id_pengantaran);
+									} else {
+										window.alert('Directions request failed due to ' + status);
+									}
+								});
+							}
+
+						} else {
+							handleLocationError(false, infoWindow, map.getCenter());
 						}
-
-					} else {
-						handleLocationError(false, infoWindow, map.getCenter());
 					}
-				}
 
-				function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-					infoWindow.setPosition(pos);
-					infoWindow.setContent(browserHasGeolocation ?
-						'Error: The Geolocation service failed.' :
-						'Error: Your browser doesn\'t support geolocation.');
-					infoWindow.open(map);
-				}
+					function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+						infoWindow.setPosition(pos);
+						infoWindow.setContent(browserHasGeolocation ?
+							'Error: The Geolocation service failed.' :
+							'Error: Your browser doesn\'t support geolocation.');
+						infoWindow.open(map);
+					}
 
-				google.maps.event.addDomListener(window, 'load', initMap);
-			</script>
+					google.maps.event.addDomListener(window, 'load', initMap);
+				</script>
+			<?php endif; ?>
 
 		<?php else : ?>
 
@@ -854,18 +857,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 					<option value="Selesai">Selesai</option>
 					<option value="Tidak Selesai">Tidak Selesai</option>
 					`);
-
-				// var status = this.api().column(4);
-				// var statusSelect = $('<select class="filter form-control js-select-2"><option value="">Semua</option></select>')
-				// 	.appendTo('#statusSelect')
-				// 	.on('change', function() {
-				// 		var val = $(this).val();
-				// 		status.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
-				// 	});
-				// status.data().unique().sort().each(function(d, j) {
-				// 	statusSelect.append('<option value="' + d + '">' + d + '</option>');
-				// });
-
 			},
 			"lengthMenu": [
 				[10, 25, 50, 100, -1],

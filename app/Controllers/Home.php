@@ -40,6 +40,16 @@ class Home extends BaseController
 		return view('landing/welcome/views', $data);
 	}
 
+	public function offline()
+	{
+		$data = [
+			'request' => $this->request,
+			'db' => $this->db,
+			'title' => 'OFFLINE',
+		];
+		return view('landing/offline/views', $data);
+	}
+
 	public function tentang()
 	{
 		$data = [

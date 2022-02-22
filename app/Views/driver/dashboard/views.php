@@ -154,6 +154,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 		<?php else : ?>
 
 			<?php if ($jumlah_orderan_masuk_belum_selesai > 0) : ?>
+
 				<?php if ($r_orderan = $data_orderan_belum_selesai->getRow()) : ?>
 					<?php
 					$id_customer = $r_orderan->id_customer;
@@ -295,15 +296,11 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 												<?php elseif ($r_orderan->status == "3") : ?>
 
-													<span>
-														Telah sampai di bandara ? tandai selesai !
-													</span>
-
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post">
+													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
 														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
 														<input type="hidden" name="status" value="4">
-														<button type="submit" class="btn btn-block btn-danger btn-confirm-otw-bandara">
-															<i class="fa fa-times"></i> Selesai
+														<button type="submit" class="btn btn-block btn-success btn-confirm-otw-bandara">
+															<i class="fa fa-check"></i> Selesai
 														</button>
 													</form>
 
@@ -542,18 +539,18 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 								totalDist = totalDist / 1000;
 								infoWindow.setContent(infoWindow.getContent() + `
-                        <tr style="text-align: left;">
-                            <td>Jarak Tempuh</td>
-                            <td>:</td>
-                            <td>${totalDist.toFixed(2)} km (${(totalDist * 0.621371).toFixed(2)} miles)</td>
-                        </tr>
-                        <tr style="text-align: left;">
-                            <td>Waktu Tempuh</td>
-                            <td>:</td>
-                            <td>${(totalTime / 60).toFixed(2)} menit</td>
-                        </tr>
-                    </table>
-                    `);
+										<tr style="text-align: left;">
+											<td>Jarak Tempuh</td>
+											<td>:</td>
+											<td>${totalDist.toFixed(2)} km (${(totalDist * 0.621371).toFixed(2)} miles)</td>
+										</tr>
+										<tr style="text-align: left;">
+											<td>Waktu Tempuh</td>
+											<td>:</td>
+											<td>${(totalTime / 60).toFixed(2)} menit</td>
+										</tr>
+									</table>
+									`);
 							}
 
 							function calculateDistances(start, end) {

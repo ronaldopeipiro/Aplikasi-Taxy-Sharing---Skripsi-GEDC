@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::beranda');
+$routes->get('/you-are-offline', 'Home::offline');
 
 // Driver
 $routes->get('/driver/login', 'Driver\Auth::login', ['filter' => 'auth_not_login_driver']);
@@ -44,10 +45,12 @@ $routes->get('/driver', 'Driver\Dashboard::index', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/pengantaran', 'Driver\Pengantaran::index', ['filter' => 'auth_driver']);
 $routes->get('/driver/pengantaran/create', 'Driver\Pengantaran::create', ['filter' => 'auth_driver']);
+$routes->get('/driver/pengantaran/detail/(:num)', 'Driver\Pengantaran::detail/$1', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/orderan', 'Driver\Orderan::index', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/history', 'Driver\Orderan::history', ['filter' => 'auth_driver']);
+$routes->get('/driver/history/detail/(:any)', 'Driver\Orderan::detail_history/$1', ['filter' => 'auth_driver']);
 
 $routes->get('/driver/akun', 'Driver\Akun::index', ['filter' => 'auth_driver']);
 

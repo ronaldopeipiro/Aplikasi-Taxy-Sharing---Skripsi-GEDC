@@ -1,0 +1,31 @@
+{
+  "start_url": "/?utm_source=homescreen",
+  "lang": "Indonesian",
+  "name": "Airport Taxi Sharing",
+  "background_color": "#fff",
+  "theme_color": "#53B1F7",
+  "short_name": "Airport Taxi Sharing",
+  "description": "Aplikasi Airport Taxi Sharing",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "generated": "true",
+  "icons": [
+    {
+      "src": "https://jo.yokcaridok.id/assets/img/logo.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://jo.yokcaridok.id/assets/img/logo.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://jo.yokcaridok.id/assets/img/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

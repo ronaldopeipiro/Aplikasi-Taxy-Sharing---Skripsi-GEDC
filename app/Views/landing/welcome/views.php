@@ -177,7 +177,7 @@
 <!-- <section> close ============================-->
 <!-- ============================================-->
 
-<section class="py-8">
+<!-- <section class="py-8">
 	<div class="container-lg">
 		<div class="row flex-center">
 			<div class="col-md-11 col-lg-6 col-xl-4 col-xxl-5">
@@ -540,7 +540,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 
 
 <?= $this->endSection('content_landing'); ?>
