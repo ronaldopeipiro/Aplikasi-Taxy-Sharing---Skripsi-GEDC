@@ -1,0 +1,12 @@
+CRITICAL - 2022-03-04 00:26:53 --> Undefined variable: no_driver_ready
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\customer\order\views.php(839): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 839, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('customer/order/...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Order.php(100): view('customer/order/...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Customer\Order->index()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Order))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}

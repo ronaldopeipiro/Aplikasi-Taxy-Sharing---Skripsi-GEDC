@@ -1,6 +1,6 @@
 {
   "start_url": "/?utm_source=homescreen",
-  "lang": "Indonesian",
+  "lang": "Indonesia",
   "name": "Airport Taxi Sharing",
   "background_color": "#fff",
   "theme_color": "#53B1F7",
@@ -10,6 +10,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "generated": "true",
+  "gcm_sender_id": "956814356639",
   "icons": [
     {
       "src": "https://jo.yokcaridok.id/assets/img/logo.jpg",

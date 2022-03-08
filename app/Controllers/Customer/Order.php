@@ -157,6 +157,8 @@ class Order extends Controller
 		$biaya = $this->request->getPost('biaya');
 
 		$customer = ($this->db->query("SELECT * FROM tb_customer WHERE id_customer='$id_customer' "))->getRow();
+		$pengantaran = ($this->db->query("SELECT * FROM tb_pengantaran WHERE id_pengantaran='$id_pengantaran' "))->getRow();
+		$driver = ($this->db->query("SELECT * FROM tb_driver WHERE id_driver='$pengantaran->id_driver' "))->getRow();
 
 		$cek_orderan_proses = ($this->db->query("SELECT * FROM tb_order WHERE id_customer='$id_customer' AND status='0' LIMIT 1 "))->getNumRows();
 
@@ -178,6 +180,7 @@ class Order extends Controller
 			]);
 
 			$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, "0");
+			$this->kirim_email_to_driver($driver->nama_lengkap, $driver->email, "0");
 
 			echo json_encode(array(
 				'success' => '1',
@@ -192,13 +195,17 @@ class Order extends Controller
 		$order = ($this->db->query("SELECT * FROM tb_order WHERE id_order='$id_order' "))->getRow();
 		$customer = ($this->db->query("SELECT * FROM tb_customer WHERE id_customer='$order->id_customer' "))->getRow();
 
+		$id_pengantaran = $order->id_pengantaran;
+		$pengantaran = ($this->db->query("SELECT * FROM tb_pengantaran WHERE id_pengantaran='$id_pengantaran' "))->getRow();
+		$driver = ($this->db->query("SELECT * FROM tb_driver WHERE id_driver='$pengantaran->id_driver' "))->getRow();
+
 		// $this->OrderModel->deleteOrder($id_order);
 		$this->OrderModel->updateOrder([
 			'status' => '5'
 		], $id_order);
 
 		$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, "5");
-
+		$this->kirim_email_to_driver($driver->nama_lengkap, $driver->email, "5");
 
 		session()->setFlashdata('pesan_berhasil', 'Orderan dibatalkan !');
 		return redirect()->to(base_url() . '/customer/order');
@@ -256,13 +263,85 @@ class Order extends Controller
 			$email_smtp->setSubject("Orderan dibatalkan");
 			$pesan = '
 					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
-					Orderan anda berhasil dibatalkan !
+					Orderan anda berhasil dibatalkan pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB !
 					<br>
 					<br>
 					Lihat detail orderan anda disini.
 					<br>
 					<a href="' . base_url() . '/customer/order">
 						' . base_url() . '/customer/order
+					</a>
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+		}
+
+		$email_smtp->setMessage($pesan);
+		$email_smtp->send();
+	}
+
+	public function kirim_email_to_driver($nama_penerima, $email_penerima, $status)
+	{
+		$email_smtp = \Config\Services::email();
+
+		$config["protocol"] = "smtp";
+		$config["mailType"] = 'html';
+		$config["charset"] = 'utf-8';
+		// $config["CRLF"] = 'rn';
+		$config["priority"] = '5';
+		$config["SMTPHost"] = "smtp.gmail.com"; //alamat email SMTP 
+		$config["SMTPUser"] = "airporttaxisharing@gmail.com"; //password email SMTP 
+		$config["SMTPPass"] = "ztyfhshhykzoqloq";
+
+		// $config["SMTPPort"] = 465;
+		// $config["SMTPCrypto"] = "ssl";
+		$config["SMTPPort"] = 587;
+		$config["SMTPCrypto"] = "tls";
+
+		$config["SMTPAuth"] = true;
+		$email_smtp->initialize($config);
+		$email_smtp->setFrom("airporttaxisharing@gmail.com", "AIRPORT TAXI SHARING");
+
+		$email_smtp->setTo($email_penerima);
+
+		if ($status == "0") {
+			$email_smtp->setSubject("Orderan Masuk");
+			$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					Ada orderan masuk untuk anda, pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					Lihat detail orderan anda disini.
+					<br>
+					<a href="' . base_url() . '/driver/orderan">
+						' . base_url() . '/driver/orderan
+					</a>
+					<br>
+					<br>
+					Terima Kasih 
+					<br>
+					<br>
+					<br>
+					<i><b>Pesan ini dikirimkan otomatis oleh sistem !</b></i>
+					<br>
+			';
+		} elseif ($status == "5") {
+			$email_smtp->setSubject("Orderan dibatalkan oleh customer");
+			$pesan = '
+					<h4>Hallo, saudara/i <b>' . $nama_penerima . '</b></h4>
+					Orderan anda telah dibatalkan oleh customer pada ' . date("d/m/Y") . ' pukul ' . date("H:i:s") . ' WIB
+					<br>
+					<br>
+					Lihat detail orderan anda disini.
+					<br>
+					<a href="' . base_url() . '/driver/orderan">
+						' . base_url() . '/driver/orderan
 					</a>
 					<br>
 					<br>

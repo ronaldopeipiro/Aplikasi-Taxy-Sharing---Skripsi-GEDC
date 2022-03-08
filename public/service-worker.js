@@ -1,18 +1,28 @@
 var CACHE_NAME = "airport-taxi-sharing-cache-v1";
 
-var urlsToCache = ["https://jo.yokcaridok.id"];
+var urlsToCache = [
+  // "./",
+  "./you-are-offline",
+  "./assets/img/logo.jpg",
+  "./assets/img/offline-logo.png",
+  "./assets/img/alert.png",
+  "./assets/img/loader.gif",
+  "./assets/img/taxi.png",
+  "./assets/img/airport-marker.png",
+  "./assets/img/user-loc-marker.png",
+  "./assets/img/titik-pengantaran.png",
+  "./assets/img/bg-landing.jpg",
+  "./assets/img/bg-login.jpg",
+];
 
 self.addEventListener("install", function (event) {
   // Perform install steps
 
   event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-
-      .then(function (cache) {
-        console.log("Opened cache");
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(function (cache) {
+      console.log("Opened cache");
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
@@ -24,7 +34,7 @@ self.addEventListener("fetch", function (event) {
         return response || fetch(event.request);
       })
       .catch(function () {
-        return caches.match("./you-are-offline");
+        return caches.match("https://jo.yokcaridok.id/you-are-offline");
       })
   );
 });

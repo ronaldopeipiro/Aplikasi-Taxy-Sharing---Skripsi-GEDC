@@ -31,6 +31,8 @@ class Pengantaran extends Controller
 		$this->user_nopol = $data_user['nopol'];
 		$this->user_level = "driver";
 		$this->user_foto =	$data_user['foto'];
+		$this->user_latitude =	$data_user['latitude'];
+		$this->user_longitude =	$data_user['longitude'];
 		$this->user_status = $data_user['status_akun'];
 
 		$this->jml_pengantaran_diproses = ($this->db->query("SELECT * FROM tb_pengantaran WHERE id_driver='$this->id_user' AND status_pengantaran = '0' "))->getNumRows();
@@ -104,6 +106,8 @@ class Pengantaran extends Controller
 			'user_level' => $this->user_level,
 			'user_foto' => $this->user_foto,
 			'user_status' => $this->user_status,
+			'user_latitude' => $this->user_latitude,
+			'user_longitude' => $this->user_longitude,
 			'user_no_anggota' => $this->user_no_anggota,
 			'user_nopol' => $this->user_nopol,
 			'pengantaran' => $this->PengantaranModel->getPengantaran($id_pengantaran),

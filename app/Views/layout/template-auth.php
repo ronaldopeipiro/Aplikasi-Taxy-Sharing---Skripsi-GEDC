@@ -33,7 +33,6 @@
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets_login/css/main.css">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 
 	<script src="<?= base_url(); ?>/assets_custom/jquery/jquery.min.js"></script>
 	<script src="<?= base_url(); ?>/assets_login/vendor/animsition/js/animsition.min.js"></script>
@@ -44,20 +43,7 @@
 	<script src="<?= base_url(); ?>/assets_login/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="<?= base_url(); ?>/assets_login/vendor/countdowntime/countdowntime.js"></script>
 
-	<script src="<?= base_url(); ?>/assets_custom/datatables/jquery.dataTables.min.js"></script>
-	<script src="<?= base_url(); ?>/assets_custom/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-	<script src="<?= base_url(); ?>/assets_custom/datatables-responsive/js/dataTables.responsive.min.js"></script>
-	<script src="<?= base_url(); ?>/assets_custom/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
 	<script src="<?= base_url(); ?>/assets_custom/sweetalert2/sweetalert2.min.js"></script>
-
-	<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 
 	<script src="<?= base_url(); ?>/assets_login/js/main.js"></script>
 
@@ -159,14 +145,15 @@
 	<?= $this->renderSection('content_auth'); ?>
 
 	<script>
-		$(function() {
-			$('.js-select-2').select2();
-			$('#data-table').DataTable({
-				"paging": true,
-				"responsive": true,
-				"searching": true,
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('<?= base_url() ?>/service-worker.js').then(function(registration) {
+					console.log('ServiceWorker Berhasil di Install: ', registration.scope);
+				}, function(err) {
+					console.log('ServiceWorker Gagal Di Install: ', err);
+				});
 			});
-		})
+		}
 	</script>
 </body>
 

@@ -48,7 +48,7 @@ class Dashboard extends Controller
 	public function getAddress($latitude, $longitude)
 	{
 		//google map api url
-		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI";
+		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyCG7FscIk67I9yY_fiyLc7-_1Aoyerf96E";
 
 		// send http request
 		$geocode = file_get_contents($url);
@@ -70,7 +70,7 @@ class Dashboard extends Controller
 
 	public function distance_matrix_google($lat1, $lng1, $lat2, $lng2)
 	{
-		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyBJkHXEVXBSLY7ExRcxoDxXzRYLJHg7qfI");
+		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyCG7FscIk67I9yY_fiyLc7-_1Aoyerf96E");
 		$json = json_decode($fetch);
 
 		$data['distance'] = $json->rows[0]->elements[0]->distance->text;;

@@ -244,7 +244,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 									</table>
 
 									<a href="tel:<?= $driver->no_hp; ?>" class="btn btn-block btn-primary">
-										<i class="fa fa-phone mr-2"></i> Hubungi Customer
+										<i class="fa fa-phone mr-2"></i> Hubungi Driver
 									</a>
 								</div>
 							</div>
@@ -658,7 +658,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 					<div class="row justify-content-start align-content-center">
 						<?php
-						$no = 1;
+						$no = 0;
 						?>
 						<?php foreach ($pengantaran as $data) : ?>
 							<?php
@@ -675,6 +675,9 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 							$jarak_titik_to_bandara = $class_dashboard->distance_matrix_google($data['latitude'], $data['longitude'], $bandara->latitude, $bandara->longitude);
 							$jarak_user_to_bandara = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $bandara->latitude, $bandara->longitude);
 
+							$data_jarak_user_to_titik = explode(' ', $jarak_user_to_titik['distance']);
+							$user_to_titik_jarak = $data_jarak_user_to_titik[0];
+
 							$data_jarak_user_to_bandara = explode(' ', $jarak_user_to_bandara['distance']);
 							$user_to_bandara_jarak = $data_jarak_user_to_bandara[0];
 							$biaya_perjalanan = ($data_tarif['tarif_perkm'] * $user_to_bandara_jarak);
@@ -685,146 +688,174 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 							$estimasi_penjemputan = $data_waktu_tempuh_driver_to_titik[0] + $data_waktu_tempuh_user_to_titik[0];
 							?>
 
-							<div class="col-lg-4 h-100 mt-3">
-								<form id="formSubmitOrder<?= $no; ?>">
-									<?= csrf_field(); ?>
-									<div class="card p-0">
+							<?php if (($user_to_titik_jarak * 1000) <= $data['radius_jemput']) : ?>
 
-										<div class="card-header pt-2 pb-0 d-flex justify-content-center align-items-center">
-											<div class="text-center">
-												<h5>
-													<?= $driver->nama_lengkap; ?>
+								<div class="col-lg-4 h-100 mt-3">
+									<form id="formSubmitOrder<?= $no; ?>">
+										<?= csrf_field(); ?>
+										<div class="card p-0">
+
+											<div class="card-header pt-2 pb-0 d-flex justify-content-center align-items-center">
+												<div class="text-center">
+													<h5>
+														<?= $driver->nama_lengkap; ?>
+														<br>
+														<?= $user_to_titik_jarak * 1000; ?>
+														<?= $data['radius_jemput']; ?>
+													</h5>
 													<p>
 														<?= $driver->nopol; ?>
 													</p>
-												</h5>
+												</div>
+											</div>
+
+											<div class="card-body p-1">
+												<div class="text-center">
+													<img src="<?= (empty($driver->foto)) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/driver/' . $driver->foto; ?>" style="width: 150px; height: 150px; object-fit: cover; object-position: center; border-radius: 10px;" alt="">
+												</div>
+												<table class="table-sm table-responsive table-borderless" style="font-size: 12px;">
+													<tr>
+														<td colspan="3">
+															<span class="font-weight-bold">
+																Driver akan menjemput anda dalam <br>
+															</span>
+															<?= $estimasi_penjemputan; ?> menit
+														</td>
+													</tr>
+													<tr>
+														<td colspan="3">
+															<span class="font-weight-bold">
+																Lokasi Pengantaran <br>
+															</span>
+															<?= $nama_lokasi; ?>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="3">
+															<span class="font-weight-bold">
+																Bandara Tujuan <br>
+															</span>
+															<?= $bandara->nama_bandara; ?>
+														</td>
+													</tr>
+													<tr>
+														<td>Jarak anda ke bandara</td>
+														<td>:</td>
+														<td><?= $jarak_user_to_bandara['distance']; ?></td>
+													</tr>
+													<tr>
+														<td>Biaya Perjalanan</td>
+														<td>:</td>
+														<td><?= rupiah($biaya_perjalanan, "Y"); ?></td>
+													</tr>
+												</table>
+
+												<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
+												<input type="hidden" name="id_pengantaran" value="<?= $id_pengantaran ?>" />
+												<input type="hidden" name="latitude" value="<?= $user_latitude ?>" />
+												<input type="hidden" name="longitude" value="<?= $user_longitude ?>" />
+												<input type="hidden" name="tarif_perkm" value="<?= $data_tarif['tarif_perkm'] ?>" />
+												<input type="hidden" name="jarak_customer_to_bandara" value="<?= $user_to_bandara_jarak ?>" />
+												<input type="hidden" name="biaya" value="<?= $biaya_perjalanan ?>" />
+											</div>
+
+											<div class="card-footer">
+												<div class="d-flex">
+													<button type="button" class="btn btn-block btn-outline-success btn-submit-order-<?= $no; ?>" title="Order Taxi">
+														<i class="fa fa-taxi"></i> ORDER TAXI
+													</button>
+												</div>
 											</div>
 										</div>
+									</form>
+								</div>
 
-										<div class="card-body p-1">
-											<div class="text-center">
-												<img src="<?= (empty($driver->foto)) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/driver/' . $driver->foto; ?>" style="width: 150px; height: 150px; object-fit: cover; object-position: center; border-radius: 10px;" alt="">
-											</div>
-											<table class="table-sm table-responsive table-borderless" style="font-size: 12px;">
-												<tr>
-													<td colspan="3">
-														<span class="font-weight-bold">
-															Driver akan menjemput anda dalam <br>
-														</span>
-														<?= $estimasi_penjemputan; ?> menit
-													</td>
-												</tr>
-												<tr>
-													<td colspan="3">
-														<span class="font-weight-bold">
-															Lokasi Pengantaran <br>
-														</span>
-														<?= $nama_lokasi; ?>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="3">
-														<span class="font-weight-bold">
-															Bandara Tujuan <br>
-														</span>
-														<?= $bandara->nama_bandara; ?>
-													</td>
-												</tr>
-												<tr>
-													<td>Jarak anda ke bandara</td>
-													<td>:</td>
-													<td><?= $jarak_user_to_bandara['distance']; ?></td>
-												</tr>
-												<tr>
-													<td>Biaya Perjalanan</td>
-													<td>:</td>
-													<td><?= rupiah($biaya_perjalanan, "Y"); ?></td>
-												</tr>
-											</table>
+								<script>
+									$(document).ready(function() {
+										$(function() {
 
-											<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
-											<input type="hidden" name="id_pengantaran" value="<?= $id_pengantaran ?>" />
-											<input type="hidden" name="latitude" value="<?= $user_latitude ?>" />
-											<input type="hidden" name="longitude" value="<?= $user_longitude ?>" />
-											<input type="hidden" name="tarif_perkm" value="<?= $data_tarif['tarif_perkm'] ?>" />
-											<input type="hidden" name="jarak_customer_to_bandara" value="<?= $user_to_bandara_jarak ?>" />
-											<input type="hidden" name="biaya" value="<?= $biaya_perjalanan ?>" />
-										</div>
+											$(".btn-submit-order-<?= $no; ?>").click(function(e) {
+												e.preventDefault();
 
-										<div class="card-footer">
-											<div class="d-flex">
-												<button type="button" class="btn btn-block btn-outline-success btn-submit-order-<?= $no; ?>" title="Order Taxi">
-													<i class="fa fa-taxi"></i> ORDER TAXI
-												</button>
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
+												var id_customer = $('#formSubmitOrder<?= $no; ?> input[name="id_customer"]').val();
+												var id_pengantaran = $('#formSubmitOrder<?= $no; ?> input[name="id_pengantaran"]').val();
+												var latitude = $('#formSubmitOrder<?= $no; ?> input[name="latitude"]').val();
+												var longitude = $('#formSubmitOrder<?= $no; ?> input[name="longitude"]').val();
+												var tarif_perkm = $('#formSubmitOrder<?= $no; ?> input[name="tarif_perkm"]').val();
+												var jarak_customer_to_bandara = $('#formSubmitOrder<?= $no; ?> input[name="jarak_customer_to_bandara"]').val();
+												var biaya = $('#formSubmitOrder<?= $no; ?> input[name="biaya"]').val();
 
-							<script>
-								$(document).ready(function() {
-									$(function() {
+												$.ajax({
+													type: "POST",
+													url: "<?= base_url() ?>/customer/order/submit-order",
+													dataType: "JSON",
+													data: {
+														id_customer: id_customer,
+														id_pengantaran: id_pengantaran,
+														latitude: latitude,
+														longitude: longitude,
+														tarif_perkm: tarif_perkm,
+														jarak_customer_to_bandara: jarak_customer_to_bandara,
+														biaya: biaya
+													},
+													beforeSend: function() {
+														$("#loader").show();
+													},
+													success: function(data) {
+														if (data.success == "1") {
+															Swal.fire(
+																'Berhasil !',
+																data.pesan,
+																'success'
+															);
 
-										$(".btn-submit-order-<?= $no; ?>").click(function(e) {
-											e.preventDefault();
-
-											var id_customer = $('#formSubmitOrder<?= $no; ?> input[name="id_customer"]').val();
-											var id_pengantaran = $('#formSubmitOrder<?= $no; ?> input[name="id_pengantaran"]').val();
-											var latitude = $('#formSubmitOrder<?= $no; ?> input[name="latitude"]').val();
-											var longitude = $('#formSubmitOrder<?= $no; ?> input[name="longitude"]').val();
-											var tarif_perkm = $('#formSubmitOrder<?= $no; ?> input[name="tarif_perkm"]').val();
-											var jarak_customer_to_bandara = $('#formSubmitOrder<?= $no; ?> input[name="jarak_customer_to_bandara"]').val();
-											var biaya = $('#formSubmitOrder<?= $no; ?> input[name="biaya"]').val();
-
-											$.ajax({
-												type: "POST",
-												url: "<?= base_url() ?>/customer/order/submit-order",
-												dataType: "JSON",
-												data: {
-													id_customer: id_customer,
-													id_pengantaran: id_pengantaran,
-													latitude: latitude,
-													longitude: longitude,
-													tarif_perkm: tarif_perkm,
-													jarak_customer_to_bandara: jarak_customer_to_bandara,
-													biaya: biaya
-												},
-												success: function(data) {
-													if (data.success == "1") {
-														Swal.fire(
-															'Berhasil !',
-															data.pesan,
-															'success'
-														);
-
-														setTimeout(function() { // wait for 5 secs(2)
-															location.reload(); // then reload the page.(3)
-														}, 10);
-													} else if (data.success == "0") {
-														Swal.fire(
-															'Gagal !',
-															data.pesan,
-															'error'
-														);
-														setTimeout(function() { // wait for 5 secs(2)
-															location.reload(); // then reload the page.(3)
-														}, 10);
+															setTimeout(function() { // wait for 5 secs(2)
+																location.reload(); // then reload the page.(3)
+															}, 10);
+														} else if (data.success == "0") {
+															Swal.fire(
+																'Gagal !',
+																data.pesan,
+																'error'
+															);
+															setTimeout(function() { // wait for 5 secs(2)
+																location.reload(); // then reload the page.(3)
+															}, 10);
+														}
+													},
+													complete: function(data) {
+														$("#loader").hide();
 													}
-												}
+												});
+
 											});
 
 										});
-
 									});
-								});
-							</script>
+								</script>
 
-							<?php $no++; ?>
+								<?php $no += 1; ?>
+							<?php endif; ?>
+
 						<?php endforeach; ?>
 
-					</div>
+						<?php if ($no == 0) : ?>
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body text-center py-6">
+										Belum ada driver tersedia yang melakukan pengantaran penumpang disekitar anda !
+										<br>
+										<br>
+										<a class="btn btn-info text-white" onclick="window.location.reload();">
+											<i class="fas fa-sync-alt"></i> Muat Ulang
+										</a>
+									</div>
+								</div>
+							</div>
 
+						<?php endif; ?>
+
+					</div>
 
 				</div>
 			</div>

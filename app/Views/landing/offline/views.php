@@ -6,26 +6,28 @@
 	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>
 	<div class="container">
-		<div class="row align-items-center min-vh-75 min-vh-md-100">
+		<div class="row justify-content-center align-items-center min-vh-100 min-vh-md-100">
 
-			<div class="col-md-6 col-lg-5 py-4 text-sm-start text-center">
-				<h1 class="mt-2 mb-sm-4 display-2 fw-semi-bold lh-sm fs-5 fs-lg-8 fs-xxl-8">
-					TAXI <br class="d-block d-lg-none d-xl-block" />
-					<span style="color: brown;">SHARING</span>
-				</h1>
-				<p class="mb-4">
-					Temukan kemudahan perjalanan anda menuju bandara sekitar anda disini !
-				</p>
-				<div class="pt-2">
-					<p class="fw-semi-bold">
-						Masuk sebagai ?
-					</p>
-					<a href="<?= base_url(); ?>/customer" class="btn btn-success mr-2" style="width: 160px;">
-						<i class="fa fa-users"></i> Customer
-					</a>
-					<a href="<?= base_url(); ?>/driver" class="btn btn-info" style="width: 160px;">
-						<i class="fa fa-users"></i> Driver
-					</a>
+			<div class="col-md-6 col-lg-5 py-4 text-center">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="mt-4">
+							Airport Taxi Sharing
+						</h4>
+						<div class="mt-4">
+							<img src="<?= base_url(); ?>/assets/img/alert.png" style="height: 40px;">
+						</div>
+						<div>
+							<img src="<?= base_url(); ?>/assets/img/offline-logo.png" style="height: 100px;">
+						</div>
+						<p class="my-4">
+							Kehilangan jaringan internet !
+						</p>
+						<a href="<?= base_url(); ?>" class="btn btn-dark">
+							<i class="fas fa-sync"></i>
+							Muat Ulang
+						</a>
+					</div>
 				</div>
 			</div>
 

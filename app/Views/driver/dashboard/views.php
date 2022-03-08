@@ -89,9 +89,9 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<div class="card mt-3">
 								<div class="card-body">
 									<p>Hari ini</p>
-									<h3>
+									<h4>
 										<?= rupiah($pendapatan_hari_ini->total_biaya, "Y"); ?>
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -100,9 +100,9 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<div class="card mt-3">
 								<div class="card-body">
 									<p>Bulan ini</p>
-									<h3>
+									<h4>
 										<?= rupiah($pendapatan_bulan_ini->total_biaya, "Y"); ?>
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -111,9 +111,9 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<div class="card mt-3">
 								<div class="card-body">
 									<p>Tahun ini</p>
-									<h3>
+									<h4>
 										<?= rupiah($pendapatan_tahun_ini->total_biaya, "Y"); ?>
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -122,9 +122,9 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<div class="card mt-3">
 								<div class="card-body">
 									<p>Total</p>
-									<h3>
+									<h4>
 										<?= rupiah($pendapatan_total->total_biaya, "Y"); ?>
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>

@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">
-	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
+	<div class="bg-holder d-none d-sm-block" style="background-image:url(<?= base_url() ?>/assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>
 
 	<div class="container">
@@ -16,7 +16,7 @@
 						</h5>
 						<hr>
 
-						<div class="row mb-3">
+						<!-- <div class="row mb-3">
 							<div class="col-lg-2">
 								<label for="statusVerifikasiSelect">Status Verifikasi</label>
 								<div id="statusVerifikasiSelect"></div>
@@ -25,7 +25,7 @@
 								<label for="statusAkunSelect">Status Akun</label>
 								<div id="statusAkunSelect"></div>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="row">
 							<div class="col-12">
@@ -215,30 +215,30 @@
 			"searching": true,
 			"deferRender": true,
 			"initComplete": function() {
-				var statusVerifikasi = this.api().column(8);
-				var statusVerifikasiSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
-					.appendTo('#statusVerifikasiSelect')
-					.on('change', function() {
-						var val = $(this).val();
-						statusVerifikasi.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
-					});
-				statusVerifikasiSelect.append(`
-					<option value="Belum diverifikasi">Belum diverifikasi</option>
-					<option value="Terverifikasi">Terverifikasi</option>
-					<option value="Tidak terverifikasi">Tidak terverifikasi</option>
-					`);
+				// var statusVerifikasi = this.api().column(8);
+				// var statusVerifikasiSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
+				// 	.appendTo('#statusVerifikasiSelect')
+				// 	.on('change', function() {
+				// 		var val = $(this).val();
+				// 		statusVerifikasi.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+				// 	});
+				// statusVerifikasiSelect.append(`
+				// 	<option value="Belum diverifikasi">Belum diverifikasi</option>
+				// 	<option value="Terverifikasi">Terverifikasi</option>
+				// 	<option value="Tidak terverifikasi">Tidak terverifikasi</option>
+				// 	`);
 
-				var statusAkun = this.api().column(9);
-				var statusAkunSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
-					.appendTo('#statusAkunSelect')
-					.on('change', function() {
-						var val = $(this).val();
-						statusAkun.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
-					});
-				statusAkunSelect.append(`
-					<option value="Aktif">Aktif</option>
-					<option value="Tidak Aktif">Tidak Aktif</option>
-					`);
+				// var statusAkun = this.api().column(9);
+				// var statusAkunSelect = $('<select class="filter form-control-sm"><option value="">Semua</option></select>')
+				// 	.appendTo('#statusAkunSelect')
+				// 	.on('change', function() {
+				// 		var val = $(this).val();
+				// 		statusAkun.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+				// 	});
+				// statusAkunSelect.append(`
+				// 	<option value="Aktif">Aktif</option>
+				// 	<option value="Tidak Aktif">Tidak Aktif</option>
+				// 	`);
 
 				// var status = this.api().column(4);
 				// var statusSelect = $('<select class="filter form-control js-select-2"><option value="">Semua</option></select>')

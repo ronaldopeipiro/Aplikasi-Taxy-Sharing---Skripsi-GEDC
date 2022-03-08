@@ -7,7 +7,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">
-	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
+	<div class="bg-holder d-none d-sm-block" style="background-image:url(<?= base_url() ?>/assets/img/illustrations/category-bg.png); background-position:right top; background-size:200px 320px;">
 	</div>
 
 	<div class="container">
@@ -49,12 +49,24 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 										$data_customer = $db->query("SELECT * FROM tb_customer ORDER BY id_customer DESC");
 										?>
 										<?php foreach ($data_customer->getResult('array') as $row) : ?>
+											<?php
+											$foto_customer = "";
+											if ($row['foto'] != "") {
+												if (strpos($row['foto'], ':') !== false) {
+													$foto_customer = $row['foto'];
+												} else {
+													$foto_customer = base_url() . '/assets/img/customer/' . $row['foto'];
+												}
+											} else {
+												$foto_customer = base_url() . '/assets/img/noimg.png';
+											}
+											?>
 											<tr>
 												<td style="vertical-align: middle;" class="text-center">
 													<?= $no++; ?>.
 												</td>
 												<td style="vertical-align: middle;">
-													<img src="<?= (empty($row['foto'])) ? base_url() . '/assets/img/noimg.png' : base_url() . '/assets/img/customer/' . $row['foto']; ?>" style="width: 40px; height: 40px; object-fit: cover; object-position: top; border-radius: 50%;">
+													<img src="<?= $foto_customer; ?>" style="width: 40px; height: 40px; object-fit: cover; object-position: top; border-radius: 50%;">
 												</td>
 												<td style="vertical-align: middle;"><?= $row['nama_lengkap']; ?></td>
 												<td style="vertical-align: middle;"><?= $row['username']; ?></td>

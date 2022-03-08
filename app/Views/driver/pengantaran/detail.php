@@ -136,7 +136,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 		var bounds = new google.maps.LatLngBounds();
 		var directionsService = new google.maps.DirectionsService();
 		var directionsRenderer = new google.maps.DirectionsRenderer({
-			draggable: true,
+			// draggable: true,
 			map
 		});
 
@@ -169,6 +169,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 		}];
 
 		let bandaraLocation = new google.maps.LatLng(<?= $bandara->latitude . ',' . $bandara->longitude ?>);
+		let driverLocation = new google.maps.LatLng(<?= $user_latitude . ',' . $user_longitude ?>);
 		let posisiPengantaran = new google.maps.LatLng(<?= $pengantaran["latitude"] . ',' . $pengantaran["longitude"] ?>);
 
 		var mapOptions = {
@@ -301,7 +302,23 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 		});
 
 		function showRoute() {
-			var start = bandaraLocation;
+			<?php if ($pengantaran['status_pengantaran'] == '0') : ?>
+				var start = driverLocation;
+
+				var iconDriver = {
+					url: "<?= base_url() ?>/assets/img/taxi.png", // url
+					scaledSize: new google.maps.Size(40, 40), // scaled size
+					origin: new google.maps.Point(0, 0), // origin
+					anchor: new google.maps.Point(20, 20) // anchor
+				};
+				var markerDriver = new google.maps.Marker({
+					position: driverLocation,
+					map: map,
+					icon: iconDriver
+				});
+			<?php else : ?>
+				var start = bandaraLocation;
+			<?php endif; ?>
 			var end = posisiPengantaran;
 
 			var request = {

@@ -33,10 +33,10 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 			</div>
 
 			<div class="col-lg-12" style="min-height: 60vh;">
-				<div class="row mb-3">
-					<div class="col-lg-4 mb-3">
+				<div class="row">
+					<div class="col-lg-4">
 						<div class="form-group">
-							<label for="tanggalOrderSelect">Tanggal Order</label>
+							<label for="tanggalOrderSelect">Tanggal Pengantaran</label>
 							<div class="cariTanggalPengantaran">
 								<div class="input-group date">
 									<span class="input-group-append">
@@ -50,12 +50,12 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 						</div>
 					</div>
 
-					<div class="col-lg-3">
+					<div class="col-lg-3 mb-3">
 						<label for="statusSelect">Status</label>
 						<div id="statusSelect"></div>
 					</div>
 
-					<div class="col-lg-3">
+					<div class="col-lg-3 mb-3">
 						<label for="orderanSelect">Orderan</label>
 						<div id="orderanSelect"></div>
 					</div>
@@ -214,7 +214,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					<option value="Tidak Selesai">Tidak Selesai</option>
 					`);
 
-				var orderan = this.api().column(8);
+				var orderan = this.api().column(6);
 				var orderanSelect = $('<select class="filter form-control"><option value="">Semua</option></select>')
 					.appendTo('#orderanSelect')
 					.on('change', function() {

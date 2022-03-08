@@ -111,11 +111,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 									var infoWindow = new google.maps.InfoWindow;
 									var bounds = new google.maps.LatLngBounds();
-									var directionsService = new google.maps.DirectionsService();
-									var directionsRenderer = new google.maps.DirectionsRenderer({
-										draggable: true,
-										map
-									});
+
 									var directionsDisplay;
 
 									if (navigator.geolocation) {
@@ -181,11 +177,18 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 											map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
 												name: 'Peta'
 											}));
+
 											directionsDisplay = new google.maps.DirectionsRenderer({
 												polylineOptions: {
 													strokeColor: "blue"
 												},
 												suppressMarkers: true
+											});
+
+											var directionsService = new google.maps.DirectionsService();
+											var directionsRenderer = new google.maps.DirectionsRenderer({
+												// draggable: true,
+												map
 											});
 
 											directionsDisplay.setMap(map);
@@ -684,13 +687,13 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 							<div class="alert alert-info">
 								<div class="row justify-content-center align-items-center" style="min-height: 50vh;">
 									<h5 class="text-center">
-										Anda belum memiliki aktifitas orderan masuk baru !
+										Anda belum memiliki orderan masuk !
 									</h5>
 
 									<div class="row justify-content-center">
-										<div class="col-lg-3 text-center">
+										<div class="col-lg-3 mb-3 mb-lg-0 text-center">
 											<a href="<?= base_url(); ?>/driver" class="btn btn-outline-dark">
-												<i class="fa fa-home"></i> Kembali ke Beranda
+												<i class="fa fa-arrow-left"></i> Beranda
 											</a>
 										</div>
 										<div class="col-lg-3 text-center">

@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 use CodeIgniter\Controller;
 use App\Models\AdminModel;
 use App\Models\DriverModel;
+use App\Models\PengantaranModel;
+use App\Models\OrderModel;
 
 class Orderan extends Controller
 {
@@ -15,6 +17,8 @@ class Orderan extends Controller
 		$this->validation = \Config\Services::validation();
 		$this->AdminModel = new AdminModel();
 		$this->DriverModel = new DriverModel();
+		$this->PengantaranModel = new PengantaranModel();
+		$this->OrderModel = new OrderModel();
 
 		$this->session = session();
 		$this->id_user = $this->session->get('id_user');
@@ -45,5 +49,25 @@ class Orderan extends Controller
 			'user_status' => $this->user_status
 		];
 		return view('admin/orderan/views', $data);
+	}
+
+	public function detail($kode_order)
+	{
+		$data = [
+			'request' => $this->request,
+			'db' => $this->db,
+			'validation' => $this->validation,
+			'title' => 'Data Orderan',
+			'user_id' => $this->id_user,
+			'user_nama_lengkap' => $this->user_nama_lengkap,
+			'user_username' => $this->user_username,
+			'user_email' => $this->user_email,
+			'user_no_hp' => $this->user_no_hp,
+			'user_level' => $this->user_level,
+			'user_foto' => $this->user_foto,
+			'user_status' => $this->user_status,
+			'orderan' => $this->OrderModel->getOrderByKodeOrder($kode_order)
+		];
+		return view('admin/orderan/detail', $data);
 	}
 }

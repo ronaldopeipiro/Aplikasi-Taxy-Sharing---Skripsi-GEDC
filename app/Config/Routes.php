@@ -62,6 +62,8 @@ $routes->get('/admin/login', 'Admin\Auth::login', ['filter' => 'auth_not_login_a
 $routes->get('/admin', 'Admin\Dashboard::index', ['filter' => 'auth_admin']);
 
 $routes->get('/admin/orderan', 'Admin\Orderan::index', ['filter' => 'auth_admin']);
+$routes->get('/admin/orderan/detail/(:any)', 'Admin\Orderan::detail/$1', ['filter' => 'auth_admin']);
+
 $routes->get('/admin/driver', 'Admin\Driver::index', ['filter' => 'auth_admin']);
 $routes->get('/admin/customer', 'Admin\Customer::index', ['filter' => 'auth_admin']);
 $routes->get('/admin/bandara', 'Admin\Bandara::index', ['filter' => 'auth_admin']);

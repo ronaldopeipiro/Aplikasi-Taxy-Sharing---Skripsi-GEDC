@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">
-	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
+	<div class="bg-holder d-none d-sm-block" style="background-image:url(<?= base_url() ?>/assets/img/illustrations/category-bg.png); background-position:right top; background-size:200px 320px;">
 	</div>
 
 	<div class="container">
@@ -229,6 +229,21 @@
 							</div>
 
 						</form>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-12 my-3">
+
+				<div class="card shadow py-4">
+
+					<div class="card-body py-0">
+
+						<a href="<?= base_url(); ?>/admin/logout" class="btn btn-outline-dark btn-logout">
+							<i class="fa fa-sign-out"></i> Keluar dari Aplikasi
+						</a>
 
 					</div>
 

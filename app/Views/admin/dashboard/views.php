@@ -37,7 +37,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 ?>
 
 <section class="py-8" id="home" style="min-height: 97vh;">
-	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
+	<div class="bg-holder d-none d-sm-block" style="background-image:url(<?= base_url() ?>/assets/img/illustrations/category-bg.png); background-position:right top; background-size:200px 320px;">
 	</div>
 
 	<div class="container">
@@ -172,9 +172,9 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 </section>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
 	function drawVisualization() {
-		// Create and populate the data table.
 		var data = google.visualization.arrayToDataTable([
 			[
 				'Bulan',
@@ -246,6 +246,8 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 		var userLoc;
 		var gmarkers = [];
 		var gmarkersDriver = [];
+		var gmarkersCustomer = [];
+		var gmarkersPengantaran = [];
 		var marker, i;
 		var lineMarkers = [];
 		var lingkar = [];
@@ -364,8 +366,8 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 			}
 
 			// hapus marker
-			for (i = 0; i < gmarkers.length; i++) {
-				if (gmarkers[i].getMap() != null) gmarkers[i].setMap(null);
+			for (i = 0; i < gmarkersPengantaran.length; i++) {
+				if (gmarkersPengantaran[i].getMap() != null) gmarkersPengantaran[i].setMap(null);
 			}
 			// Akhir hapus marker
 
@@ -437,7 +439,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 					origin: new google.maps.Point(0, 0), // origin
 					anchor: new google.maps.Point(20, 20) // anchor
 				};
-				var marker_pengantaran = new google.maps.Marker({
+				var markerPengantaran = new google.maps.Marker({
 					position: posisiMarker,
 					map: map,
 					icon: iconTitikPengantaran
@@ -453,10 +455,10 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 					radius: radius_jemput
 				});
 
-				circlePengantaran.bindTo('center', marker_pengantaran, 'position');
+				circlePengantaran.bindTo('center', markerPengantaran, 'position');
 				circlePengantaran.setRadius(parseFloat(radius_jemput));
 
-				google.maps.event.addListener(marker_pengantaran, 'click', (function(marker_pengantaran, i) {
+				google.maps.event.addListener(markerPengantaran, 'click', (function(markerPengantaran, i) {
 					return function() {
 						infoWindow.setContent(`
 												<div style="width: 100%; text-align: center;">
@@ -493,10 +495,10 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 												<br>
 												<br>
 												`);
-						infoWindow.open(map, marker_pengantaran);
+						infoWindow.open(map, markerPengantaran);
 					}
-				})(marker_pengantaran, i));
-				gmarkers.push(marker_pengantaran);
+				})(markerPengantaran, i));
+				gmarkersPengantaran.push(markerPengantaran);
 			}
 		}
 
@@ -517,7 +519,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 
 			var arrayLokasiDriver = [
 				<?php
-				$driver = $db->query("SELECT * FROM tb_driver WHERE aktif='Y'");
+				$driver = $db->query("SELECT * FROM tb_driver WHERE (latitude != '' AND longitude != '') AND status_akun='1'");
 				foreach ($driver->getResult('array') as $data) {
 					$id_driver = $data["id_driver"];
 					$latitude = $data["latitude"];
@@ -620,6 +622,127 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 					}
 				})(markerDriver, i));
 				gmarkersDriver.push(markerDriver);
+			}
+		}
+
+		// Lokasi Customer
+		tampilLokasiCustomer();
+
+		function tampilLokasiCustomer() {
+			if (marker) {
+				marker.setMap(null);
+				marker = "";
+			}
+
+			// hapus marker
+			for (i = 0; i < gmarkersCustomer.length; i++) {
+				if (gmarkersCustomer[i].getMap() != null) gmarkersCustomer[i].setMap(null);
+			}
+			// Akhir hapus marker
+
+			var arrayLokasiCustomer = [
+				<?php
+				$customer = $db->query("SELECT * FROM tb_customer WHERE (latitude != '' AND longitude != '') AND status='1' ");
+				foreach ($customer->getResult('array') as $data) {
+					$id_customer = $data["id_customer"];
+					$latitude = $data["latitude"];
+					$longitude = $data["longitude"];
+					$nama_lokasi = "";
+					$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
+					$no_hp = $data["no_hp"];
+					$email = $data["email"];
+
+					$foto_customer = "";
+					if ($data['foto'] != "") {
+						if (strpos($data['foto'], ':') !== false) {
+							$foto_customer = $data['foto'];
+						} else {
+							$foto_customer = base_url() . '/assets/img/customer/' . $data['foto'];
+						}
+					} else {
+						$foto_customer = base_url() . '/assets/img/noimg.png';
+					}
+					echo "
+						{
+                            id_customer: '" . $id_customer . "',
+                            latitude_customer: '" . $latitude . "',
+                            longitude_customer: '" . $longitude . "',
+                            foto_profil_customer: '" . $foto_customer . "',
+							nama_customer:'" . $data["nama_lengkap"] . "',
+							nama_lokasi_customer:'" . $nama_lokasi . "',
+							email_customer:'" . $email . "',
+							no_hp_customer:'" . $no_hp . "',
+                        },
+                        ";
+				}
+				?>
+			];
+
+			for (i = 0; i < arrayLokasiCustomer.length; i++) {
+				let id_customer = arrayLokasiCustomer[i].id_customer;
+				let nama_customer = arrayLokasiCustomer[i].nama_customer;
+				let no_hp_customer = arrayLokasiCustomer[i].no_hp_customer;
+				let email_customer = arrayLokasiCustomer[i].email_customer;
+				let foto_profil_customer = arrayLokasiCustomer[i].foto_profil_customer;
+
+				let latitude = arrayLokasiCustomer[i].latitude_customer;
+				let longitude = arrayLokasiCustomer[i].longitude_customer;
+				let nama_lokasi = arrayLokasiCustomer[i].nama_lokasi_customer;
+				let posisiCustomer = new google.maps.LatLng(latitude, longitude);
+
+				var iconcCustomer = {
+					url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
+					scaledSize: new google.maps.Size(40, 40), // scaled size
+					origin: new google.maps.Point(0, 0), // origin
+					anchor: new google.maps.Point(20, 20) // anchor
+				};
+
+				var markerCustomer = new google.maps.Marker({
+					position: posisiCustomer,
+					map: map,
+					icon: iconcCustomer
+				});
+
+				google.maps.event.addListener(markerCustomer, 'click', (function(markerCustomer, i) {
+					return function() {
+						infoWindow.setContent(`
+												<div style="width: 100%; text-align: center;">
+													<h4>${nama_customer}</h4>
+													<img src="${foto_profil_customer}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: top;"/>
+												</div>
+												<br>
+												<div class="mb-2">
+													<span class="font-weight-bold">
+														Lokasi customer
+													</span> <br>
+													<span>
+														${nama_lokasi} <br>
+														(${latitude}, ${longitude})
+													</span>
+												</div>
+												<div class="mb-2">
+													<span class="font-weight-bold">
+														No. Handphone
+													</span> <br>
+													<span>
+														${no_hp_customer}
+													</span>
+												</div>
+												<div class="mb-2">
+													<span class="font-weight-bold">
+														Email
+													</span> <br>
+													<span>
+														${email_customer}
+													</span>
+												</div>
+												<br>
+												<br>
+												`);
+						infoWindow.open(map, markerCustomer);
+					}
+				})(markerCustomer, i));
+				gmarkersCustomer.push(markerCustomer);
 			}
 		}
 

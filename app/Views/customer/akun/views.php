@@ -204,6 +204,21 @@
 				</div>
 			<?php endif; ?>
 
+			<div class="col-lg-12 my-3">
+
+				<div class="card shadow py-4">
+
+					<div class="card-body py-0">
+
+						<a href="<?= base_url(); ?>/customer/logout" class="btn btn-outline-dark btn-logout">
+							<i class="fa fa-sign-out"></i> Keluar dari Aplikasi
+						</a>
+
+					</div>
+
+				</div>
+			</div>
+
 		</div>
 
 	</div>
