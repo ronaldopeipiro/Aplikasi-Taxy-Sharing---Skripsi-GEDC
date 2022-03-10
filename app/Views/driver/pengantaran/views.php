@@ -44,7 +44,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 											<i class="fa fa-calendar"></i>
 										</span>
 									</span>
-									<input type="text" class="form-control form-control-sm pull-right" id="cariTanggalPengantaran" placeholder="Contoh : 01/01/2022 - 12/12/2022">
+									<input type="text" class="form-control form-control-lg pull-right" id="cariTanggalPengantaran" placeholder="Contoh : 01/01/2022 - 12/12/2022">
 								</div>
 							</div>
 						</div>
@@ -151,7 +151,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 												</li>
 											<?php endif; ?>
 											<li class="d-block">
-												<a href="<?= base_url(); ?>/driver/pengantaran/detail/<?= $row['id_pengantaran']; ?>" class="btn btn-sm btn-outline-info">
+												<a href="<?= base_url(); ?>/driver/pengantaran/detail/<?= $row['id_pengantaran']; ?>" class="btn btn-sm btn-outline-info" style="width: 100%;">
 													<i class="fa fa-list"></i> Detail
 												</a>
 											</li>
@@ -202,7 +202,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 			"deferRender": true,
 			"initComplete": function() {
 				var status = this.api().column(7);
-				var statusSelect = $('<select class="filter form-control"><option value="">Semua Status</option></select>')
+				var statusSelect = $('<select class="filter form-control form-control-lg"><option value="">Semua Status</option></select>')
 					.appendTo('#statusSelect')
 					.on('change', function() {
 						var val = $(this).val();
@@ -215,7 +215,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					`);
 
 				var orderan = this.api().column(6);
-				var orderanSelect = $('<select class="filter form-control"><option value="">Semua</option></select>')
+				var orderanSelect = $('<select class="filter form-control form-control-lg"><option value="">Semua</option></select>')
 					.appendTo('#orderanSelect')
 					.on('change', function() {
 						var val = $(this).val();

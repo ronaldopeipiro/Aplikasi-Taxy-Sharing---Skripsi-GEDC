@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\DriverModel;
+use App\Models\PushNotifModel;
 
 class Home extends BaseController
 {
@@ -15,6 +16,7 @@ class Home extends BaseController
 
 		$this->CustomerModel = new CustomerModel();
 		$this->DriverModel = new DriverModel();
+		$this->PushNotifModel = new PushNotifModel();
 	}
 
 	public function get_client_ip()
@@ -44,20 +46,41 @@ class Home extends BaseController
 		$data_endpoint = explode("https://fcm.googleapis.com/fcm/send/", $this->request->getVar('endpoint'));
 		$endpoint = $data_endpoint[1];
 
-		if ($tipe_user == "customer") {
-			$query = $this->CustomerModel->updateCustomer([
+		$cek_data = $this->db->query("SELECT * FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' AND endpoint='$endpoint'")->getNumRows();
+
+		if (!($cek_data > 0)) {
+			$query = $this->PushNotifModel->save([
+				'id_user' => $id_user,
+				'tipe_user' => $tipe_user,
 				'endpoint' => $endpoint
-			], $id_user);
-		} elseif ($tipe_user == "driver") {
-			$query = $this->DriverModel->updateDriver([
-				'endpoint' => $endpoint
-			], $id_user);
+			]);
 		}
 
 		if ($query) {
 			echo json_encode(array(
 				'success' => '1',
 				'pesan' => 'Layanan notifikasi berhasil diaktifkan !'
+			));
+		} else {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Maaf, terdapat kesalahan teknis !'
+			));
+		}
+	}
+
+	public function unsubscribe_notification()
+	{
+		$id_user = $this->request->getVar('id_user');
+		$tipe_user = $this->request->getVar('tipe_user');
+		$endpoint = $this->request->getVar('endpoint');
+
+		$query = $this->db->query("DELETE FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' AND endpoint='$endpoint'");
+
+		if ($query) {
+			echo json_encode(array(
+				'success' => '1',
+				'pesan' => 'Layanan notifikasi berhasil dinonaktifkan !'
 			));
 		} else {
 			echo json_encode(array(

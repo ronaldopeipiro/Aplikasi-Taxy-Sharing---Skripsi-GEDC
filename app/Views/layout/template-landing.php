@@ -69,7 +69,7 @@
 		<?= $this->renderSection('content_landing'); ?>
 
 		<section class="py-0 bg-primary-gradient">
-			<div class="bg-holder" style="background-image:url(assets/img/illustrations/footer-bg.png);background-position:center;background-size:cover;">
+			<div class="bg-holder" style="background-image:url(<?= base_url() ?>/assets/img/illustrations/footer-bg.png);background-position:center;background-size:cover;">
 			</div>
 			<!--/.bg-holder-->
 

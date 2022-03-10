@@ -10,16 +10,23 @@
 
 			<div class="col-md-6 col-lg-5 py-4 text-sm-start text-center">
 				<h1 class="mt-2 mb-sm-4 display-2 fw-semi-bold lh-sm fs-5 fs-lg-8 fs-xxl-8">
-					TAXI <br class="d-block d-lg-none d-xl-block" />
-					<span style="color: brown;">SHARING</span>
+					<span class="text-danger">
+						AIRPORT
+						<br class="d-block d-lg-none d-xl-block" />
+					</span>
+					<span class="text-info">
+						TAXI
+						<br class="d-block d-lg-none d-xl-block" />
+					</span>
+					<span class="text-warning">SHARING</span>
 				</h1>
 				<p class="mb-4">
 					Temukan kemudahan perjalanan anda menuju bandara sekitar anda disini !
 				</p>
-				<div class="pt-2">
-					<p class="fw-semi-bold">
-						Masuk sebagai ?
-					</p>
+				<p class="fw-semi-bold">
+					Masuk sebagai ?
+				</p>
+				<div class="d-flex justify-content-center justify-content-lg-start pt-2">
 					<a href="<?= base_url(); ?>/customer" class="btn btn-success mr-2" style="width: 160px;">
 						<i class="fa fa-users"></i> Customer
 					</a>
@@ -58,7 +65,7 @@
 		<div class="row flex-center h-100">
 			<div class="col-12 col-xl-11">
 				<div class="row">
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center">
 								<img src="assets/img/illustrations/finance.png" height="120" alt="" />
@@ -69,7 +76,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center"> <img src="assets/img/illustrations/design.png" height="120" alt="" />
 								<div class="card-body px-2">
@@ -81,7 +88,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center"> <img src="assets/img/illustrations/programmer.png" height="120" alt="" />
 								<div class="card-body px-2">
@@ -105,7 +112,7 @@
 		<div class="row flex-center h-100">
 			<div class="col-12 col-xl-11">
 				<div class="row">
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center">
 								<img src="assets/img/illustrations/finance.png" height="120" alt="" />
@@ -116,7 +123,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center"> <img src="assets/img/illustrations/design.png" height="120" alt="" />
 								<div class="card-body px-2">
@@ -128,7 +135,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-lg-4 pb-lg-6 px-lg-4 pb-4">
+					<div class="col-sm-4 col-lg-4 pb-lg-6 px-lg-4 pb-4">
 						<div class="card py-4 shadow-sm h-100 hover-top">
 							<div class="text-center"> <img src="assets/img/illustrations/programmer.png" height="120" alt="" />
 								<div class="card-body px-2">
@@ -154,10 +161,10 @@
 
 	<div class="container">
 		<div class="row flex-center">
-			<div class="col-md-6 order-md-1 text-center text-md-end">
+			<div class="col-sm-12 col-md-12 col-lg-7 text-center text-md-end">
 				<img class="img-fluid mb-4 w-100" src="assets/img/landing-bg.jpg" alt="" />
 			</div>
-			<div class="col-md-5 text-center text-md-start">
+			<div class="col-sm-12 col-md-12 col-lg-5 text-center text-md-start">
 				<h1 style="font-size: 65px;">
 					Lebih dari
 				</h1>

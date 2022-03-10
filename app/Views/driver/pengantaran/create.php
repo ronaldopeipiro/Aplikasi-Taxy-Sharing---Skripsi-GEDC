@@ -50,7 +50,7 @@
 		font-weight: 300;
 	}
 
-	#pac-input {
+	#nama-lokasi-input {
 		background-color: #fff;
 		font-family: Roboto;
 		font-size: 20px;
@@ -58,7 +58,7 @@
 		text-overflow: ellipsis;
 	}
 
-	#pac-input:focus {
+	#nama-lokasi-input:focus {
 		border-color: #4d90fe;
 	}
 
@@ -104,21 +104,40 @@
 							<?= csrf_field(); ?>
 							<div class="row">
 
-								<div class="col-lg-12">
+								<div class="col-lg-12 order-1 order-lg-1">
 									<div class="form-group">
-										<input id="pac-input" type="text" placeholder="Mau antar penumpang kemana ?" class="form-control" name="lokasi" value="" required>
+										<input id="nama-lokasi-input" type="text" placeholder="Mau antar penumpang kemana ?" class="form-control" name="lokasi" value="" required>
 									</div>
 								</div>
 
-								<div class="col-lg-8">
+								<div class="col-lg-8 order-3 order-lg-3">
 									<div id="map" style="width: 100%; height: 440px; border-radius: 10px;"></div>
 								</div>
 
-								<div class="col-lg-4">
+								<div class="col-lg-12 order-2 order-lg-2 mb-3">
 
 									<div class="form-group row">
+										<label for="radius_jemput" class="col-12 col-form-label">
+											Radius Jemput
+										</label>
+										<div class="col-12">
+											<div class="d-flex">
+												<div id="radius_pilihan">100</div>
+												<div class="ml-1">meter</div>
+											</div>
+											<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="radius_jemput" id="radius_jemput" name="radius_jemput" value="<?= (old('radius_jemput')) ? old('radius_jemput') : '100'; ?>" min="100" max="5000" step="10" onchange="updateTextInput(this.value);">
+											<div class="invalid-feedback">
+												<?= $validation->getError('radius_jemput'); ?>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-lg-4 order-4 order-lg-4 mt-3 mt-lg-0">
+									<div class="form-group row">
 										<label for="id_bandara" class="col-12 col-form-label">
-											Bandara Keberangkatan
+											Bandara
 										</label>
 										<div class="col-12">
 											<select name="id_bandara" id="id_bandara" class="form-control">
@@ -145,28 +164,16 @@
 										</div>
 									</div>
 
-									<div class="form-group row">
-										<label for="radius_jemput" class="col-12 col-form-label">
-											Radius Jemput
-										</label>
-										<div class="col-12">
-											<div id="radius_pilihan">100</div>
-											<input type="range" class="form-range <?= ($validation->hasError('radius_jemput')) ? 'is-invalid' : ''; ?>" id="radius_jemput" id="radius_jemput" name="radius_jemput" value="<?= (old('radius_jemput')) ? old('radius_jemput') : '100'; ?>" min="100" max="5000" step="10" onchange="updateTextInput(this.value);">
-											<div class="invalid-feedback">
-												<?= $validation->getError('radius_jemput'); ?>
-											</div>
-										</div>
-									</div>
-
 									<div class="form-group row mt-5">
 										<div class="col-12">
-											<button type="submit" class="btn btn-block btn-success">
+											<button type="submit" id="btn-submit" class="btn btn-block btn-success">
 												<i class="fa fa-arrow-right"></i> SUBMIT
 											</button>
 										</div>
 									</div>
 
 								</div>
+
 							</div>
 
 						</form>
@@ -187,6 +194,13 @@
 	let rad = 100;
 	let slider_rad = 100;
 
+	$(document).ready(function() {
+		$('#btn-submit').prop('disabled', true);
+		$('#nama-lokasi-input').change(function() {
+			$('#btn-submit').prop('disabled', false);
+		});
+	});
+
 	function initMap() {
 
 		if (navigator.geolocation) {
@@ -200,17 +214,49 @@
 				userLng = position.coords.longitude;
 				userLoc = new google.maps.LatLng(userLat, userLng);
 
-				const map = new google.maps.Map(document.getElementById("map"), {
-					center: {
-						lat: userLat,
-						lng: userLng
+				var myStyle = [{
+					featureType: "administrative",
+					elementType: "labels",
+					stylers: [{
+						visibility: "on"
+					}]
+				}, {
+					featureType: "poi",
+					elementType: "labels",
+					stylers: [{
+						visibility: "off"
+					}]
+				}, {
+					featureType: "water",
+					elementType: "labels",
+					stylers: [{
+						visibility: "on"
+					}]
+				}, {
+					featureType: "road",
+					elementType: "labels",
+					stylers: [{
+						visibility: "on"
+					}]
+				}];
+
+				var mapOptions = {
+					center: userLoc,
+					zoom: 15,
+					mapTypeControlOptions: {
+						mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
 					},
-					zoom: 14,
-					mapTypeId: "roadmap",
-				});
+					mapTypeId: 'mystyle',
+					location_type: google.maps.GeocoderLocationType.ROOFTOP
+				};
+
+				const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+				map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
+					name: 'Peta'
+				}));
 
 				// Create the search box and link it to the UI element.
-				const input = document.getElementById("pac-input");
+				const input = document.getElementById("nama-lokasi-input");
 				const searchBox = new google.maps.places.SearchBox(input);
 
 				// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -221,8 +267,6 @@
 
 				let markers = [];
 
-				// Listen for the event fired when the user selects a prediction and retrieve
-				// more details for that place.
 				searchBox.addListener("places_changed", () => {
 					const places = searchBox.getPlaces();
 
@@ -336,7 +380,7 @@
 				trafficLayer.setMap(map);
 
 				var icon_user = {
-					url: "<?= base_url() ?>/assets/img/user-loc-marker.png", // url
+					url: "<?= base_url() ?>/assets/img/taxi.png", // url
 					scaledSize: new google.maps.Size(40, 40), // scaled size
 					origin: new google.maps.Point(0, 0), // origin
 					anchor: new google.maps.Point(14, 18), // anchor

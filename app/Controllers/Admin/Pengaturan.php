@@ -34,7 +34,7 @@ class Pengaturan extends Controller
 			'request' => $this->request,
 			'db' => $this->db,
 			'validation' => $this->validation,
-			'title' => 'Akun Saya',
+			'title' => 'Pengaturan',
 			'user_id' => $this->id_user,
 			'user_nama_lengkap' => $this->user_nama_lengkap,
 			'user_username' => $this->user_username,

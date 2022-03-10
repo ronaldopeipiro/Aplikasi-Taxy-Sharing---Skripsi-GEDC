@@ -78,3 +78,51 @@ CRITICAL - 2022-03-08 16:36:01 --> Undefined offset: 1
 #4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
 #5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
 #6 {main}
+CRITICAL - 2022-03-08 22:33:48 --> Trying to access array offset on value of type null
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\driver\pengantaran\detail.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\laragon\\www\\...', 31, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('driver/penganta...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Driver\Pengantaran.php(116): view('driver/penganta...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Driver\Pengantaran->detail('assets', 'img', 'illustrations', 'category-bg.png')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Pengantaran))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-03-08 22:34:00 --> Trying to access array offset on value of type null
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\driver\pengantaran\detail.php(31): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\laragon\\www\\...', 31, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('driver/penganta...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Driver\Pengantaran.php(116): view('driver/penganta...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Driver\Pengantaran->detail('assets', 'img', 'illustrations', 'category-bg.png')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Pengantaran))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-03-08 23:16:29 --> Trying to access array offset on value of type null
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\driver\history\detail.php(41): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\laragon\\www\\...', 41, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('driver/history/...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Driver\Orderan.php(102): view('driver/history/...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Driver\Orderan->detail_history('assets', 'img', 'illustrations', 'category-bg.png')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Orderan))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}
+CRITICAL - 2022-03-08 23:17:05 --> Trying to access array offset on value of type null
+#0 C:\laragon\www\taxi-sharing-2020\app\Views\driver\history\detail.php(41): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\laragon\\www\\...', 41, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('driver/history/...', Array, true)
+#4 C:\laragon\www\taxi-sharing-2020\app\Controllers\Driver\Orderan.php(102): view('driver/history/...', Array)
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Driver\Orderan->detail_history('assets', 'img', 'illustrations', 'category-bg.png')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Driver\Orderan))
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#10 {main}

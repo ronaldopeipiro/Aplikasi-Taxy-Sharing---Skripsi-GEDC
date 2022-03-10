@@ -24,6 +24,8 @@ class Dashboard extends Controller
 		$this->BandaraModel = new BandaraModel();
 		$this->TarifModel = new TarifModel();
 
+		$this->keyAPI = "AIzaSyB-JpweDJ7_cA9-KiEq-iMjQzlluOemnWo";
+
 		$this->session = session();
 		if ($this->session->get('id_user') != "") {
 			$this->id_user = $this->session->get('id_user');
@@ -48,7 +50,7 @@ class Dashboard extends Controller
 	public function getAddress($latitude, $longitude)
 	{
 		//google map api url
-		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyCG7FscIk67I9yY_fiyLc7-_1Aoyerf96E";
+		$url = "https://maps.google.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$this->keyAPI";
 
 		// send http request
 		$geocode = file_get_contents($url);
@@ -70,7 +72,7 @@ class Dashboard extends Controller
 
 	public function distance_matrix_google($lat1, $lng1, $lat2, $lng2)
 	{
-		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=AIzaSyCG7FscIk67I9yY_fiyLc7-_1Aoyerf96E");
+		$fetch = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?departure_time=now&destinations=$lat2%2C$lng2&origins=$lat1%2C$lng1&key=$this->keyAPI");
 		$json = json_decode($fetch);
 
 		$data['distance'] = $json->rows[0]->elements[0]->distance->text;;

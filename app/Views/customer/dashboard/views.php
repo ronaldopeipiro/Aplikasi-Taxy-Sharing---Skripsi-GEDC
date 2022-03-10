@@ -124,7 +124,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 								<img src="<?= $foto_user ?>" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: solid 2px #fff; padding: 2px; object-position: top;">
 							</div>
 
-							<div class="col-lg-8 text-center">
+							<div class="col-lg-8 text-center text-lg-start">
 								<h4 style="color: brown;">
 									<?= $user_nama_lengkap; ?>
 								</h4>
@@ -135,17 +135,15 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 									<?= $user_no_hp; ?>
 								</p>
 
-								<div>
+								<div class="mt-4">
 									<p>
-										<button class="btn btn-outline-info js-notify-btn">Notify me!</button>
+										<button class="btn btn-sm btn-outline-info js-notify-btn">Notify me!</button>
 									</p>
 									<p>
-										<button disabled class="btn btn-outline-info js-push-btn">Subscribe !</button>
+										<span id="statusSubsNotifikasi"></span>
+										<button disabled class="btn btn-sm btn-outline-info js-push-btn">Subscribe !</button>
 									</p>
-									<!-- <section class="js-sub-endpoint" style="display: none; width: 80%">
-										<h3>Endpoint URL:</h3>
-										<code class="js-endpoint-url"></code>
-									</section> -->
+									<span id="endpointURL"></span>
 								</div>
 							</div>
 
@@ -341,6 +339,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 					var map,
 						markerUser,
+						markerUserTag,
 						userLoc,
 						mapCenter = new google.maps.LatLng({
 							lat: -0.0263303,
@@ -677,7 +676,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 								}
 
 								$(".btn-submit-order-" + i).click(function(e) {
-									e.preventDefault();
+									// e.preventDefault();
 
 									var id_customer = $('#formSubmitOrder' + i + ' input[name="id_customer"]').val();
 									var id_pengantaran = $('#formSubmitOrder' + i + ' input[name="id_pengantaran"]').val();
@@ -825,7 +824,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 </section>
 
-
 <script>
 	"use strict";
 	var app = (function() {
@@ -833,24 +831,27 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 		var swRegistration = null;
 		var notifyButton = document.querySelector(".js-notify-btn");
 		var pushButton = document.querySelector(".js-push-btn");
+		var statusPermission = "";
+		var endpoint = "";
 
 		if (!("Notification" in window)) {
 			console.log("Notifications not supported in this browser");
 			return;
 		}
 
+		Notification.requestPermission();
 		Notification.requestPermission(function(status) {
-			console.log("Notification permission status :", status);
+			statusPermission = status;
 		});
 
 		function displayNotification() {
 			if (Notification.permission == "granted") {
 				navigator.serviceWorker.getRegistration().then(function(reg) {
 					var options = {
-						image: "http://localhost:2020/assets/img/taxi.png",
+						// image: "https://jo.yokcaridok.id/assets/img/taxi.png",
 						body: "Informasi Test ...",
 						tag: "id1",
-						icon: "http://localhost:2020/assets/img/logo.jpg",
+						icon: "https://jo.yokcaridok.id/assets/img/logo.jpg",
 						vibrate: [200, 50, 50, 150],
 						data: {
 							dateOfArrival: Date.now(),
@@ -859,12 +860,12 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						actions: [{
 								action: "explore",
 								title: "Buka notifikasi",
-								icon: "http://localhost:2020/assets/img/checkmark.png",
+								icon: "https://jo.yokcaridok.id/assets/img/checkmark.png",
 							},
 							{
 								action: "close",
 								title: "Tutup notifikasi",
-								icon: "http://localhost:2020/assets/img/xmark.png",
+								icon: "https://jo.yokcaridok.id/assets/img/xmark.png",
 							},
 						],
 					};
@@ -873,13 +874,18 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 			}
 		}
 
+
 		function initializeUI() {
 			pushButton.addEventListener("click", function() {
-				pushButton.disabled = true;
-				if (isSubscribed) {
-					unsubscribeUser();
+				if (statusPermission === "denied") {
+					Notification.requestPermission();
 				} else {
-					subscribeUser();
+					pushButton.disabled = true;
+					if (isSubscribed) {
+						unsubscribeUser();
+					} else {
+						subscribeUser();
+					}
 				}
 			});
 
@@ -917,6 +923,29 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 				.getSubscription()
 				.then(function(subscription) {
 					if (subscription) {
+						var id_user = "<?= $user_id ?>";
+						var tipe_user = "customer";
+						var endpoint = subscription.endpoint;
+						$('#endpointURL').text(endpoint);
+
+						$.ajax({
+							beforeSend: function() {
+								$("#loading-image").show();
+							},
+							type: "POST",
+							url: "<?= base_url() ?>/Home/unsubscribe_notification",
+							dataType: "JSON",
+							data: {
+								id_user: id_user,
+								tipe_user: tipe_user,
+								endpoint: endpoint
+							},
+							success: function(data) {},
+							complete: function(data) {
+								$("#loading-image").hide();
+							}
+						});
+
 						return subscription.unsubscribe();
 					}
 				})
@@ -932,10 +961,12 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 		}
 
 		function updateSubscriptionOnServer(subscription) {
+			var id_user = "<?= $user_id ?>";
+			var tipe_user = "customer";
+
 			if (subscription) {
-				var id_user = "<?= $user_id ?>";
-				var tipe_user = "customer";
-				var endpoint = subscription.endpoint;
+				endpoint = subscription.endpoint;
+				$('#endpointURL').text(endpoint);
 
 				$.ajax({
 					beforeSend: function() {
@@ -949,21 +980,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						tipe_user: tipe_user,
 						endpoint: endpoint
 					},
-					success: function(data) {
-						// if (data.success == "1") {
-						// 	Swal.fire(
-						// 		'Berhasil',
-						// 		data.pesan,
-						// 		'success'
-						// 	)
-						// } else if (data.success == "0") {
-						// 	Swal.fire(
-						// 		'Gagal',
-						// 		data.pesan,
-						// 		'error'
-						// 	)
-						// }
-					},
+					success: function(data) {},
 					complete: function(data) {
 						$("#loading-image").hide();
 					}
@@ -973,16 +990,18 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 		function updateBtn() {
 			if (Notification.permission === "denied") {
-				pushButton.textContent = "Push Messaging Blocked";
-				alert("Notifikasi tidak diizinkan !");
-				pushButton.disabled = true;
+				pushButton.textContent = "Ubah Izin Notifikasi";
+				$("#statusSubsNotifikasi").text('Izin notifikasi diblokir !');
+				pushButton.disabled = false;
 				updateSubscriptionOnServer(null);
 				return;
 			}
 			if (isSubscribed) {
-				pushButton.textContent = "Nonaktifkan Notifikasi";
+				pushButton.textContent = "Nonaktifkan";
+				$("#statusSubsNotifikasi").text('Notifikasi aktif !');
 			} else {
-				pushButton.textContent = "Aktifkan Notifikasi";
+				$("#statusSubsNotifikasi").text('Notifikasi tidak aktif !');
+				pushButton.textContent = "Aktifkan";
 			}
 			pushButton.disabled = false;
 		}

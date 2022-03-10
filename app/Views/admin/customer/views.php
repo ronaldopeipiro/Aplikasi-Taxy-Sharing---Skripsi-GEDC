@@ -73,7 +73,9 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 												<td style="vertical-align: middle;"><?= $row['email'] ?></td>
 												<td style="vertical-align: middle;"><?= $row['no_hp'] ?></td>
 												<td style="vertical-align: middle;">
-													<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
+													<?php if ($row['latitude'] != "" and $row['longitude'] != "") : ?>
+														<?= $class_dashboard->getAddress($row['latitude'], $row['longitude']); ?>
+													<?php endif; ?>
 												</td>
 												<td style="vertical-align: middle;">
 													<form action="" method="POST">

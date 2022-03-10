@@ -1,0 +1,226 @@
+ERROR - 2022-03-09 00:01:53 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:01:53 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:03:15 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:03:15 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:03:27 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:03:27 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:03:41 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:03:41 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:04:05 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:04:05 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:06:53 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:06:53 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:58:55 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:58:55 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+ERROR - 2022-03-09 00:59:04 --> Unknown column 'endpoint' in 'field list'
+CRITICAL - 2022-03-09 00:59:04 --> Unknown column 'endpoint' in 'field list'
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tb_cust...', 0)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tb_cust...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tb_cust...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tb_cust...', Array, false)
+#4 C:\laragon\www\taxi-sharing-2020\app\Models\CustomerModel.php(53): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(49): App\Models\CustomerModel->updateCustomer(Array, '9')
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2022-03-09 01:00:55 --> Undefined property: App\Controllers\Home::$PushNotifModel
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\laragon\\www\\...', 47, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:00:58 --> Undefined property: App\Controllers\Home::$PushNotifModel
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\laragon\\www\\...', 47, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:04:19 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:04:42 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:05:26 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:08:53 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:09:10 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:15:33 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:20:02 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:25:28 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:25:36 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:25:41 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:29:46 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-09 01:34:04 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+ERROR - 2022-03-09 12:45:18 --> Email: sendWithSmtp throwed fsockopen(): unable to connect to smtp.gmail.com:587 (No connection could be made because the target machine actively refused it.
+)

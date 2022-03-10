@@ -73,7 +73,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 
 		<div class="row mt-3">
 
-			<div class="col-lg-3">
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
 				<a style="text-decoration: none;" href="<?= base_url(); ?>/admin/driver">
 					<div class="card rounded-3">
 						<div class="card-body">
@@ -89,7 +89,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 				</a>
 			</div>
 
-			<div class="col-lg-3">
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
 				<a style="text-decoration: none;" href="<?= base_url(); ?>/admin/driver">
 					<div class="card rounded-3">
 						<div class="card-body">
@@ -105,7 +105,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 				</a>
 			</div>
 
-			<div class="col-lg-3">
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
 				<a style="text-decoration: none;" href="<?= base_url(); ?>/admin/customer">
 					<div class="card rounded-3">
 						<div class="card-body">
@@ -121,7 +121,7 @@ $class_dashboard = new App\Controllers\Admin\Dashboard;
 				</a>
 			</div>
 
-			<div class="col-lg-3">
+			<div class="col-sm-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
 				<a style="text-decoration: none;" href="<?= base_url(); ?>/admin/bandara">
 					<div class="card rounded-3">
 						<div class="card-body">

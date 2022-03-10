@@ -72,7 +72,7 @@ date_default_timezone_set("Asia/Jakarta");
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyCG7FscIk67I9yY_fiyLc7-_1Aoyerf96E&language=id-ID"></script>
+	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyB-JpweDJ7_cA9-KiEq-iMjQzlluOemnWo&language=id-ID"></script>
 
 	<script>
 		const base_url = "<?= base_url() ?>"
@@ -563,6 +563,7 @@ date_default_timezone_set("Asia/Jakarta");
 	<script src="<?= base_url(); ?>/vendors/is/is.min.js"></script>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 	<script src="<?= base_url(); ?>/assets/js/theme.js"></script>
+
 
 	<script>
 		$(document).ready(function() {
