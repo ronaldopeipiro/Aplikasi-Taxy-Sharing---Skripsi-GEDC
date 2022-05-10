@@ -39,6 +39,10 @@ class GoogleCloudRetailV2SearchRequest extends \Google\Collection
    */
   public $filter;
   /**
+   * @var string[]
+   */
+  public $labels;
+  /**
    * @var int
    */
   public $offset;
@@ -58,6 +62,8 @@ class GoogleCloudRetailV2SearchRequest extends \Google\Collection
    * @var string
    */
   public $pageToken;
+  protected $personalizationSpecType = GoogleCloudRetailV2SearchRequestPersonalizationSpec::class;
+  protected $personalizationSpecDataType = '';
   /**
    * @var string
    */
@@ -164,6 +170,20 @@ class GoogleCloudRetailV2SearchRequest extends \Google\Collection
     return $this->filter;
   }
   /**
+   * @param string[]
+   */
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  /**
+   * @return string[]
+   */
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  /**
    * @param int
    */
   public function setOffset($offset)
@@ -232,6 +252,20 @@ class GoogleCloudRetailV2SearchRequest extends \Google\Collection
   public function getPageToken()
   {
     return $this->pageToken;
+  }
+  /**
+   * @param GoogleCloudRetailV2SearchRequestPersonalizationSpec
+   */
+  public function setPersonalizationSpec(GoogleCloudRetailV2SearchRequestPersonalizationSpec $personalizationSpec)
+  {
+    $this->personalizationSpec = $personalizationSpec;
+  }
+  /**
+   * @return GoogleCloudRetailV2SearchRequestPersonalizationSpec
+   */
+  public function getPersonalizationSpec()
+  {
+    return $this->personalizationSpec;
   }
   /**
    * @param string

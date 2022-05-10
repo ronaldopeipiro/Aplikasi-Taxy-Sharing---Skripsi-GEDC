@@ -1,0 +1,24 @@
+CRITICAL - 2022-05-10 11:39:20 --> file_get_contents(): SSL: The operation completed successfully.
+
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_conten...', 'C:\\laragon\\www\\...', 56, Array)
+#1 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(56): file_get_contents('https://maps.go...')
+#2 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(170): App\Controllers\Customer\Dashboard->getAddress('-0.0276842', '109.3299919')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#6 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(125): view('customer/dashbo...', Array)
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Customer\Dashboard->index()
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#9 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#12 {main}
+CRITICAL - 2022-05-10 11:40:54 --> file_get_contents(http://localhost:2020/notif-keys/public_key.txt): failed to open stream: HTTP request failed!
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_conten...', 'C:\\laragon\\www\\...', 112, Array)
+#1 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(112): file_get_contents('http://localhos...')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notif()
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#7 {main}

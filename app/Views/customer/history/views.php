@@ -17,8 +17,12 @@ function rupiah($angka, $string)
 $class_dashboard = new App\Controllers\Customer\Dashboard;
 ?>
 
+<script>
+	send_notif('8', 'customer', 'Hai GEDC');
+</script>
+
 <section class="py-8" id="home" style="min-height: 94vh;">
-	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
+	<div class="bg-holder d-none d-sm-block" style="background-image: url(<?= base_url() ?>/assets/img/illustrations/category-bg.png); background-position:right top; background-size:200px 320px;">
 	</div>
 	<div class="container">
 

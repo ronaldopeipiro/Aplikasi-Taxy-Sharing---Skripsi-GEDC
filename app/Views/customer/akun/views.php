@@ -2,6 +2,11 @@
 
 <?= $this->section('content'); ?>
 
+
+<script>
+	send_notif('6', 'customer', 'Hallo bang dicky');
+</script>
+
 <section class="py-8" id="home" style="min-height: 97vh;">
 	<div class="bg-holder d-none d-sm-block" style="background-image:url(assets/img/illustrations/category-bg.png);background-position:right top;background-size:200px 320px;">
 	</div>

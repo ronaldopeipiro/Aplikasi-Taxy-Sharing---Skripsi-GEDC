@@ -41,7 +41,6 @@ date_default_timezone_set("Asia/Jakarta");
 	<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.2/css/fixedHeader.bootstrap.min.css">
 
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
 	<link href="<?= base_url(); ?>/assets/css/theme.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>/assets/css/maps.css" rel="stylesheet" />
 
@@ -75,40 +74,214 @@ date_default_timezone_set("Asia/Jakarta");
 	<script src="https://maps.google.com/maps/api/js?libraries=places,geometry&key=AIzaSyB-JpweDJ7_cA9-KiEq-iMjQzlluOemnWo&language=id-ID"></script>
 
 	<script>
-		const base_url = "<?= base_url() ?>"
+		const base_url = "<?= base_url() ?>";
 	</script>
 
-	<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
 	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyCMGTf96Sslm3HGyY7ssEcXPGICRyimDIc",
-			authDomain: "sisfoku-8b881.firebaseapp.com",
-			databaseURL: "https://sisfoku-8b881.firebaseio.com",
-			projectId: "sisfoku-8b881",
-			storageBucket: "sisfoku-8b881.appspot.com",
-			messagingSenderId: "956814356639",
-		};
+		document.addEventListener('DOMContentLoaded', () => {
+			const applicationServerKey =
+				'BMBlr6YznhYMX3NgcWIDRxZXs0sh7tCv7_YCsWcww0ZCv9WGg-tRCXfMEHTiBPCksSqeve1twlbmVAZFv7GSuj0';
 
-		firebase.initializeApp(config);
+			if (!('serviceWorker' in navigator)) {
+				console.warn('Service workers are not supported by this browser');
+				return;
+			}
 
-		// Retrieve Firebase Messaging object.
-		const messaging = firebase.messaging();
+			if (!('PushManager' in window)) {
+				console.warn('Push notifications are not supported by this browser');
+				return;
+			}
 
-		messaging.onMessage(function(payload) {
-			console.log("Message received. ", payload);
-			//notificationTitle = payload.data.title;
-			notificationTitle = payload.data.title;
-			notificationOptions = {
-				body: payload.data.body,
-				icon: payload.data.icon,
-				image: payload.data.image,
-			};
-			var notification = new Notification(
-				notificationTitle,
-				notificationOptions
+			if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+				console.warn('Notifications are not supported by this browser');
+				return;
+			}
+
+			if (Notification.permission === 'denied') {
+				console.warn('Notifications are denied by the user');
+				return;
+			}
+
+			push_subscribe();
+
+			navigator.serviceWorker.register(base_url + '/service-worker-notif.js').then(
+				() => {
+					console.log('[SW] Service worker has been registered');
+					push_updateSubscription();
+				},
+				e => {
+					console.error('[SW] Service worker registration failed', e);
+				}
 			);
+
+			function urlBase64ToUint8Array(base64String) {
+				const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+				const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+
+				const rawData = window.atob(base64);
+				const outputArray = new Uint8Array(rawData.length);
+
+				for (let i = 0; i < rawData.length; ++i) {
+					outputArray[i] = rawData.charCodeAt(i);
+				}
+				return outputArray;
+			}
+
+			function checkNotificationPermission() {
+				return new Promise((resolve, reject) => {
+					if (Notification.permission === 'denied') {
+						return reject(new Error('Push messages are blocked.'));
+					}
+					if (Notification.permission === 'granted') {
+						return resolve();
+					}
+					if (Notification.permission === 'default') {
+						return Notification.requestPermission().then(result => {
+							if (result !== 'granted') {
+								reject(new Error('Bad permission result'));
+							} else {
+								resolve();
+							}
+						});
+					}
+					return reject(new Error('Unknown permission'));
+				});
+			}
+
+			function push_subscribe() {
+				return checkNotificationPermission()
+					.then(() => navigator.serviceWorker.ready)
+					.then(serviceWorkerRegistration =>
+						serviceWorkerRegistration.pushManager.subscribe({
+							userVisibleOnly: true,
+							applicationServerKey: urlBase64ToUint8Array(applicationServerKey),
+						})
+					)
+					.then(subscription => {
+						return subscribe_user(subscription);
+					})
+					.then(subscription => subscription) // update your UI
+					.catch(e => {
+						if (Notification.permission === 'denied') {
+							console.warn('Notifications are denied by the user.');
+						} else {
+							console.error('Impossible to subscribe to push notifications', e);
+						}
+					});
+			}
+
+			function push_updateSubscription() {
+				navigator.serviceWorker.ready
+					.then(serviceWorkerRegistration => serviceWorkerRegistration.pushManager.getSubscription())
+					.then(subscription => {
+						if (!subscription) {
+							return;
+						}
+						return subscribe_user(subscription);
+					})
+					.then(subscription => subscription)
+					.catch(e => {
+						console.error('Error when updating the subscription', e);
+					});
+			}
+
+			function push_unsubscribe() {
+				navigator.serviceWorker.ready
+					.then(serviceWorkerRegistration => serviceWorkerRegistration.pushManager.getSubscription())
+					.then(subscription => {
+						if (!subscription) {
+							return;
+						}
+						// return subscribe_user(subscription);
+					})
+					.then(subscription => subscription.unsubscribe())
+					.catch(e => {
+						console.error('Error when unsubscribing the user', e);
+					});
+			}
+
+			function subscribe_user(subscription) {
+				const key = subscription.getKey('p256dh');
+				const token = subscription.getKey('auth');
+				const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
+
+				var endpoint = getEndpoint(subscription);
+				var p256dh = key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null;
+				var auth = token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null;
+
+				console.log(endpoint);
+				console.log(p256dh);
+				console.log(auth);
+				console.log(contentEncoding);
+
+				var id_user = '<?= $user_id ?>';
+				var tipe_user = '<?= $user_level ?>';
+
+				$.ajax({
+					type: "POST",
+					url: base_url + "/Home/push_subscription",
+					dataType: "JSON",
+					enctype: 'multipart/form-data',
+					data: {
+						id_user: id_user,
+						tipe_user: tipe_user,
+						endpoint: endpoint,
+						p256dh: p256dh,
+						auth: auth,
+						ce: contentEncoding
+					},
+					beforeSend: function() {
+						$("#loader").show();
+					},
+					success: function(data) {
+						if (data.success == "1") {
+							toastr.success(data.pesan);
+						} else if (data.success == "0") {
+							toastr.error(data.pesan);
+						}
+					},
+					complete: function() {
+						$("#loader").hide();
+					}
+				});
+			}
 		});
+
+		function getEndpoint(pushSubscription) {
+			var endpoint = pushSubscription.endpoint;
+			var subscriptionId = pushSubscription.subscriptionId;
+
+			// fix Chrome < 45
+			if (subscriptionId && endpoint.indexOf(subscriptionId) === -1) {
+				endpoint += '/' + subscriptionId;
+			}
+
+			return endpoint;
+		}
+
+		function send_notif(id_user, tipe_user, text_pesan) {
+			const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
+			$.ajax({
+				type: "POST",
+				url: base_url + "/Home/send_push_notif",
+				dataType: "JSON",
+				data: {
+					id_user: id_user,
+					tipe_user: tipe_user,
+					text_pesan: text_pesan,
+					ce: contentEncoding
+				},
+				beforeSend: function() {
+					$("#loader").show();
+				},
+				success: function(data) {
+					console.log(data.pesan);
+				},
+				complete: function() {
+					$("#loader").hide();
+				}
+			});
+		}
 	</script>
 
 	<style>
@@ -168,11 +341,14 @@ date_default_timezone_set("Asia/Jakarta");
 				<?php
 				if ($user_level == "admin") {
 					$link_home = base_url() . "/admin";
-				} elseif ($user_level == "admin") {
+				} elseif ($user_level == "customer") {
+					$link_home = base_url() . "/customer";
+				} elseif ($user_level == "driver") {
+					$link_home = base_url() . "/driver";
 				}
 				?>
 
-				<a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="<?= base_url(); ?>">
+				<a class="navbar-brand d-flex align-items-center fw-bolder fs-2 fst-italic" href="<?= $link_home; ?>">
 					<div class="text-danger">AIRPORT</div>
 					<div class="text-info">TAXI</div>
 					<div class="text-warning">SHARING</div>
@@ -500,7 +676,6 @@ date_default_timezone_set("Asia/Jakarta");
 								<li class="nav-item <?= $request->uri->getSegment(2) == 'driver' ? 'active' : ''; ?>">
 									<a class="nav-link py-3 d-block text-center" href="<?= base_url(); ?>/admin/driver">
 										<div class="nav-link-icon w-100 d-flex justify-content-center">
-											<!-- Download SVG icon from http://tabler-icons.io/i/steering-wheel -->
 											<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 												<circle cx="12" cy="12" r="9" />
@@ -564,19 +739,18 @@ date_default_timezone_set("Asia/Jakarta");
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 	<script src="<?= base_url(); ?>/assets/js/theme.js"></script>
 
-
 	<script>
 		$(document).ready(function() {
 			$('.btn-hapus').on('click', function(e) {
 				event.preventDefault(); // prevent form submit
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Hapus Data ?',
 					text: "Pilih ya, jika anda ingin menghapus data !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, hapus data !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -589,13 +763,13 @@ date_default_timezone_set("Asia/Jakarta");
 			$('.btn-terima-order').on('click', function(e) {
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
-					text: "Pilih ya, jika anda ingin menerima order !",
+					title: 'Terima Orderan ?',
+					text: "Pilih ya, jika anda ingin menerima orderan !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, Terima !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -608,13 +782,13 @@ date_default_timezone_set("Asia/Jakarta");
 			$('.btn-tolak-order').on('click', function(e) {
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Tolak Orderan ?',
 					text: "Pilih ya, jika anda ingin menolak orderan !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, Tolak !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -627,7 +801,7 @@ date_default_timezone_set("Asia/Jakarta");
 			$('.btn-confirm-jemput-customer').on('click', function(e) {
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Jemput Customer ?',
 					text: "Pilih ya, jika anda benar akan menjemput customer !",
 					icon: 'warning',
 					showCancelButton: true,
@@ -646,7 +820,7 @@ date_default_timezone_set("Asia/Jakarta");
 			$('.btn-confirm-otw-bandara').on('click', function(e) {
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Menuju Bandara ?',
 					text: "Pilih ya, jika anda benar akan berangkat menuju bandara !",
 					icon: 'warning',
 					showCancelButton: true,
@@ -666,13 +840,13 @@ date_default_timezone_set("Asia/Jakarta");
 				// prevent form submit
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Batalkan Orderan',
 					text: "Pilih ya, jika anda ingin membatalkan orderan !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, Batalkan Orderan !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -683,16 +857,15 @@ date_default_timezone_set("Asia/Jakarta");
 			});
 
 			$('.btn-cancel-confirm-pengantaran').on('click', function(e) {
-				// prevent form submit
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Batalkan pengantaran ?',
 					text: "Pilih ya, jika anda ingin membatalkan pengantaran !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, Batalkan !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -706,13 +879,13 @@ date_default_timezone_set("Asia/Jakarta");
 				// prevent form submit
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
+					title: 'Selesai Pengantaran ?',
 					text: "Pilih ya, jika anda telah selesai melakukan pengantaran penumpang dari bandara !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
 					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya !',
+					confirmButtonText: 'Ya',
 					cancelButtonText: 'Batal'
 				}).then((result) => {
 					if (result.isConfirmed) {
@@ -726,8 +899,8 @@ date_default_timezone_set("Asia/Jakarta");
 				// prevent form submit
 				event.preventDefault();
 				Swal.fire({
-					title: 'Apakah anda yakin ?',
-					text: "Pilih ya, jika benar anda telah sampai dibandara !",
+					title: 'Orderan Selesai ?',
+					text: "Pilih ya, jika benar anda telah selesai mengantar penumpang sampai di bandara tujuan !",
 					icon: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
@@ -745,7 +918,7 @@ date_default_timezone_set("Asia/Jakarta");
 			$('.btn-logout').on('click', function(e) {
 				event.preventDefault(); // prevent form submit
 				Swal.fire({
-					title: 'Konfirmasi ?',
+					title: 'Logout ?',
 					text: "Apakah anda yakin ingin keluar dari aplikasi ?",
 					icon: 'warning',
 					showCancelButton: true,
@@ -771,7 +944,7 @@ date_default_timezone_set("Asia/Jakarta");
 		})
 	</script>
 
-	<script>
+	<!-- <script>
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', function() {
 				navigator.serviceWorker.register('<?= base_url() ?>/service-worker.js').then(function(registration) {
@@ -781,7 +954,7 @@ date_default_timezone_set("Asia/Jakarta");
 				});
 			});
 		}
-	</script>
+	</script> -->
 
 </body>
 

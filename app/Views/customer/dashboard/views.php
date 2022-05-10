@@ -140,10 +140,10 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 										<button class="btn btn-sm btn-outline-info js-notify-btn">Notify me!</button>
 									</p>
 									<p>
-										<span id="statusSubsNotifikasi"></span>
-										<button disabled class="btn btn-sm btn-outline-info js-push-btn">Subscribe !</button>
+										<span class="badge badge-info" id="statusSubsNotifikasi"></span>
+										<!-- <button disabled class="btn btn-sm btn-outline-info js-push-btn">Subscribe !</button> -->
 									</p>
-									<span id="endpointURL"></span>
+									<!-- <span id="endpointURL"></span> -->
 								</div>
 							</div>
 
@@ -463,58 +463,61 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 							var arrayTitikPengantaran = [
 								<?php
 								foreach ($pengantaran as $data) {
-									$id_driver = $data["id_driver"];
-									$driver = $db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver' ")->getRow();
-
-									$id_bandara = $data["id_bandara"];
-									$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
-
 									$id_pengantaran = $data["id_pengantaran"];
-									$nama_bandara = $bandara->nama_bandara;
-									$latitude = $data["latitude"];
-									$longitude = $data["longitude"];
-									$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
-									$jarak_user_to_titik = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $latitude, $longitude);
-									$jarak_driver_to_titik = $class_dashboard->distance_matrix_google($driver->latitude, $driver->longitude, $latitude, $longitude);
-									$jarak_titik_to_bandara = $class_dashboard->distance_matrix_google($latitude, $longitude, $bandara->latitude, $bandara->longitude);
-									$jarak_user_to_bandara = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $bandara->latitude, $bandara->longitude);
-									$radius_jemput = $data["radius_jemput"];
-									$foto_profil_driver = $driver->foto;
+									$ceK_orderan_proses = $db->query("SELECT * FROM tb_order WHERE id_pengantaran='$id_pengantaran' AND status < '5' ")->getNumRows();
+									if ($ceK_orderan_proses == 0) {
+										$id_driver = $data["id_driver"];
+										$driver = $db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver' ")->getRow();
 
-									$data_jarak_user_to_bandara = explode(' ', $jarak_user_to_bandara['distance']);
-									$val_jarak_user_to_bandara = str_replace(',', '.', $data_jarak_user_to_bandara[0]);
-									$biaya_perjalanan = ($data_tarif['tarif_perkm'] * $val_jarak_user_to_bandara);
+										$id_bandara = $data["id_bandara"];
+										$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
 
-									$data_waktu_tempuh_user_to_titik = explode(' ', $jarak_user_to_titik['duration']);
-									$data_waktu_tempuh_driver_to_titik = explode(' ', $jarak_driver_to_titik['duration']);
-									$data_waktu_tempuh_user_to_bandara = explode(' ', $jarak_user_to_bandara['duration']);
-									$estimasi_penjemputan = $data_waktu_tempuh_driver_to_titik[0] + $data_waktu_tempuh_user_to_titik[0];
+										$nama_bandara = $bandara->nama_bandara;
+										$latitude = $data["latitude"];
+										$longitude = $data["longitude"];
+										$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
+										$jarak_user_to_titik = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $latitude, $longitude);
+										$jarak_driver_to_titik = $class_dashboard->distance_matrix_google($driver->latitude, $driver->longitude, $latitude, $longitude);
+										$jarak_titik_to_bandara = $class_dashboard->distance_matrix_google($latitude, $longitude, $bandara->latitude, $bandara->longitude);
+										$jarak_user_to_bandara = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $bandara->latitude, $bandara->longitude);
+										$radius_jemput = $data["radius_jemput"];
+										$foto_profil_driver = $driver->foto;
 
-									echo
-									"{
-										id_driver: '" . $id_driver . "',
-										id_bandara: '" . $id_bandara . "',
-										nama_bandara: '" . $nama_bandara . "',
-										id_pengantaran: '" . $id_pengantaran . "',
-										latitude: '" . $latitude . "',
-										longitude: '" . $longitude . "',
-										nama_lokasi: '" . $nama_lokasi . "',
-										radius_jemput: '" . $radius_jemput . "',
-										jarak_user_to_titik: '" . $jarak_user_to_titik["distance"] . "',
-										waktu_tempuh_user_to_titik: '" . $jarak_user_to_titik["duration"] . "',
-										jarak_titik_to_bandara: '" . $jarak_titik_to_bandara["distance"] . "',
-										waktu_tempuh_titik_to_bandara: '" . $jarak_titik_to_bandara["duration"] . "',
-										jarak_user_to_bandara: '" . $data_jarak_user_to_bandara[0] . "',
-										waktu_tempuh_user_to_bandara: '" . $data_waktu_tempuh_user_to_bandara[0] . "',
-										estimasi_penjemputan: '" . $estimasi_penjemputan . "',
-										biaya_perjalanan: '" . $biaya_perjalanan . "',
-										biaya_perjalanan_string: '" . rupiah($biaya_perjalanan, 'Y') . "',
-										foto_profil_driver: '" . $foto_profil_driver . "',
-										nama_driver:'" . $driver->nama_lengkap . "',
-										nopol_driver:'" . $driver->nopol . "',
-										nama_driver:'" . $driver->nama_lengkap . "',
-									},
-									";
+										$data_jarak_user_to_bandara = explode(' ', $jarak_user_to_bandara['distance']);
+										$val_jarak_user_to_bandara = str_replace(',', '.', $data_jarak_user_to_bandara[0]);
+										$biaya_perjalanan = ($data_tarif['tarif_perkm'] * $val_jarak_user_to_bandara);
+
+										$data_waktu_tempuh_user_to_titik = explode(' ', $jarak_user_to_titik['duration']);
+										$data_waktu_tempuh_driver_to_titik = explode(' ', $jarak_driver_to_titik['duration']);
+										$data_waktu_tempuh_user_to_bandara = explode(' ', $jarak_user_to_bandara['duration']);
+										$estimasi_penjemputan = $data_waktu_tempuh_driver_to_titik[0] + $data_waktu_tempuh_user_to_titik[0];
+
+										echo
+										"{
+											id_driver: '" . $id_driver . "',
+											id_bandara: '" . $id_bandara . "',
+											nama_bandara: '" . $nama_bandara . "',
+											id_pengantaran: '" . $id_pengantaran . "',
+											latitude: '" . $latitude . "',
+											longitude: '" . $longitude . "',
+											nama_lokasi: '" . $nama_lokasi . "',
+											radius_jemput: '" . $radius_jemput . "',
+											jarak_user_to_titik: '" . $jarak_user_to_titik["distance"] . "',
+											waktu_tempuh_user_to_titik: '" . $jarak_user_to_titik["duration"] . "',
+											jarak_titik_to_bandara: '" . $jarak_titik_to_bandara["distance"] . "',
+											waktu_tempuh_titik_to_bandara: '" . $jarak_titik_to_bandara["duration"] . "',
+											jarak_user_to_bandara: '" . $data_jarak_user_to_bandara[0] . "',
+											waktu_tempuh_user_to_bandara: '" . $data_waktu_tempuh_user_to_bandara[0] . "',
+											estimasi_penjemputan: '" . $estimasi_penjemputan . "',
+											biaya_perjalanan: '" . $biaya_perjalanan . "',
+											biaya_perjalanan_string: '" . rupiah($biaya_perjalanan, 'Y') . "',
+											foto_profil_driver: '" . $foto_profil_driver . "',
+											nama_driver:'" . $driver->nama_lengkap . "',
+											nopol_driver:'" . $driver->nopol . "',
+											nama_driver:'" . $driver->nama_lengkap . "',
+										},
+										";
+									}
 								}
 								?>
 							];
@@ -591,19 +594,9 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											</div>
 											<br>
 											<div class="row justify-content-center mb-4">
-												<form id="formSubmitOrder` + i + `">
-													<?= csrf_field(); ?>
-													<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
-													<input type="hidden" name="id_pengantaran" value="${id_pengantaran}"/>
-													<input type="hidden" name="latitude" value="<?= $user_latitude ?>" />
-													<input type="hidden" name="longitude" value="<?= $user_longitude ?>" />
-													<input type="hidden" name="tarif_perkm" value="<?= $data_tarif['tarif_perkm'] ?>" />
-													<input type="hidden" name="jarak_customer_to_bandara" value="${jarak_user_to_bandara}" />
-													<input type="hidden" name="biaya" value="${biaya_perjalanan}" />
-													<button type="button" class="btn btn-block btn-outline-success btn-submit-order-` + i + `" title="Order Taxi">
-														<i class="fa fa-taxi"></i> ORDER TAXI
-													</button>
-												</form>
+												<button onclick="submit_order(<?= $user_id ?>, ${id_pengantaran}, <?= $user_latitude ?>, <?= $user_longitude ?>, <?= $data_tarif['tarif_perkm'] ?>, ${jarak_user_to_bandara}, ${biaya_perjalanan})" class="btn btn-block btn-outline-success" title="Order Taxi">
+													<i class="fa fa-taxi"></i> ORDER TAXI
+												</button>
 											</div>
 											<div class="mb-2">
 												<span class="font-weight-bold">
@@ -674,55 +667,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 								if (driver_ready = 0) {
 									$('#text-no-driver-ready').text('Tidak ada driver yang melakukan pengantaran penumpang di sekitar anda !');
 								}
-
-								$(".btn-submit-order-" + i).click(function(e) {
-									// e.preventDefault();
-
-									var id_customer = $('#formSubmitOrder' + i + ' input[name="id_customer"]').val();
-									var id_pengantaran = $('#formSubmitOrder' + i + ' input[name="id_pengantaran"]').val();
-									var latitude = $('#formSubmitOrder' + i + ' input[name="latitude"]').val();
-									var longitude = $('#formSubmitOrder' + i + ' input[name="longitude"]').val();
-									var tarif_perkm = $('#formSubmitOrder' + i + ' input[name="tarif_perkm"]').val();
-									var jarak_customer_to_bandara = $('#formSubmitOrder' + i + ' input[name="jarak_customer_to_bandara"]').val();
-									var biaya = $('#formSubmitOrder' + i + ' input[name="biaya"]').val();
-
-									$.ajax({
-										type: "POST",
-										url: "<?= base_url() ?>/customer/order/submit-order",
-										dataType: "JSON",
-										data: {
-											id_customer: id_customer,
-											id_pengantaran: id_pengantaran,
-											latitude: latitude,
-											longitude: longitude,
-											tarif_perkm: tarif_perkm,
-											jarak_customer_to_bandara: jarak_customer_to_bandara,
-											biaya: biaya
-										},
-										success: function(data) {
-											if (data.success == "1") {
-												Swal.fire(
-													'Berhasil !',
-													data.pesan,
-													'success'
-												);
-												setTimeout(function() { // wait for 5 secs(2)
-													location.reload(); // then reload the page.(3)
-												}, 10);
-											} else if (data.success == "0") {
-												Swal.fire(
-													'Gagal !',
-													data.pesan,
-													'error'
-												);
-												setTimeout(function() { // wait for 5 secs(2)
-													location.reload(); // then reload the page.(3)
-												}, 10);
-											}
-										}
-									});
-
-								});
 
 							}
 						}
@@ -816,217 +760,74 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 					});
 				</script>
 
+				<script>
+					function submit_order(id_customer, id_pengantaran, latitude, longitude, tarif_perkm, jarak_customer_to_bandara, biaya) {
+
+						event.preventDefault();
+						Swal.fire({
+							title: 'Order TAXI',
+							text: "Pilih ya, jika anda ingin order TAXI ini !",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Ya',
+							cancelButtonText: 'Batal'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								$.ajax({
+									type: "POST",
+									url: "<?= base_url() ?>/customer/order/submit-order",
+									dataType: "JSON",
+									data: {
+										id_customer: id_customer,
+										id_pengantaran: id_pengantaran,
+										latitude: latitude,
+										longitude: longitude,
+										tarif_perkm: tarif_perkm,
+										jarak_customer_to_bandara: jarak_customer_to_bandara,
+										biaya: biaya
+									},
+									beforeSend: function() {
+										$("#loader").show();
+									},
+									success: function(data) {
+										if (data.success == "1") {
+											Swal.fire(
+												'Berhasil !',
+												data.pesan,
+												'success'
+											);
+											setTimeout(function() { // wait for 5 secs(2)
+												location.reload(); // then reload the page.(3)
+											}, 10);
+										} else if (data.success == "0") {
+											Swal.fire(
+												'Gagal !',
+												data.pesan,
+												'error'
+											);
+											setTimeout(function() { // wait for 5 secs(2)
+												location.reload(); // then reload the page.(3)
+											}, 10);
+										}
+									},
+									complete: function(data) {
+										$("#loader").hide();
+									}
+								});
+							}
+						});
+
+					}
+				</script>
+
 			<?php endif; ?>
 		<?php endif; ?>
-
 
 	</div>
 
 </section>
 
-<script>
-	"use strict";
-	var app = (function() {
-		var isSubscribed = false;
-		var swRegistration = null;
-		var notifyButton = document.querySelector(".js-notify-btn");
-		var pushButton = document.querySelector(".js-push-btn");
-		var statusPermission = "";
-		var endpoint = "";
 
-		if (!("Notification" in window)) {
-			console.log("Notifications not supported in this browser");
-			return;
-		}
-
-		Notification.requestPermission();
-		Notification.requestPermission(function(status) {
-			statusPermission = status;
-		});
-
-		function displayNotification() {
-			if (Notification.permission == "granted") {
-				navigator.serviceWorker.getRegistration().then(function(reg) {
-					var options = {
-						// image: "https://jo.yokcaridok.id/assets/img/taxi.png",
-						body: "Informasi Test ...",
-						tag: "id1",
-						icon: "https://jo.yokcaridok.id/assets/img/logo.jpg",
-						vibrate: [200, 50, 50, 150],
-						data: {
-							dateOfArrival: Date.now(),
-							primaryKey: 1
-						},
-						actions: [{
-								action: "explore",
-								title: "Buka notifikasi",
-								icon: "https://jo.yokcaridok.id/assets/img/checkmark.png",
-							},
-							{
-								action: "close",
-								title: "Tutup notifikasi",
-								icon: "https://jo.yokcaridok.id/assets/img/xmark.png",
-							},
-						],
-					};
-					reg.showNotification("Pemberitahuan Baru !", options);
-				});
-			}
-		}
-
-
-		function initializeUI() {
-			pushButton.addEventListener("click", function() {
-				if (statusPermission === "denied") {
-					Notification.requestPermission();
-				} else {
-					pushButton.disabled = true;
-					if (isSubscribed) {
-						unsubscribeUser();
-					} else {
-						subscribeUser();
-					}
-				}
-			});
-
-			// Set initial subscription value
-			swRegistration.pushManager.getSubscription().then(function(subscription) {
-				isSubscribed = subscription !== null;
-				updateSubscriptionOnServer(subscription);
-				updateBtn();
-			});
-		}
-
-		function subscribeUser() {
-			swRegistration.pushManager
-				.subscribe({
-					userVisibleOnly: true,
-				})
-				.then(function(subscription) {
-					console.log("User is subscribed:", subscription);
-					updateSubscriptionOnServer(subscription);
-					isSubscribed = true;
-					updateBtn();
-				})
-				.catch(function(err) {
-					if (Notification.permission === "denied") {
-						console.warn("Permission for notifications was denied");
-					} else {
-						console.error("Failed to subscribe the user: ", err);
-					}
-					updateBtn();
-				});
-		}
-
-		function unsubscribeUser() {
-			swRegistration.pushManager
-				.getSubscription()
-				.then(function(subscription) {
-					if (subscription) {
-						var id_user = "<?= $user_id ?>";
-						var tipe_user = "customer";
-						var endpoint = subscription.endpoint;
-						$('#endpointURL').text(endpoint);
-
-						$.ajax({
-							beforeSend: function() {
-								$("#loading-image").show();
-							},
-							type: "POST",
-							url: "<?= base_url() ?>/Home/unsubscribe_notification",
-							dataType: "JSON",
-							data: {
-								id_user: id_user,
-								tipe_user: tipe_user,
-								endpoint: endpoint
-							},
-							success: function(data) {},
-							complete: function(data) {
-								$("#loading-image").hide();
-							}
-						});
-
-						return subscription.unsubscribe();
-					}
-				})
-				.catch(function(error) {
-					console.log("Error unsubscribing", error);
-				})
-				.then(function() {
-					updateSubscriptionOnServer(null);
-					console.log("User is unsubscribed");
-					isSubscribed = false;
-					updateBtn();
-				});
-		}
-
-		function updateSubscriptionOnServer(subscription) {
-			var id_user = "<?= $user_id ?>";
-			var tipe_user = "customer";
-
-			if (subscription) {
-				endpoint = subscription.endpoint;
-				$('#endpointURL').text(endpoint);
-
-				$.ajax({
-					beforeSend: function() {
-						$("#loading-image").show();
-					},
-					type: "POST",
-					url: "<?= base_url() ?>/Home/subscribe_notification",
-					dataType: "JSON",
-					data: {
-						id_user: id_user,
-						tipe_user: tipe_user,
-						endpoint: endpoint
-					},
-					success: function(data) {},
-					complete: function(data) {
-						$("#loading-image").hide();
-					}
-				});
-			}
-		}
-
-		function updateBtn() {
-			if (Notification.permission === "denied") {
-				pushButton.textContent = "Ubah Izin Notifikasi";
-				$("#statusSubsNotifikasi").text('Izin notifikasi diblokir !');
-				pushButton.disabled = false;
-				updateSubscriptionOnServer(null);
-				return;
-			}
-			if (isSubscribed) {
-				pushButton.textContent = "Nonaktifkan";
-				$("#statusSubsNotifikasi").text('Notifikasi aktif !');
-			} else {
-				$("#statusSubsNotifikasi").text('Notifikasi tidak aktif !');
-				pushButton.textContent = "Aktifkan";
-			}
-			pushButton.disabled = false;
-		}
-
-		notifyButton.addEventListener("click", function() {
-			displayNotification();
-		});
-
-		if ("serviceWorker" in navigator && "PushManager" in window) {
-			console.log("Service Worker and Push is supported");
-			navigator.serviceWorker
-				.register("<?= base_url() ?>/service-worker-notif.js")
-				.then(function(swReg) {
-					console.log("Service Worker registered", swReg);
-					swRegistration = swReg;
-					initializeUI();
-				})
-				.catch(function(error) {
-					console.error("Service Worker Error", error);
-				});
-		} else {
-			console.warn("Push messaging is not supported");
-			pushButton.textContent = "Push Not Supported";
-		}
-	})();
-</script>
-
-th<?= $this->endSection('content'); ?>
+<?= $this->endSection('content'); ?>

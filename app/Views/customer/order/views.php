@@ -663,45 +663,43 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						<?php foreach ($pengantaran as $data) : ?>
 							<?php
 							$id_pengantaran = $data["id_pengantaran"];
-							$id_driver = $data["id_driver"];
-							$id_bandara = $data["id_bandara"];
+							$ceK_orderan_proses = $db->query("SELECT * FROM tb_order WHERE id_pengantaran='$id_pengantaran' AND status < '5' ")->getNumRows();
+							if ($ceK_orderan_proses == 0) {
 
-							$driver = ($db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver' "))->getRow();
-							$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
+								$id_driver = $data["id_driver"];
+								$id_bandara = $data["id_bandara"];
 
-							$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
-							$jarak_user_to_titik = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $data['latitude'], $data['longitude']);
-							$jarak_driver_to_titik = $class_dashboard->distance_matrix_google($driver->latitude, $driver->longitude, $data['latitude'], $data['longitude']);
-							$jarak_titik_to_bandara = $class_dashboard->distance_matrix_google($data['latitude'], $data['longitude'], $bandara->latitude, $bandara->longitude);
-							$jarak_user_to_bandara = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $bandara->latitude, $bandara->longitude);
+								$driver = ($db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver' "))->getRow();
+								$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara' "))->getRow();
 
-							$data_jarak_user_to_titik = explode(' ', $jarak_user_to_titik['distance']);
-							$user_to_titik_jarak = $data_jarak_user_to_titik[0];
+								$nama_lokasi = $class_dashboard->getAddress($data['latitude'], $data['longitude']);
+								$jarak_user_to_titik = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $data['latitude'], $data['longitude']);
+								$jarak_driver_to_titik = $class_dashboard->distance_matrix_google($driver->latitude, $driver->longitude, $data['latitude'], $data['longitude']);
+								$jarak_titik_to_bandara = $class_dashboard->distance_matrix_google($data['latitude'], $data['longitude'], $bandara->latitude, $bandara->longitude);
+								$jarak_user_to_bandara = $class_dashboard->distance_matrix_google($user_latitude, $user_longitude, $bandara->latitude, $bandara->longitude);
 
-							$data_jarak_user_to_bandara = explode(' ', $jarak_user_to_bandara['distance']);
-							$user_to_bandara_jarak = $data_jarak_user_to_bandara[0];
-							$biaya_perjalanan = ($data_tarif['tarif_perkm'] * $user_to_bandara_jarak);
+								$data_jarak_user_to_titik = explode(' ', $jarak_user_to_titik['distance']);
+								$user_to_titik_jarak = $data_jarak_user_to_titik[0];
 
-							$data_waktu_tempuh_user_to_titik = explode(' ', $jarak_user_to_titik['duration']);
-							$data_waktu_tempuh_driver_to_titik = explode(' ', $jarak_driver_to_titik['duration']);
-							$data_waktu_tempuh_user_to_bandara = explode(' ', $jarak_user_to_bandara['duration']);
-							$estimasi_penjemputan = $data_waktu_tempuh_driver_to_titik[0] + $data_waktu_tempuh_user_to_titik[0];
+								$data_jarak_user_to_bandara = explode(' ', $jarak_user_to_bandara['distance']);
+								$user_to_bandara_jarak = $data_jarak_user_to_bandara[0];
+								$biaya_perjalanan = ($data_tarif['tarif_perkm'] * $user_to_bandara_jarak);
+
+								$data_waktu_tempuh_user_to_titik = explode(' ', $jarak_user_to_titik['duration']);
+								$data_waktu_tempuh_driver_to_titik = explode(' ', $jarak_driver_to_titik['duration']);
+								$data_waktu_tempuh_user_to_bandara = explode(' ', $jarak_user_to_bandara['duration']);
+								$estimasi_penjemputan = $data_waktu_tempuh_driver_to_titik[0] + $data_waktu_tempuh_user_to_titik[0];
 							?>
 
-							<?php if (($user_to_titik_jarak * 1000) <= $data['radius_jemput']) : ?>
+								<?php if (($user_to_titik_jarak * 1000) <= $data['radius_jemput']) : ?>
 
-								<div class="col-lg-4 h-100 mt-3">
-									<form id="formSubmitOrder<?= $no; ?>">
-										<?= csrf_field(); ?>
+									<div class="col-lg-4 h-100 mt-3">
 										<div class="card p-0">
 
 											<div class="card-header pt-2 pb-0 d-flex justify-content-center align-items-center">
 												<div class="text-center">
 													<h5>
 														<?= $driver->nama_lengkap; ?>
-														<br>
-														<?= $user_to_titik_jarak * 1000; ?>
-														<?= $data['radius_jemput']; ?>
 													</h5>
 													<p>
 														<?= $driver->nopol; ?>
@@ -749,98 +747,24 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 														<td><?= rupiah($biaya_perjalanan, "Y"); ?></td>
 													</tr>
 												</table>
-
-												<input type="hidden" name="id_customer" value="<?= $user_id ?>" />
-												<input type="hidden" name="id_pengantaran" value="<?= $id_pengantaran ?>" />
-												<input type="hidden" name="latitude" value="<?= $user_latitude ?>" />
-												<input type="hidden" name="longitude" value="<?= $user_longitude ?>" />
-												<input type="hidden" name="tarif_perkm" value="<?= $data_tarif['tarif_perkm'] ?>" />
-												<input type="hidden" name="jarak_customer_to_bandara" value="<?= $user_to_bandara_jarak ?>" />
-												<input type="hidden" name="biaya" value="<?= $biaya_perjalanan ?>" />
 											</div>
 
 											<div class="card-footer">
 												<div class="d-flex">
-													<button type="button" class="btn btn-block btn-outline-success btn-submit-order-<?= $no; ?>" title="Order Taxi">
+													<button onclick="submit_order(<?= $user_id ?>, <?= $id_pengantaran ?>, <?= $user_latitude ?>, <?= $user_longitude ?>, <?= $data_tarif['tarif_perkm'] ?>, <?= $user_to_bandara_jarak ?>, <?= $biaya_perjalanan ?>)" class="btn btn-block btn-outline-success" title="Order Taxi">
 														<i class="fa fa-taxi"></i> ORDER TAXI
 													</button>
 												</div>
 											</div>
 										</div>
-									</form>
-								</div>
-
-								<script>
-									$(document).ready(function() {
-										$(function() {
-
-											$(".btn-submit-order-<?= $no; ?>").click(function(e) {
-												e.preventDefault();
-
-												var id_customer = $('#formSubmitOrder<?= $no; ?> input[name="id_customer"]').val();
-												var id_pengantaran = $('#formSubmitOrder<?= $no; ?> input[name="id_pengantaran"]').val();
-												var latitude = $('#formSubmitOrder<?= $no; ?> input[name="latitude"]').val();
-												var longitude = $('#formSubmitOrder<?= $no; ?> input[name="longitude"]').val();
-												var tarif_perkm = $('#formSubmitOrder<?= $no; ?> input[name="tarif_perkm"]').val();
-												var jarak_customer_to_bandara = $('#formSubmitOrder<?= $no; ?> input[name="jarak_customer_to_bandara"]').val();
-												var biaya = $('#formSubmitOrder<?= $no; ?> input[name="biaya"]').val();
-
-												$.ajax({
-													type: "POST",
-													url: "<?= base_url() ?>/customer/order/submit-order",
-													dataType: "JSON",
-													data: {
-														id_customer: id_customer,
-														id_pengantaran: id_pengantaran,
-														latitude: latitude,
-														longitude: longitude,
-														tarif_perkm: tarif_perkm,
-														jarak_customer_to_bandara: jarak_customer_to_bandara,
-														biaya: biaya
-													},
-													beforeSend: function() {
-														$("#loader").show();
-													},
-													success: function(data) {
-														if (data.success == "1") {
-															Swal.fire(
-																'Berhasil !',
-																data.pesan,
-																'success'
-															);
-
-															setTimeout(function() { // wait for 5 secs(2)
-																location.reload(); // then reload the page.(3)
-															}, 10);
-														} else if (data.success == "0") {
-															Swal.fire(
-																'Gagal !',
-																data.pesan,
-																'error'
-															);
-															setTimeout(function() { // wait for 5 secs(2)
-																location.reload(); // then reload the page.(3)
-															}, 10);
-														}
-													},
-													complete: function(data) {
-														$("#loader").hide();
-													}
-												});
-
-											});
-
-										});
-									});
-								</script>
-
-								<?php $no += 1; ?>
-							<?php endif; ?>
-
+									</div>
+									<?php $no += 1; ?>
+								<?php endif; ?>
+							<?php } ?>
 						<?php endforeach; ?>
 
 						<?php if ($no == 0) : ?>
-							<div class="col-lg-12">
+							<div class="col-lg-12">;
 								<div class="card">
 									<div class="card-body text-center py-6">
 										Belum ada driver tersedia yang melakukan pengantaran penumpang disekitar anda !
@@ -864,6 +788,61 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 
 	</div>
 </section>
+
+<script>
+	function submit_order(id_customer, id_pengantaran, latitude, longitude, tarif_perkm, jarak_customer_to_bandara, biaya) {
+
+		event.preventDefault();
+		Swal.fire({
+			title: 'Order TAXI',
+			text: "Pilih ya, jika anda ingin order TAXI ini !",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ya',
+			cancelButtonText: 'Batal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "POST",
+					url: "<?= base_url() ?>/customer/order/submit-order",
+					dataType: "JSON",
+					data: {
+						id_customer: id_customer,
+						id_pengantaran: id_pengantaran,
+						latitude: latitude,
+						longitude: longitude,
+						tarif_perkm: tarif_perkm,
+						jarak_customer_to_bandara: jarak_customer_to_bandara,
+						biaya: biaya
+					},
+					beforeSend: function() {
+						$("#loader").show();
+					},
+					success: function(data) {
+						if (data.success == "1") {
+							Swal.fire(
+								'Berhasil !',
+								data.pesan,
+								'success'
+							);
+						} else if (data.success == "0") {
+							Swal.fire(
+								'Gagal !',
+								data.pesan,
+								'error'
+							);
+						}
+					},
+					complete: function(data) {
+						$("#loader").hide();
+					}
+				});
+			}
+		});
+	}
+</script>
 
 <script>
 	$(document).ready(function() {

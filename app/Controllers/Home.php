@@ -6,6 +6,9 @@ use App\Models\CustomerModel;
 use App\Models\DriverModel;
 use App\Models\PushNotifModel;
 
+use Minishlink\WebPush\WebPush;
+use Minishlink\WebPush\Subscription;
+
 class Home extends BaseController
 {
 	public function __construct()
@@ -39,102 +42,6 @@ class Home extends BaseController
 		return $ipaddress;
 	}
 
-	public function subscribe_notification()
-	{
-		$id_user = $this->request->getVar('id_user');
-		$tipe_user = $this->request->getVar('tipe_user');
-		$data_endpoint = explode("https://fcm.googleapis.com/fcm/send/", $this->request->getVar('endpoint'));
-		$endpoint = $data_endpoint[1];
-
-		$cek_data = $this->db->query("SELECT * FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' AND endpoint='$endpoint'")->getNumRows();
-
-		if (!($cek_data > 0)) {
-			$query = $this->PushNotifModel->save([
-				'id_user' => $id_user,
-				'tipe_user' => $tipe_user,
-				'endpoint' => $endpoint
-			]);
-		}
-
-		if ($query) {
-			echo json_encode(array(
-				'success' => '1',
-				'pesan' => 'Layanan notifikasi berhasil diaktifkan !'
-			));
-		} else {
-			echo json_encode(array(
-				'success' => '0',
-				'pesan' => 'Maaf, terdapat kesalahan teknis !'
-			));
-		}
-	}
-
-	public function unsubscribe_notification()
-	{
-		$id_user = $this->request->getVar('id_user');
-		$tipe_user = $this->request->getVar('tipe_user');
-		$endpoint = $this->request->getVar('endpoint');
-
-		$query = $this->db->query("DELETE FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' AND endpoint='$endpoint'");
-
-		if ($query) {
-			echo json_encode(array(
-				'success' => '1',
-				'pesan' => 'Layanan notifikasi berhasil dinonaktifkan !'
-			));
-		} else {
-			echo json_encode(array(
-				'success' => '0',
-				'pesan' => 'Maaf, terdapat kesalahan teknis !'
-			));
-		}
-	}
-
-	public function send_push_notification()
-	{
-		$endpoint = $this->request->getVar('endpoint');
-
-		$judul = $this->request->getVar('judul');
-		$deskripsi = $this->request->getVar('deskripsi');
-		$link_aksi = $this->request->getVar('link_aksi');
-
-		$server_key_firebase = "AAAA3saUcJ8:APA91bFHkJ9eHLkxYc9YLDmsSTabwL8zk2jAzWqpUbqvkXnEhIPKG9gOY0vQkwYaWRHrBZMhLjWaLBcQ3fb68bp1peY0Sw1dy_1mHAZYGgrY26TC9PnlrMFbcrQ_qSxAxBDjArV4xySI";
-
-		define('SERVER_API_KEY', $server_key_firebase);
-		$registrationIds[0] = $endpoint;
-		$header = [
-			'Authorization: Key=' . SERVER_API_KEY,
-			'Content-Type: Application/json'
-		];
-		$msg = [
-			'title' => $judul,
-			'body'  => $deskripsi,
-			'icon'  => 'https://jo.yokcaridok.id/assets/img/logo.jpg',
-			'image' => 'https://jo.yokcaridok.id/assets/img/taxi.png',
-			'click_action' => $link_aksi
-		];
-
-		$payload = [
-			'registration_ids'  => $registrationIds,
-			'data'				=> $msg
-		];
-
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://fcm.googleapis.com/fcm/send",
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_CUSTOMREQUEST => "POST",
-			CURLOPT_POSTFIELDS => json_encode($payload),
-			CURLOPT_HTTPHEADER => $header
-		));
-
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-		curl_close($curl);
-		if ($err) echo "cURL Error #:" . $err;
-		else echo $response;
-	}
-
 	public function beranda()
 	{
 		$data = [
@@ -163,5 +70,95 @@ class Home extends BaseController
 			'title' => 'TENTANG',
 		];
 		return view('landing/tentang/views', $data);
+	}
+
+	public function push_subscription()
+	{
+		$id_user = $this->request->getPost('id_user');
+		$tipe_user = $this->request->getPost('tipe_user');
+		$endpoint = $this->request->getPost('endpoint');
+		$p256dh = $this->request->getPost('p256dh');
+		$auth = $this->request->getPost('auth');
+
+		$cek_data = $this->db->query("SELECT * FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' AND endpoint = '$endpoint'");
+		if ($cek_data->getNumRows() == 0) {
+			$this->PushNotifModel->save([
+				'id_user' => $id_user,
+				'tipe_user' => $tipe_user,
+				'endpoint' => $endpoint,
+				'p256dh' => $p256dh,
+				'auth' => $auth
+			]);
+		} else {
+			$data = $cek_data->getRow();
+			$this->PushNotifModel->updatePushNotif([
+				'p256dh' => $p256dh,
+				'auth' => $auth
+			], $data->id_push_notif);
+		}
+	}
+
+	public function send_push_notif()
+	{
+		// $id_user = $this->request->getPost('id_user');
+		$tipe_user = $this->request->getPost('tipe_user');
+		$text_pesan = $this->request->getPost('text_pesan');
+		$contentencoding = $this->request->getPost('ce');
+
+		$id_user = 7;
+		$auth = [
+			'VAPID' => [
+				'subject' => 'https://jo.yokcaridok.id/',
+				'publicKey' => file_get_contents(base_url() . '/notif-keys/public_key.txt'),
+				'privateKey' => file_get_contents(base_url() . '/notif-keys/private_key.txt')
+			],
+		];
+
+		if ($tipe_user === "customer") {
+			$user = $this->CustomerModel->getCustomer($id_user);
+		} elseif ($tipe_user === "driver") {
+			$user = $this->DriverModel->getDriver($id_user);
+		}
+
+		$email_user = $user["email"];
+		$confirm_send_notif = "Notif to User [$email_user] -> ";
+
+		$cek_user = $this->db->query("SELECT * FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' ORDER BY id_push_notif DESC");
+		foreach ($cek_user->getResult('array') as $result) {
+			$tujuan = array(
+				"endpoint" => $result['endpoint'],
+				"expirationTime" => "",
+				"keys" => array(
+					"p256dh" => $result['p256dh'],
+					"auth" => $result['auth']
+				),
+				"contentEncoding" => "$contentencoding"
+			);
+
+			$subscription = Subscription::create($tujuan, true);
+			$webPush = new WebPush($auth);
+
+			$report = $webPush->sendOneNotification(
+				$subscription,
+				$text_pesan
+			);
+
+			$endpoint = $report->getRequest()->getUri()->__toString();
+
+			if ($report->isSuccess()) {
+				$result_success = true;
+				$confirm_send_notif .= "Sent to $endpoint -> ";
+			} else {
+				$result_success = false;
+				$confirm_send_notif .= "Failed to $endpoint -> ";
+				$this->db->query("DELETE FROM tb_push_notif WHERE endpoint='$endpoint' ");
+			}
+		}
+
+		if ($confirm_send_notif != "") {
+			echo json_encode(array(
+				'pesan' => "$confirm_send_notif"
+			));
+		}
 	}
 }

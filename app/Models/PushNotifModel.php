@@ -26,6 +26,14 @@ class PushNotifModel extends Model
 		return $this->where(['id_push_notif' => $id_push_notif])->first();
 	}
 
+	public function getPushNotifByUser($id_user, $tipe_user)
+	{
+		return $this->where([
+			'id_user' => $id_user,
+			'tipe_user' => $tipe_user
+		])->orderBy('id_push_notif', 'desc')->findAll();
+	}
+
 	public function updatePushNotif($data, $id)
 	{
 		$query = $this->db->table($this->table)->update($data, array('id_push_notif' => $id));

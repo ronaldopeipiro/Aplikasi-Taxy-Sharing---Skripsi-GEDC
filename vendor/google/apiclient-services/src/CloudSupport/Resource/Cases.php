@@ -107,7 +107,7 @@ class Cases extends \Google\Service\Resource
    * @opt_param string filter An expression written in the Cloud filter language.
    * If non-empty, then only cases whose fields match the filter are returned. If
    * empty, then no messages are filtered out. Filter strings can use the
-   * following fields: - status (Accepted values: OPEN or CLOSED) - severity
+   * following fields: - state (Accepted values: OPEN or CLOSED) - severity
    * (Accepted values: S0, S1, S2, S3, or S4) - creator.email with the operators
    * equals (=) and AND. Additionally, a global restriction (with no operator) can
    * be used to search across displayName, description, and comments (e.g. "my
@@ -127,7 +127,8 @@ class Cases extends \Google\Service\Resource
   /**
    * Update the specified case. Only a subset of fields (display_name,
    * description, time_zone, subscriber_email_addresses, related_resources,
-   * severity, primary_contact, and labels) can be updated. (cases.patch)
+   * severity, priority, primary_contact, and labels) can be updated.
+   * (cases.patch)
    *
    * @param string $name The resource name for the case.
    * @param CloudsupportCase $postBody

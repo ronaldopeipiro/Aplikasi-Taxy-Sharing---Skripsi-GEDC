@@ -1,0 +1,768 @@
+CRITICAL - 2022-03-10 15:30:29 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:30:30 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:30:45 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:30:45 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:31:32 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:31:40 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:31:40 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:17 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:17 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:42 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:42 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:48 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:33:48 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:34:56 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:34:56 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:35:14 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:35:15 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:35:42 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:35:43 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:36:12 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:36:12 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:44:44 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:44:45 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:50:11 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:50:11 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:50:49 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:50:49 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:51:43 --> Undefined offset: 1
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\laragon\\www\\...', 47, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:52:01 --> Undefined offset: 1
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\laragon\\www\\...', 47, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:52:39 --> Undefined offset: 1
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\laragon\\www\\...', 47, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:52:46 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:52:46 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:52:59 --> Undefined property: stdClass::$duration_in_traffic
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(80): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\laragon\\www\\...', 80, Array)
+#1 C:\laragon\www\taxi-sharing-2020\app\Views\customer\dashboard\views.php(480): App\Controllers\Customer\Dashboard->distance_matrix_google('-0.0263303', '109.3425039', '-0.1467269', '109.4043702')
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(210): include('C:\\laragon\\www\\...')
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Common.php(1089): CodeIgniter\View\View->render('customer/dashbo...', Array, true)
+#5 C:\laragon\www\taxi-sharing-2020\app\Controllers\Customer\Dashboard.php(125): view('customer/dashbo...', Array)
+#6 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Customer\Dashboard->index()
+#7 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Customer\Dashboard))
+#8 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2022-03-10 15:53:17 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:53:17 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:53:59 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:53:59 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:56:06 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:56:06 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:57:12 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:57:12 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:57:19 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 15:57:19 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:04:18 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:04:20 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:06:52 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:06:52 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:07:22 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:10:47 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:10:48 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:11:13 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:11:14 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:11:57 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:11:58 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:13:00 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:13:00 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:15:39 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:15:39 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:15:48 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:15:59 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:16:01 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:18:07 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(58): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 58, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:19:54 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:20:06 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:21:11 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:22:05 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:22:12 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:22:25 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:22:31 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:22:38 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:41:56 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 16:42:04 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 17:32:45 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:37:42 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:37:51 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:38:36 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:38:48 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:39:29 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:46:53 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 17:53:05 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:25:14 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:25:23 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:25:32 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:25:43 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:25:56 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:26:23 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:39:47 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:40:00 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:40:25 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:49:10 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:53:54 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:54:35 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 22:56:18 --> Too few arguments to function App\Controllers\Home::send_push_notification(), 0 passed in C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php on line 825 and exactly 1 expected
+#0 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->send_push_notification()
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#4 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#5 {main}
+CRITICAL - 2022-03-10 23:12:06 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 23:12:06 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 23:12:20 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 23:12:20 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}
+CRITICAL - 2022-03-10 23:12:59 --> Undefined variable: query
+#0 C:\laragon\www\taxi-sharing-2020\app\Controllers\Home.php(59): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\laragon\\www\\...', 59, Array)
+#1 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(825): App\Controllers\Home->subscribe_notification()
+#2 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(412): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#3 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\CodeIgniter.php(320): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\laragon\www\taxi-sharing-2020\public\index.php(38): CodeIgniter\CodeIgniter->run()
+#5 C:\laragon\www\taxi-sharing-2020\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(43): require_once('C:\\laragon\\www\\...')
+#6 {main}

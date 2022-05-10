@@ -92,13 +92,15 @@ class Auth extends Controller
 		require_once APPPATH . 'Libraries/vendor/autoload.php';
 		$google_client = new \Google_Client();
 
-		// Localhost
-		$google_client->setClientId('470512694911-b0qms2mklitu9btvi9fvr21j65vlkmcs.apps.googleusercontent.com');
-		$google_client->setClientSecret('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');
-
-		// Hosting jo.yokcaridok.id
-		// $google_client->setClientId('470512694911-6ffkdo551ugthpd935s930p0636o92a2.apps.googleusercontent.com');
-		// $google_client->setClientSecret('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');
+		if (base_url() == "http://localhost:2020") {
+			// Localhost
+			$google_client->setClientId('470512694911-b0qms2mklitu9btvi9fvr21j65vlkmcs.apps.googleusercontent.com');
+			$google_client->setClientSecret('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');
+		} else {
+			// Hosting jo.yokcaridok.id
+			$google_client->setClientId('470512694911-6ffkdo551ugthpd935s930p0636o92a2.apps.googleusercontent.com');
+			$google_client->setClientSecret('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');
+		}
 
 		$google_client->setRedirectUri(base_url() . '/customer/login');
 		$google_client->addScope('email');
