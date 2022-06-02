@@ -134,17 +134,6 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 								<p style="color: darkslateblue; margin-top: -15px;">
 									<?= $user_no_hp; ?>
 								</p>
-
-								<div class="mt-4">
-									<p>
-										<button class="btn btn-sm btn-outline-info js-notify-btn">Notify me!</button>
-									</p>
-									<p>
-										<span class="badge badge-info" id="statusSubsNotifikasi"></span>
-										<!-- <button disabled class="btn btn-sm btn-outline-info js-push-btn">Subscribe !</button> -->
-									</p>
-									<!-- <span id="endpointURL"></span> -->
-								</div>
 							</div>
 
 						</div>
@@ -284,15 +273,13 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 									<a href="<?= base_url(); ?>/customer/order" class="btn btn-info">
 										<i class="fa fa-arrow-right"></i> Detail Order
 									</a>
-									<?php if ($orderan_belum_selesai->status == "0") : ?>
-										<form action="<?= base_url(); ?>/Customer/Order/cancel_order" method="POST">
-											<?= csrf_field(); ?>
-											<input type="hidden" name="id_order" value="<?= $orderan_belum_selesai->id_order; ?>">
 
-											<button type="submit" class="btn btn-danger btn-cancel-order">
-												<i class="fa fa-times"></i> Batalkan
-											</button>
-										</form>
+									<?php if ($orderan_belum_selesai->status == "0") : ?>
+
+										<button onclick="customer_update_status_order(<?= $orderan_belum_selesai->id_order ?>, '5', <?= $id_driver ?>,  <?= $user_id ?>)" class="btn btn-block btn-outline-danger" title="Batalkan Orderan" style="width: 50%;">
+											<i class="fa fa-times"></i> Batalkan
+										</button>
+
 									<?php endif; ?>
 								</div>
 
@@ -594,7 +581,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 											</div>
 											<br>
 											<div class="row justify-content-center mb-4">
-												<button onclick="submit_order(<?= $user_id ?>, ${id_pengantaran}, <?= $user_latitude ?>, <?= $user_longitude ?>, <?= $data_tarif['tarif_perkm'] ?>, ${jarak_user_to_bandara}, ${biaya_perjalanan})" class="btn btn-block btn-outline-success" title="Order Taxi">
+												<button onclick="submit_order(${id_driver}, <?= $user_id ?>, ${id_pengantaran}, <?= $user_latitude ?>, <?= $user_longitude ?>, <?= $data_tarif['tarif_perkm'] ?>, ${jarak_user_to_bandara}, ${biaya_perjalanan})" class="btn btn-block btn-outline-success" title="Order Taxi">
 													<i class="fa fa-taxi"></i> ORDER TAXI
 												</button>
 											</div>
@@ -761,7 +748,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 				</script>
 
 				<script>
-					function submit_order(id_customer, id_pengantaran, latitude, longitude, tarif_perkm, jarak_customer_to_bandara, biaya) {
+					function submit_order(id_driver, id_customer, id_pengantaran, latitude, longitude, tarif_perkm, jarak_customer_to_bandara, biaya) {
 
 						event.preventDefault();
 						Swal.fire({
@@ -798,6 +785,8 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 												data.pesan,
 												'success'
 											);
+											send_notif(id_driver, 'driver', 'Anda memiliki orderan baru, silahkan buka aplikasi untuk melihat orderan !');
+											send_notif(id_customer, 'customer', 'Orderan berhasil dibuat !');
 											setTimeout(function() { // wait for 5 secs(2)
 												location.reload(); // then reload the page.(3)
 											}, 10);

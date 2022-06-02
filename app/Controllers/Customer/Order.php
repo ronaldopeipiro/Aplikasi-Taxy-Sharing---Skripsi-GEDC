@@ -189,9 +189,11 @@ class Order extends Controller
 		}
 	}
 
-	public function cancel_order()
+	public function update_status_order()
 	{
 		$id_order = $this->request->getPost('id_order');
+		$status = $this->request->getPost('status');
+
 		$order = ($this->db->query("SELECT * FROM tb_order WHERE id_order='$id_order' "))->getRow();
 		$customer = ($this->db->query("SELECT * FROM tb_customer WHERE id_customer='$order->id_customer' "))->getRow();
 
@@ -199,16 +201,24 @@ class Order extends Controller
 		$pengantaran = ($this->db->query("SELECT * FROM tb_pengantaran WHERE id_pengantaran='$id_pengantaran' "))->getRow();
 		$driver = ($this->db->query("SELECT * FROM tb_driver WHERE id_driver='$pengantaran->id_driver' "))->getRow();
 
-		// $this->OrderModel->deleteOrder($id_order);
-		$this->OrderModel->updateOrder([
-			'status' => '5'
+		$query = $this->OrderModel->updateOrder([
+			'status' => $status
 		], $id_order);
 
-		$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, "5");
-		$this->kirim_email_to_driver($driver->nama_lengkap, $driver->email, "5");
+		if ($query) {
+			$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, "5");
+			$this->kirim_email_to_driver($driver->nama_lengkap, $driver->email, "5");
 
-		session()->setFlashdata('pesan_berhasil', 'Orderan dibatalkan !');
-		return redirect()->to(base_url() . '/customer/order');
+			echo json_encode(array(
+				'success' => '1',
+				'pesan' => 'Berhasil update status orderan !'
+			));
+		} else {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Gagal update status orderan !'
+			));
+		}
 	}
 
 	public function kirim_email_konfirmasi_status_orderan($nama_penerima, $email_penerima, $status)

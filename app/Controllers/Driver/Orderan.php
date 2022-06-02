@@ -117,14 +117,24 @@ class Orderan extends Controller
 			], $data_order['id_pengantaran']);
 		}
 
-
-		$this->OrderModel->updateOrder([
+		$query = $this->OrderModel->updateOrder([
 			'status' => $status
 		], $id_order);
 
-		session()->setFlashdata('pesan_berhasil', 'Berhasil update status orderan !');
-		$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, $status);
-		return redirect()->to(base_url() . '/driver/orderan');
+		if ($query) {
+			$this->kirim_email_konfirmasi_status_orderan($customer->nama_lengkap, $customer->email, $status);
+			echo json_encode(array(
+				'success' => '1',
+				'pesan' => 'Berhasil update status orderan !'
+			));
+		} else {
+			echo json_encode(array(
+				'success' => '0',
+				'pesan' => 'Gagal update status orderan !'
+			));
+		}
+		// session()->setFlashdata('pesan_berhasil', 'Berhasil update status orderan !');
+		// return redirect()->to(base_url() . '/driver/orderan');
 	}
 
 	public function kirim_email_konfirmasi_status_orderan($nama_penerima, $email_penerima, $status)

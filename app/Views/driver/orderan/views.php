@@ -50,6 +50,9 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 				$id_pengantaran = $r_orderan->id_pengantaran;
 				$pengantaran = ($db->query("SELECT * FROM tb_pengantaran WHERE id_pengantaran='$id_pengantaran' LIMIT 1"))->getRow();
 
+				$id_driver = $pengantaran->id_driver;
+				$driver = ($db->query("SELECT * FROM tb_driver WHERE id_driver='$id_driver'"))->getRow();
+
 				$id_bandara = $r_orderan->id_bandara;
 				$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara'"))->getRow();
 
@@ -460,6 +463,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 													<td>:</td>
 													<td style="width: 70%;">${no_hp_customer}</td>
 												</tr>
+											</table>
 											`);
 														infoWindow.open(map, markerCustomer);
 													}
@@ -558,52 +562,31 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 											<?php if ($r_orderan->status == "0") : ?>
 
-												<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 50%">
-													<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-													<input type="hidden" name="status" value="1">
-													<button type="submit" class="btn btn-block btn-success btn-terima-order" style="width: 100%;">
-														<i class="fa fa-check"></i> Terima
-													</button>
-												</form>
+												<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '1', <?= $id_driver ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-success mt-2" title="Terima Orderan" style="width: 50%;">
+													<i class="fa fa-check"></i> Terima
+												</button>
 
-												<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 50%;">
-													<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-													<input type="hidden" name="status" value="6">
-													<button type="submit" class="btn btn-block btn-danger btn-tolak-order" style="width: 100%;">
-														<i class="fa fa-times"></i> Tolak
-													</button>
-												</form>
+												<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '6', <?= $id_driver ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-danger" title="Tolak Orderan" style="width: 50%;">
+													<i class="fa fa-times"></i> Tolak
+												</button>
 
 											<?php elseif ($r_orderan->status == "1") : ?>
 
-												<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-													<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-													<input type="hidden" name="status" value="2">
-													<button type="submit" class="btn btn-block btn-info btn-confirm-jemput-customer" style="width: 100%;">
-														<i class="fa fa-car"></i> Jemput Customer
-													</button>
-												</form>
-
+												<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '2', <?= $id_driver ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-info" title="Jemput Customer" style="width: 100%;">
+													<i class="fa fa-taxi"></i> Jemput Customer
+												</button>
 
 											<?php elseif ($r_orderan->status == "2") : ?>
 
-												<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-													<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-													<input type="hidden" name="status" value="3">
-													<button type="submit" class="btn btn-block btn-primary btn-confirm-otw-bandara">
-														<i class="fa fa-car"></i> Menuju Bandara
-													</button>
-												</form>
+												<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '3', <?= $id_driver ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-primary" title="Menuju Bandara" style="width: 100%;">
+													<i class="fa fa-car"></i> Menuju Bandara
+												</button>
 
 											<?php elseif ($r_orderan->status == "3") : ?>
 
-												<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-													<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-													<input type="hidden" name="status" value="4">
-													<button type="submit" class="btn btn-block btn-success btn-confirm-selesai-order" style="width: 100%;">
-														<i class="fa fa-check"></i> Selesai
-													</button>
-												</form>
+												<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '4', <?= $id_driver ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-success" title="Tandai Selesai" style="width: 100%;">
+													<i class="fa fa-check"></i> Selesai
+												</button>
 
 											<?php endif; ?>
 
@@ -677,7 +660,6 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 				</div>
 			<?php endif; ?>
 
-
 		<?php else : ?>
 
 			<div class="row justify-content-center">
@@ -691,16 +673,19 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 									</h5>
 
 									<div class="row justify-content-center">
+
 										<div class="col-lg-3 mb-3 mb-lg-0 text-center">
 											<a href="<?= base_url(); ?>/driver" class="btn btn-outline-dark">
 												<i class="fa fa-arrow-left"></i> Beranda
 											</a>
 										</div>
+
 										<div class="col-lg-3 text-center">
 											<a href="<?= base_url(); ?>/driver/pengantaran/create" class="btn btn-outline-success">
 												<i class="fa fa-car"></i> Tambah Pengantaran
 											</a>
 										</div>
+
 									</div>
 
 								</div>

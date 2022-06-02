@@ -100,12 +100,12 @@ class Home extends BaseController
 
 	public function send_push_notif()
 	{
-		// $id_user = $this->request->getPost('id_user');
+		$id_user = $this->request->getPost('id_user');
 		$tipe_user = $this->request->getPost('tipe_user');
 		$text_pesan = $this->request->getPost('text_pesan');
 		$contentencoding = $this->request->getPost('ce');
 
-		$id_user = 7;
+		// $id_user = 7;
 		$auth = [
 			'VAPID' => [
 				'subject' => 'https://jo.yokcaridok.id/',
@@ -124,6 +124,7 @@ class Home extends BaseController
 		$confirm_send_notif = "Notif to User [$email_user] -> ";
 
 		$cek_user = $this->db->query("SELECT * FROM tb_push_notif WHERE id_user='$id_user' AND tipe_user='$tipe_user' ORDER BY id_push_notif DESC");
+
 		foreach ($cek_user->getResult('array') as $result) {
 			$tujuan = array(
 				"endpoint" => $result['endpoint'],

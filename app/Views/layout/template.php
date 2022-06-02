@@ -760,82 +760,6 @@ date_default_timezone_set("Asia/Jakarta");
 				});
 			});
 
-			$('.btn-terima-order').on('click', function(e) {
-				event.preventDefault();
-				Swal.fire({
-					title: 'Terima Orderan ?',
-					text: "Pilih ya, jika anda ingin menerima orderan !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
-			$('.btn-tolak-order').on('click', function(e) {
-				event.preventDefault();
-				Swal.fire({
-					title: 'Tolak Orderan ?',
-					text: "Pilih ya, jika anda ingin menolak orderan !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
-			$('.btn-confirm-jemput-customer').on('click', function(e) {
-				event.preventDefault();
-				Swal.fire({
-					title: 'Jemput Customer ?',
-					text: "Pilih ya, jika anda benar akan menjemput customer !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
-			$('.btn-confirm-otw-bandara').on('click', function(e) {
-				event.preventDefault();
-				Swal.fire({
-					title: 'Menuju Bandara ?',
-					text: "Pilih ya, jika anda benar akan berangkat menuju bandara !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
 			$('.btn-cancel-order').on('click', function(e) {
 				// prevent form submit
 				event.preventDefault();
@@ -895,26 +819,6 @@ date_default_timezone_set("Asia/Jakarta");
 				});
 			});
 
-			$('.btn-confirm-selesai-order').on('click', function(e) {
-				// prevent form submit
-				event.preventDefault();
-				Swal.fire({
-					title: 'Orderan Selesai ?',
-					text: "Pilih ya, jika benar anda telah selesai mengantar penumpang sampai di bandara tujuan !",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya',
-					cancelButtonText: 'Batal'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var form = $(this).parents('form');
-						form.submit();
-					}
-				});
-			});
-
 			$('.btn-logout').on('click', function(e) {
 				event.preventDefault(); // prevent form submit
 				Swal.fire({
@@ -942,6 +846,172 @@ date_default_timezone_set("Asia/Jakarta");
 				"searching": true,
 			});
 		})
+	</script>
+
+	<script>
+		function customer_update_status_order(id_order, status, id_driver, id_customer) {
+			event.preventDefault();
+			var title_status,
+				text_status,
+				text_notif_driver,
+				text_notif_customer;
+
+			if (status == '5') {
+				title_status = "Batalkan Orderan ?";
+				text_status = "Pilih ya, jika anda ingin membatalkan orderan !";
+
+				text_notif_driver = "Orderan dibatalkan oleh anda !";
+				text_notif_customer = "Orderan dibatalkan oleh customer !";
+			}
+
+			Swal.fire({
+				title: title_status,
+				text: text_status,
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "POST",
+						url: base_url + "/Customer/Order/update_status_order",
+						dataType: "JSON",
+						data: {
+							id_order: id_order,
+							status: status
+						},
+						beforeSend: function() {
+							$("#loader").show();
+						},
+						success: function(data) {
+							if (data.success == "1") {
+								send_notif(id_driver, 'driver', text_notif_driver);
+								send_notif(id_customer, 'customer', text_notif_customer);
+
+								Swal.fire({
+									title: 'Berhasil !',
+									text: data.pesan,
+									type: 'success'
+								}).then(function() {
+									window.location = base_url + '/customer/order';
+								});
+
+							} else if (data.success == "0") {
+
+								Swal.fire({
+									title: 'Gagal !',
+									text: data.pesan,
+									type: 'error'
+								}).then(function() {
+									window.location = base_url + '/customer/order';
+								});
+							}
+						},
+						complete: function(data) {
+							$("#loader").hide();
+						}
+					});
+				}
+			});
+
+		}
+
+		function driver_update_status_order(id_order, status, id_driver, id_customer) {
+			event.preventDefault();
+			var title_status,
+				text_status,
+				text_notif_driver,
+				text_notif_customer;
+
+			if (status == '1') {
+				title_status = "Terima Orderan ?";
+				text_status = "Pilih ya, jika anda ingin menerima orderan !";
+
+				text_notif_driver = "Berhasil menerima orderan !";
+				text_notif_customer = "Orderan diterima oleh driver. Mohon tunggu, driver akan segera menjemput anda !";
+			} else if (status == '2') {
+				title_status = "Jemput Customer ?";
+				text_status = "Pilih ya, jika anda benar akan menjemput customer !";
+
+				text_notif_driver = "Menjemput Customer !";
+				text_notif_customer = "Driver sedang menuju ke lokasi anda, silahkan tunggu !";
+			} else if (status == '3') {
+				title_status = "Menuju Bandara ?";
+				text_status = "Pilih Ya, jika anda telah siap menuju bandara ?";
+
+				text_notif_driver = "Menuju bandara, hati-hati dijalan yaa !";
+				text_notif_customer = "Anda sedang menuju bandara bersama driver kami !";
+			} else if (status == '4') {
+				title_status = "Selesai";
+				text_status = "Anda telah sampai di tujuan pengantaran ?";
+
+				text_notif_driver = "Orderan Selesai, Good Job !";
+				text_notif_customer = "Orderan Selesai, Anda telah sampai ditujuan. Terima kasih telah menggunakan layanan kami !";
+			} else if (status == '6') {
+				title_status = "Batalkan Orderan ?";
+				text_status = "Pilih Ya, jika anda ingin membatalkan orderan !";
+
+				text_notif_driver = "Orderan dibatalkan oleh anda !";
+				text_notif_customer = "Orderan ditolak oleh driver !";
+			}
+
+			Swal.fire({
+				title: title_status,
+				text: text_status,
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya',
+				cancelButtonText: 'Batal'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "POST",
+						url: base_url + "/Driver/Orderan/update_status_order",
+						dataType: "JSON",
+						data: {
+							id_order: id_order,
+							status: status
+						},
+						beforeSend: function() {
+							$("#loader").show();
+						},
+						success: function(data) {
+							if (data.success == "1") {
+								send_notif(id_driver, 'driver', text_notif_driver);
+								send_notif(id_customer, 'customer', text_notif_customer);
+
+								Swal.fire({
+									title: 'Berhasil !',
+									text: data.pesan,
+									type: 'success'
+								}).then(function() {
+									window.location = base_url + '/driver/orderan';
+								});
+
+							} else if (data.success == "0") {
+
+								Swal.fire({
+									title: 'Gagal !',
+									text: data.pesan,
+									type: 'error'
+								}).then(function() {
+									window.location = base_url + '/driver/orderan';
+								});
+							}
+						},
+						complete: function(data) {
+							$("#loader").hide();
+						}
+					});
+				}
+			});
+
+		}
 	</script>
 
 	<!-- <script>

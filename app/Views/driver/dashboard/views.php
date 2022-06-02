@@ -257,55 +257,33 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 
 												<?php if ($r_orderan->status == "0") : ?>
 
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 50%">
-														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-														<input type="hidden" name="status" value="1">
-														<button type="submit" class="btn btn-block btn-success btn-terima-order" style="width: 100%;">
-															<i class="fa fa-check"></i> Terima
-														</button>
-													</form>
+													<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '1', <?= $user_id ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-success mt-2" title="Terima Orderan" style="width: 50%;">
+														<i class="fa fa-check"></i> Terima
+													</button>
 
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 50%;">
-														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-														<input type="hidden" name="status" value="6">
-														<button type="submit" class="btn btn-block btn-danger btn-tolak-order" style="width: 100%;">
-															<i class="fa fa-times"></i> Tolak
-														</button>
-													</form>
+													<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '6', <?= $user_id ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-danger" title="Tolak Orderan" style="width: 50%;">
+														<i class="fa fa-times"></i> Tolak
+													</button>
 
 												<?php elseif ($r_orderan->status == "1") : ?>
 
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-														<input type="hidden" name="status" value="2">
-														<button type="submit" class="btn btn-block btn-info btn-confirm-jemput-customer" style="width: 100%;">
-															<i class="fa fa-car"></i> Jemput Customer
-														</button>
-													</form>
-
+													<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '2', <?= $user_id ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-info" title="Jemput Customer" style="width: 100%;">
+														<i class="fa fa-taxi"></i> Jemput Customer
+													</button>
 
 												<?php elseif ($r_orderan->status == "2") : ?>
 
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-														<input type="hidden" name="status" value="3">
-														<button type="submit" class="btn btn-block btn-primary btn-confirm-otw-bandara">
-															<i class="fa fa-car"></i> Menuju Bandara
-														</button>
-													</form>
+													<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '3', <?= $user_id ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-primary" title="Menuju Bandara" style="width: 100%;">
+														<i class="fa fa-car"></i> Menuju Bandara
+													</button>
 
 												<?php elseif ($r_orderan->status == "3") : ?>
 
-													<form action="<?= base_url(); ?>/Driver/Orderan/update_status_order" method="post" style="width: 100%;">
-														<input type="hidden" name="id_order" value="<?= $r_orderan->id_order; ?>">
-														<input type="hidden" name="status" value="4">
-														<button type="submit" class="btn btn-block btn-success btn-confirm-otw-bandara">
-															<i class="fa fa-check"></i> Selesai
-														</button>
-													</form>
+													<button onclick="driver_update_status_order(<?= $r_orderan->id_order ?>, '4', <?= $user_id ?>,  <?= $id_customer ?>)" class="btn btn-block btn-outline-success" title="Tandai Selesai" style="width: 100%;">
+														<i class="fa fa-check"></i> Selesai
+													</button>
 
 												<?php endif; ?>
-
 											</div>
 
 										</div>
@@ -376,169 +354,169 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 					</div>
 				<?php endif; ?>
 
-			<?php else : ?>
+			<?php endif; ?>
 
-				<div class="card mt-4">
-					<div class="card-body">
-						<div class="row justify-content-center">
-							<div class="col-12 text-left font-italic">
-								<span>
-									Lokasi Saya :
-								</span>
-								<span id="alamat_saya"></span>
-								<hr>
-							</div>
-							<div class="col-12">
-								<div id="peta" style="border-radius: 20px;"></div>
-							</div>
+			<div class="card mt-4">
+				<div class="card-body">
+					<div class="row justify-content-center">
+						<div class="col-12 text-left font-italic">
+							<span>
+								Lokasi Saya :
+							</span>
+							<span id="alamat_saya"></span>
+							<hr>
+						</div>
+						<div class="col-12">
+							<div id="peta" style="border-radius: 20px;"></div>
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<script>
-					function initMap() {
-						let map;
-						let userLoc;
-						let gmarkers = [];
-						let marker, i, marker_semua, markerDriver;
-						let lineMarkers = [];
-						let lingkar = [];
-						let circle_user;
+			<script>
+				function initMap() {
+					let map;
+					let userLoc;
+					let gmarkers = [];
+					let marker, i, marker_semua, markerDriver;
+					let lineMarkers = [];
+					let lingkar = [];
+					let circle_user;
 
-						let infoWindow = new google.maps.InfoWindow;
-						let bounds = new google.maps.LatLngBounds();
-						let directionsService = new google.maps.DirectionsService;
-						let directionsDisplay;
+					let infoWindow = new google.maps.InfoWindow;
+					let bounds = new google.maps.LatLngBounds();
+					let directionsService = new google.maps.DirectionsService;
+					let directionsDisplay;
 
-						if (navigator.geolocation) {
-							var positionOptions = {
-								enableHighAccuracy: true,
-								timeout: 10 * 1000 // 10 seconds
-							};
+					if (navigator.geolocation) {
+						var positionOptions = {
+							enableHighAccuracy: true,
+							timeout: 10 * 1000 // 10 seconds
+						};
 
-							navigator.geolocation.getCurrentPosition(function(position) {
-								userLat = position.coords.latitude;
-								userLng = position.coords.longitude;
-								userLoc = new google.maps.LatLng(userLat, userLng);
+						navigator.geolocation.getCurrentPosition(function(position) {
+							userLat = position.coords.latitude;
+							userLng = position.coords.longitude;
+							userLoc = new google.maps.LatLng(userLat, userLng);
 
-								function writeAddressName(latLng) {
-									var geocoder = new google.maps.Geocoder();
-									geocoder.geocode({
-											"location": latLng
-										},
-										function(results, status) {
-											if (status == google.maps.GeocoderStatus.OK) {
-												document.getElementById("alamat_saya").innerHTML = results[3].formatted_address;
-											} else {
-												document.getElementById("alamat_saya").innerHTML += "Unable to retrieve your address" + "<br />";
-											}
-										});
-								}
-
-								$.ajax({
-									type: "POST",
-									url: "<?= base_url() ?>/Driver/Dashboard/update_posisi",
-									dataType: "JSON",
-									data: {
-										latitude: userLat,
-										longitude: userLng
+							function writeAddressName(latLng) {
+								var geocoder = new google.maps.Geocoder();
+								geocoder.geocode({
+										"location": latLng
 									},
-									success: function(data) {
-										console.log('OK');
-									}
-								});
-
-								writeAddressName(userLoc);
-
-								var myStyle = [{
-									featureType: "administrative",
-									elementType: "labels",
-									stylers: [{
-										visibility: "on"
-									}]
-								}, {
-									featureType: "poi",
-									elementType: "labels",
-									stylers: [{
-										visibility: "off"
-									}]
-								}, {
-									featureType: "water",
-									elementType: "labels",
-									stylers: [{
-										visibility: "on"
-									}]
-								}, {
-									featureType: "road",
-									elementType: "labels",
-									stylers: [{
-										visibility: "on"
-									}]
-								}];
-
-								var mapOptions = {
-									center: userLoc,
-									zoom: 15,
-									mapTypeControlOptions: {
-										mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
-									},
-									mapTypeId: 'mystyle',
-									location_type: google.maps.GeocoderLocationType.ROOFTOP
-								};
-
-								map = new google.maps.Map(document.getElementById('peta'), mapOptions);
-								map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
-									name: 'Peta'
-								}));
-
-								var trafficLayer = new google.maps.TrafficLayer();
-								trafficLayer.setMap(map);
-
-								var icon_user = {
-									url: "<?= base_url() ?>/assets/img/taxi.png", // url
-									scaledSize: new google.maps.Size(60, 60), // scaled size
-									origin: new google.maps.Point(0, 0), // origin
-									anchor: new google.maps.Point(30, 30), // anchor
-									animation: google.maps.Animation.DROP
-								};
-
-								var centerLoc = new google.maps.Marker({
-									position: userLoc,
-									map: map,
-									title: 'Lokasi Saya !',
-									icon: icon_user,
-									animation: google.maps.Animation.DROP
-								});
-							}, function() {
-								handleLocationError(true, centerLoc, map.getCenter());
-							}, positionOptions);
-
-							function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_driver) {
-								directionsService.route({
-									origin: distinationOrigin,
-									destination: destinationMarker,
-									travelMode: google.maps.TravelMode.DRIVING
-								}, function(response, status) {
-									if (status === google.maps.DirectionsStatus.OK) {
-										directionsDisplay.setDirections(response);
-										computeTotals(response, infoWindow, id_driver);
-									} else {
-										window.alert('Directions request failed due to ' + status);
-									}
-								});
+									function(results, status) {
+										if (status == google.maps.GeocoderStatus.OK) {
+											document.getElementById("alamat_saya").innerHTML = results[3].formatted_address;
+										} else {
+											document.getElementById("alamat_saya").innerHTML += "Unable to retrieve your address" + "<br />";
+										}
+									});
 							}
 
-							function computeTotals(result, infoWindow, id_driver) {
-								var totalDist = 0;
-								var totalTime = 0;
-								var myroute = result.routes[0];
-								for (i = 0; i < myroute.legs.length; i++) {
-									totalDist += myroute.legs[i].distance.value;
-									totalTime += myroute.legs[i].duration.value;
+							$.ajax({
+								type: "POST",
+								url: "<?= base_url() ?>/Driver/Dashboard/update_posisi",
+								dataType: "JSON",
+								data: {
+									latitude: userLat,
+									longitude: userLng
+								},
+								success: function(data) {
+									console.log('OK');
 								}
+							});
 
-								totalDist = totalDist / 1000;
-								infoWindow.setContent(infoWindow.getContent() + `
+							writeAddressName(userLoc);
+
+							var myStyle = [{
+								featureType: "administrative",
+								elementType: "labels",
+								stylers: [{
+									visibility: "on"
+								}]
+							}, {
+								featureType: "poi",
+								elementType: "labels",
+								stylers: [{
+									visibility: "off"
+								}]
+							}, {
+								featureType: "water",
+								elementType: "labels",
+								stylers: [{
+									visibility: "on"
+								}]
+							}, {
+								featureType: "road",
+								elementType: "labels",
+								stylers: [{
+									visibility: "on"
+								}]
+							}];
+
+							var mapOptions = {
+								center: userLoc,
+								zoom: 15,
+								mapTypeControlOptions: {
+									mapTypeIds: ['mystyle', google.maps.MapTypeId.SATELLITE]
+								},
+								mapTypeId: 'mystyle',
+								location_type: google.maps.GeocoderLocationType.ROOFTOP
+							};
+
+							map = new google.maps.Map(document.getElementById('peta'), mapOptions);
+							map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, {
+								name: 'Peta'
+							}));
+
+							var trafficLayer = new google.maps.TrafficLayer();
+							trafficLayer.setMap(map);
+
+							var icon_user = {
+								url: "<?= base_url() ?>/assets/img/taxi.png", // url
+								scaledSize: new google.maps.Size(60, 60), // scaled size
+								origin: new google.maps.Point(0, 0), // origin
+								anchor: new google.maps.Point(30, 30), // anchor
+								animation: google.maps.Animation.DROP
+							};
+
+							var centerLoc = new google.maps.Marker({
+								position: userLoc,
+								map: map,
+								title: 'Lokasi Saya !',
+								icon: icon_user,
+								animation: google.maps.Animation.DROP
+							});
+						}, function() {
+							handleLocationError(true, centerLoc, map.getCenter());
+						}, positionOptions);
+
+						function calculateAndDisplayRoute(directionsService, directionsDisplay, distinationOrigin, destinationMarker, infoWindow, id_driver) {
+							directionsService.route({
+								origin: distinationOrigin,
+								destination: destinationMarker,
+								travelMode: google.maps.TravelMode.DRIVING
+							}, function(response, status) {
+								if (status === google.maps.DirectionsStatus.OK) {
+									directionsDisplay.setDirections(response);
+									computeTotals(response, infoWindow, id_driver);
+								} else {
+									window.alert('Directions request failed due to ' + status);
+								}
+							});
+						}
+
+						function computeTotals(result, infoWindow, id_driver) {
+							var totalDist = 0;
+							var totalTime = 0;
+							var myroute = result.routes[0];
+							for (i = 0; i < myroute.legs.length; i++) {
+								totalDist += myroute.legs[i].distance.value;
+								totalTime += myroute.legs[i].duration.value;
+							}
+
+							totalDist = totalDist / 1000;
+							infoWindow.setContent(infoWindow.getContent() + `
 										<tr style="text-align: left;">
 											<td>Jarak Tempuh</td>
 											<td>:</td>
@@ -551,34 +529,33 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 										</tr>
 									</table>
 									`);
-							}
-
-							function calculateDistances(start, end) {
-
-								var stuDistances = {};
-
-								stuDistances.metres = google.maps.geometry.spherical.computeDistanceBetween(start, end); // distance in metres
-								stuDistances.km = Math.round(stuDistances.metres / 2000 * 10) / 10; // distance in km rounded to 1dp
-								stuDistances.miles = Math.round(stuDistances.metres / 2000 * 0.6214 * 10) / 10; // distance in miles rounded to 1dp
-								return stuDistances;
-							}
-						} else {
-							handleLocationError(false, infoWindow, map.getCenter());
 						}
+
+						function calculateDistances(start, end) {
+
+							var stuDistances = {};
+
+							stuDistances.metres = google.maps.geometry.spherical.computeDistanceBetween(start, end); // distance in metres
+							stuDistances.km = Math.round(stuDistances.metres / 2000 * 10) / 10; // distance in km rounded to 1dp
+							stuDistances.miles = Math.round(stuDistances.metres / 2000 * 0.6214 * 10) / 10; // distance in miles rounded to 1dp
+							return stuDistances;
+						}
+					} else {
+						handleLocationError(false, infoWindow, map.getCenter());
 					}
+				}
 
-					function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-						infoWindow.setPosition(pos);
-						infoWindow.setContent(browserHasGeolocation ?
-							'Error: The Geolocation service failed.' :
-							'Error: Your browser doesn\'t support geolocation.');
-						infoWindow.open(map);
-					}
+				function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+					infoWindow.setPosition(pos);
+					infoWindow.setContent(browserHasGeolocation ?
+						'Error: The Geolocation service failed.' :
+						'Error: Your browser doesn\'t support geolocation.');
+					infoWindow.open(map);
+				}
 
-					google.maps.event.addDomListener(window, 'load', initMap);
-				</script>
+				google.maps.event.addDomListener(window, 'load', initMap);
+			</script>
 
-			<?php endif; ?>
 
 		<?php endif; ?>
 
