@@ -211,12 +211,12 @@ class Order extends Controller
 
 			echo json_encode(array(
 				'success' => '1',
-				'pesan' => 'Berhasil update status orderan !'
+				'pesan' => 'Berhasil update status order !'
 			));
 		} else {
 			echo json_encode(array(
 				'success' => '0',
-				'pesan' => 'Gagal update status orderan !'
+				'pesan' => 'Gagal update status order !'
 			));
 		}
 	}

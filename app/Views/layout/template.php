@@ -860,8 +860,8 @@ date_default_timezone_set("Asia/Jakarta");
 				title_status = "Batalkan Orderan ?";
 				text_status = "Pilih ya, jika anda ingin membatalkan orderan !";
 
-				text_notif_driver = "Orderan dibatalkan oleh anda !";
-				text_notif_customer = "Orderan dibatalkan oleh customer !";
+				text_notif_driver = "Orderan dibatalkan oleh customer !";
+				text_notif_customer = "Orderan dibatalkan oleh anda !";
 			}
 
 			Swal.fire({

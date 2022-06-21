@@ -228,7 +228,6 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 														directionsRenderer.setDirections(result);
 													}
 												});
-
 											}
 
 											directionsRenderer.setPanel(document.getElementById("text-direction-guide"));

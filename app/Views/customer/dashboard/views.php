@@ -330,7 +330,7 @@ $cek_orderan_belum_selesai = ($db->query("SELECT * FROM tb_order WHERE id_custom
 						userLoc,
 						mapCenter = new google.maps.LatLng({
 							lat: -0.0263303,
-							lng: 109.3425039
+							lng: 109.3425039	
 						}),
 						map;
 					var gmarkers = [];

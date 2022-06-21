@@ -86,7 +86,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 								$bandara = ($db->query("SELECT * FROM tb_bandara WHERE id_bandara='$id_bandara'"))->getRow();
 
 								$id_pengantaran = $row['id_pengantaran'];
-								$jumlah_orderan_masuk = $db->query("SELECT * FROM tb_order WHERE id_pengantaran = '$id_pengantaran' ")->getNumRows();
+								$jumlah_orderan_masuk = $db->query("SELECT * FROM tb_order WHERE id_pengantaran = '$id_pengantaran' AND status < 5 ")->getNumRows();
 								if ($jumlah_orderan_masuk > 0) {
 									$status_orderan = "Ada";
 								} else {
@@ -130,7 +130,7 @@ $class_dashboard = new App\Controllers\Driver\Dashboard;
 									</td>
 									<td style="vertical-align: middle;">
 										<div class="list-unstyled d-block">
-											<?php if (($row['status_pengantaran'] == "0") and ($jumlah_orderan_masuk == 0)) : ?>
+											<?php if (($row['status_pengantaran'] == 0) and ($jumlah_orderan_masuk == 0)) : ?>
 												<li class="d-block mb-2">
 													<form action="<?= base_url(); ?>/Driver/Pengantaran/confirm_pengantaran" method="post" style="width: 100%;">
 														<input type="hidden" name="id_pengantaran" value="<?= $row['id_pengantaran']; ?>">
